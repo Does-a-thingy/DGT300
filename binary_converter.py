@@ -1,5 +1,5 @@
 # define all var's
-From = 1
+FROM = 1
 INTO = 1
 holder = 0
 deci_number = 0
@@ -7,6 +7,7 @@ bina_number = 0
 hexa_number = 0
 octa_number = 0
 final_number = 0
+loop = True
 
 import os
 
@@ -19,23 +20,23 @@ def form_fetch():
     '3' for Hexadecimal
     '4' for Octal
     '''))
-    if FROM > 5 or < 0:
+    if FROM > 5 or FROM < 0:
       print('please try again')
     else:
       break
 
 # ask for into
-into_fetch():
+def into_fetch():
   while True:
-    INTO = int((input'''What would you like to convert into?:
+    INTO = int(input('''What would you like to convert into?
     '1' for Decimal
     '2' for Binary
     '3' for Hexadecimal
     '4' for Octal
     '''))
-    if FROM > 5 or < 0:
+    if INTO > 5 or INTO < 0:
       print('please try again')
-   else:
+    else:
       break
 
 # getting

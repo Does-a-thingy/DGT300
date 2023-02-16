@@ -1,1 +1,1 @@
-variable = int(input('give me values'))
+variable = 4

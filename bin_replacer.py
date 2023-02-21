@@ -9,31 +9,35 @@ counting = ''
 
 def make_values(base):
     global values
-    for i in range(12, -1, -1):
+    for i in range(10, -1, -1):
         values.append(base ** i)
 
 def making_final():
     global counting, values, number, check_list
     for part in values:
         if number >= part:
-            counting += "1"
-            number -= part
+            num = number//part #gives whole number after division round down, ignore left over
+            counting += check_list[num] # allows for up to base 36
+            number -= part*num
         else:
             counting += check_list[0]
-            
+
 def inputing(filler):
-    global loop
     while True:
         number = input('What do you want ' + filler + '? ')
         try:
             output = int(number)
-            return output
+            if output >= 0:
+                return output
+            else:
+                print('please give me a number')
         except:
             print('please give me a number')
-        
 
 number = inputing('to convert')
+base = inputing('for base')
 make_values(base)
 making_final()
+
 print(values)
 print(counting)

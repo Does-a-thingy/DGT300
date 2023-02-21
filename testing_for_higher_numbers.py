@@ -1,6 +1,6 @@
 variable = 4
 values = []
-number = 106
+number = 107
 final = ''
 list = ['0','1','2','3','4']
 count = 0
@@ -15,7 +15,7 @@ for item in values:
         while number >= item:
             count += 1
             number -= item
-        final = list[count]
+        final += list[count]
         count = 0
     else:
         final += '0'

@@ -13,7 +13,7 @@ cost = 7
 losing = True
 interest = True
 
-lowest_tries = 476483
+lowest_tries = 1000000
 
 place = ['1st', '2nd', '3rd', '4th', '5th', '6th']
 user_num = []
@@ -33,10 +33,11 @@ def ask_input():
                         print('please try again')
                     else:
                         user_num.append(num)
+                        user_num.sort()
                         break
             except:
                 print('please try again')
-
+                
 def comp_random():
     global comp_num, n
     comp_num = []
@@ -51,7 +52,6 @@ def comp_random():
 
 def compare():
     global user_num, comp_num, losing
-    user_num.sort()
     comp_num.sort()
     if user_num == comp_num:
         losing = False

@@ -14,16 +14,20 @@ for num in range(limit):
             try:
                 number = num/item
                 output = int(number)
+                prime_list.append(number)
                 if output >= 0:
+                    print('if statement ' + output)
                     loop = False
-                    continue
+                    break
                 else:
                     prime_list.append()
+                    print('else statement ' + output)
                     loop = False
                     break
             except:
-                prime_list.append()
+                print('except statement ' + str(output))
                 loop = False
                 break
+            break
         
 print(prime_list)

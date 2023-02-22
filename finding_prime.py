@@ -9,21 +9,35 @@ problem = []
 loop = True
 limit = 20
 
-for i in range(2, limit):
+def max_range(base, numb):
+    powered = 1
+    i = 0
+    limit = 1
+    while limit > 0:
+        i += 1
+        powered = base ** i
+        limit = numb//powered
+
+
+for i in range(3, limit):
     for item in prime_list:
         num = i / item
-        if type(num) == float:
-            waiting_list.append(i)
-        elif type(num) == int:
-            if num == 1:
-                waiting_list.append(i)
-                prime_list.append(i)
+        try:
+            number = int(num)
+            if number == 1:
+                print('if')
+            elif num > 1:
+                print('elif')
+                if type(i/item) == float:
+                    prime_list.append(i)
+                else:
+                    waiting_list.append(i)
             else:
+                print('else')
                 waiting_list = []
-        else:
-            print('somethings wrong.')
+        except:
+            print('problem ' + i)
             problem.append(i)
-            waiting_list = []
         
                 
         

@@ -21,6 +21,7 @@ comp_num = []
 
 def ask_input():
     global user_num, place, n
+    user_num = []
     for i in range(n):
         while True:
             num = input('Please choose your ' + place[i] + ' number under 41 and over 0: ')
@@ -66,7 +67,7 @@ def win_finish():
         print('New best score: ', str(loop_num))
 
 def main():
-    global user_num, comp_num, loop_num, lowest_tries, interest
+    global user_num, comp_num, loop_num, lowest_tries, interest, losing
     while interest == True:
         ask_input()    
         while losing == True:
@@ -86,6 +87,7 @@ def main():
         value.strip()
         if value == 'yes':
             interest = True
+            losing = True
             print('Restarting')
             os.system('cls')
         else:

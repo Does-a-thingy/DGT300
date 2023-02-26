@@ -40,7 +40,12 @@ for i in range(3, (limit + 1)): # for each number up to limit
         print('escape else', i)
         waiting_list = []
         
-    
+if len(waiting_list) == 1 and stop == 1:
+    prime_list.append(waiting_list[0])
+    waiting_list = []
+else:
+    print('escape else', i)
+    waiting_list = []
 
 
         #num = i / item

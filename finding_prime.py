@@ -9,6 +9,7 @@ problem = []
 loop = True
 limit = 20
 stop = 1
+x = True
 
 def max_range(base, numb):
     global waiting_list, escape
@@ -25,27 +26,22 @@ def max_range(base, numb):
         print('def else')
 
 for i in range(3, (limit + 1)): # for each number up to limit
-    for item in prime_list: # check against every value in list
-        if len(waiting_list) == 0:
-            max_range(item, i)
-            
+    while x is True:
+        for item in prime_list: # check against every value in list
+            if len(waiting_list) == 0:
+                max_range(item, i)
+                
+            else:
+                pass
+            if len(waiting_list) == 0:
+                break
+        if len(waiting_list) == 1 and stop == 1:
+            prime_list.append(waiting_list[0])
+            x = False
+            waiting_list = []
         else:
-            pass
-        if len(waiting_list) == 0:
-            break
-    if len(waiting_list) == 1 and stop == 1:
-        prime_list.append(waiting_list[0])
-        waiting_list = []
-    else:
-        print('escape else', i)
-        waiting_list = []
-        
-if len(waiting_list) == 1 and stop == 1:
-    prime_list.append(waiting_list[0])
-    waiting_list = []
-else:
-    print('escape else', i)
-    waiting_list = []
+            print('escape else', i)
+            waiting_list = []
 
 
         #num = i / item

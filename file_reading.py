@@ -2,7 +2,7 @@
 #f.close()
 
 word_dictionary = {'grape': 0, 'king': 1, 'olive': 2}
-
+number_list = []
 
 # open file
 # break file into lines
@@ -21,11 +21,12 @@ with open('if_poem.txt') as f: # opens a file, then closes it after its done
             else:
                 print('else broken')
 
+sorted_list = sorted(word_dictionary.items(), key=lambda item: item[1])
+for key, value in sorted_list:
+    word_dictionary[key] = value
+    
 print(word_dictionary)
 
-
-
-     
 first_word = ['king']
 second_word = ['olive']
 third_word = ['grape']

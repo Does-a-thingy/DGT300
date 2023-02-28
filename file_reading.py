@@ -20,34 +20,39 @@ with open('if_poem.txt') as f: # opens a file, then closes it after its done
                 word_dictionary[word] = 1
             else:
                 print('else broken')
-                
+
+print(word_dictionary)
+
+
+
+     
 first_word = ['king']
 second_word = ['olive']
 third_word = ['grape']
 
 for word in word_dictionary.keys():
     if word_dictionary[word] > word_dictionary[first_word[0]] and word != '   ':
-        first_word = word
+        first_word = [word]
     elif word_dictionary[word] >= word_dictionary[second_word[0]]and word != '   ':
         if word_dictionary[word] == word_dictionary[second_word[0]]:
             second_word.append(word)
         else:
-            second_word = word
+            second_word = [word]
     elif word_dictionary[word] >= word_dictionary[third_word[0]]and word != '   ':
         if word_dictionary[word] == word_dictionary[third_word[0]]:
             third_word.append(word)
         else:
-            third_word = word    
-    elif word_dictionary[word] == word_dictionary[third_word]:
+            third_word = [word]    
+    elif word_dictionary[word] == word_dictionary[third_word[0]]:
         print(word, third_word)
     else:
         pass
 
 
 
-print('{} occurs {} times.'.format(first_word, word_dictionary[first_word]))
-print('{} occurs {} times.'.format(second_word, word_dictionary[second_word]))
-print('{} occurs {} times.'.format(third_word, word_dictionary[third_word]))
+print('{} occurs {} times.'.format(first_word, word_dictionary[first_word[0]]))
+print('{} occurs {} times.'.format(second_word, word_dictionary[second_word[0]]))
+print('{} occurs {} times.'.format(third_word, word_dictionary[third_word[0]]))
     
 # reorganise dictionary into highest to lowest
 # for k in desired_order_list:

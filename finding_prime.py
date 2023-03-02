@@ -8,40 +8,32 @@ waiting_list = []
 problem = []
 loop = True
 limit = 20
-stop = 1
+bad = 0
 x = True
 
+limit = int(input('give me the limit: '))
+
 def max_range(base, numb):
-    global waiting_list, escape
-    waiting_list = []
-    product = 1 # define product
+    global waiting_list, bad
     product = numb//base # whole number of bases that can go into number
     leftovers = numb - (base*product) # get rid of as much as possible
-    if leftovers > 0:
-        waiting_list = [] # empty list
-        waiting_list.append(numb) # add tp the now empty list
-    elif leftovers == 0:
-        waiting_list == []
-    else:
-        print('def else')
+    if leftovers == 0:
+        bad = 1
 
-for i in range(3, (limit + 1)): # for each number up to limit
-    while x is True:
+for i in range(0, (limit + 1)): # for each number up to limit
+    waiting_list = []
+    if i != 0 and i != 1:
         for item in prime_list: # check against every value in list
-            if len(waiting_list) == 0:
-                max_range(item, i)
-                
-            else:
-                pass
-            if len(waiting_list) == 0:
-                break
-        if len(waiting_list) == 1 and stop == 1:
-            prime_list.append(waiting_list[0])
-            x = False
-            waiting_list = []
+            max_range(item, i)
+        if bad == 0:
+            prime_list.append(i)
+            print(prime_list)
+            bad = 0
         else:
-            print('escape else', i)
-            waiting_list = []
+            bad = 0
+    elif i == 2:
+        prime_list.append(2)
+    
 
 
         #num = i / item
@@ -63,5 +55,3 @@ for i in range(3, (limit + 1)): # for each number up to limit
             #problem.append(i)
         
 print(prime_list)
-print(problem)
-print(waiting_list)

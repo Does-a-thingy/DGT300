@@ -32,8 +32,11 @@ second_word = ['olive']
 third_word = ['grape']
 
 for word in word_dictionary.keys():
-    if word_dictionary[word] > word_dictionary[first_word[0]] and word != '   ':
-        first_word = [word]
+    if word_dictionary[word] >= word_dictionary[first_word[0]] and word != '   ':
+        if word_dictionary[word] == word_dictionary[first_word[0]]:
+            first_word.append(word)
+        else:
+            first_word = [word]
     elif word_dictionary[word] >= word_dictionary[second_word[0]]and word != '   ':
         if word_dictionary[word] == word_dictionary[second_word[0]]:
             second_word.append(word)
@@ -63,8 +66,11 @@ print('{} occurs {} times.'.format(third_word, word_dictionary[third_word[0]]))
         #com_word = word
 
 
-new_string = input('what would you like to add to the poem?: ')
-
-with open('if_poem.txt', 'w') as f:
-    f.write('\n New addition \n')
-    f.write(new_string)
+cont = input('would you like to add something to the poem?: ')
+if cont == 'yes':
+    new_string = input('what would you like to add to the poem?: ')
+    with open('if_poem.txt', 'a') as f:
+        f.write('\n New addition \n')
+        f.write(new_string)
+else:
+    print('goodbye')

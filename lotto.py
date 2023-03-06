@@ -13,7 +13,7 @@ cost = 7
 losing = True
 interest = True
 
-lowest_tries = 1000000
+lowest_tries = 10000000
 
 place = ['1st', '2nd', '3rd', '4th', '5th', '6th']
 user_num = []

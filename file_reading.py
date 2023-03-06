@@ -53,7 +53,6 @@ for word in word_dictionary.keys():
         pass
 
 
-
 print('{} occurs {} times.'.format(first_word, word_dictionary[first_word[0]]))
 print('{} occurs {} times.'.format(second_word, word_dictionary[second_word[0]]))
 print('{} occurs {} times.'.format(third_word, word_dictionary[third_word[0]]))

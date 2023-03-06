@@ -61,3 +61,10 @@ print('{} occurs {} times.'.format(third_word, word_dictionary[third_word[0]]))
 #
  #if word_dictionary[word] > word_dictionary[first_word] and word != '   ':
         #com_word = word
+
+
+new_string = input('what would you like to add to the poem?: ')
+
+with open('if_poem.txt', 'w') as f:
+    f.write('\n New addition \n')
+    f.write(new_string)

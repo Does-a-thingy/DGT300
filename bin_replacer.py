@@ -5,7 +5,7 @@ conv = 'to convert'
 number = 0
 base = 2
 end_value = 1
-
+interest = True
 counting = ''
 
 def max_range(base, numb):
@@ -49,12 +49,22 @@ def inputing(filler, check):
                 print('please give me a valid number')
         except:
             print('please give me a valid number')
-
-number = inputing('to convert? make sure it is more than -1: ', 0)
-base = inputing('for base? make sure it is between 1 and 37: ', 1)
-end_value = max_range(base, number)
-make_values(base, end_value)
-making_final()
-
-print(values)
-print(counting)
+while interest is True:
+    number = inputing('to convert? make sure it is more than -1: ', 0)
+    base = inputing('for base? make sure it is between 1 and 37: ', 1)
+    end_value = max_range(base, number)
+    make_values(base, end_value)
+    making_final()
+    print(values)
+    print(counting)  
+    inp = input('would you like to input a new number?: ')
+    if inp == 'yes':
+        print('Okay, new cycle.')
+        number = 0
+        base = 2
+        end_value = 1
+        interest = True
+        counting = ''
+        values = []
+    else:
+        interest = False

@@ -3,17 +3,20 @@ from tkinter import *
 window = Tk()
 window.title('Temperature converter')
 
-numbers = Frame(window)
-numbers.grid(row=0, column=0, columnspan=2)
+numbers_frame = Frame(window)
+numbers_frame.grid(row=0, column=0, columnspan=2, sticky='NESW')
 
-output = Frame(window)
-output.grid(row=0, column=2)
+output_frame = Frame(window)
+output_frame.grid(row=0, column=2, sticky='NESW')
 
-buttons = Frame(window)
-buttons.grid(row=0, column=3)
+buttons_frame = Frame(window)
+buttons_frame.grid(row=0, column=3, sticky='NESW')
 
+entered = StringVar()
+entered.set('')
 
-
+temp_entry = Entry(numbers, textvariable=entered)
+temp_entry.grid()
 
 
 window.mainloop()

@@ -34,12 +34,12 @@ def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
 def celc_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 32
-    convt_txt.set('The converted temperature is: {}'.format(tmp))
+    convt_txt.set('The converted temperature is: {} celcius'.format(tmp))
 
 def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt - 32)*(5/9)
-    convt_txt.set('The converted temperature is: {}'.format(tmp))
+    convt_txt.set('The converted temperature is: {} fahrenheit'.format(tmp))
 
 #have to use command after it's made
 

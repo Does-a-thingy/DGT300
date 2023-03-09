@@ -39,7 +39,7 @@ def celc_cmd():
 def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt - 32)*(5/9)
-    convt_txt.set('The converted temperature is: {} fahrenheit'.format(tmp))
+    convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
 
 #have to use command after it's made
 
@@ -53,9 +53,6 @@ grid_widget(temp_label)
 
 temp_entry = Entry(numbers_frame, textvariable=entered)
 grid_widget(temp_entry, Rw=1)
-
-temp_butt = Button(numbers_frame, text='Submit', command=submit)
-grid_widget(temp_butt, Rw=2)
 
 conv_label = Label(output_frame, textvariable=convt_txt)
 grid_widget(conv_label)

@@ -34,7 +34,7 @@ def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
 def celc_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 32
-    convt_txt.set('The converted temperature is: {} celcius'.format(tmp))
+    convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
 
 def fahr_cmd():
     tmp_srt = submit()
@@ -62,5 +62,7 @@ grid_widget(celc_butt)
 
 fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd)
 grid_widget(fahr_butt, Clumn=1)
+
+
 
 window.mainloop()

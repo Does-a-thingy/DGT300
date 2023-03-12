@@ -2,6 +2,7 @@ from tkinter import *
 
 window = Tk()
 window.title('Temperature converter')
+window.configure(bg='#FFD7CD')
 
 numbers_frame = Frame(window)
 

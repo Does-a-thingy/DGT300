@@ -21,6 +21,26 @@ text_var.set('Please input the Temperature')
 convt_txt = StringVar()
 convt_txt.set('The converted temperature is: ')
 
+help_txt = StringVar()
+help_txt.set('''How to use the program:
+
+1. Click the empty rectangle underneath 
+  'please input the temperature'
+  
+2. Type in the tempurature you want to 
+  convert from.
+  
+3. Click which tempurature you want to 
+  convert to, 'to celcius' to turn your
+  input to celcius, and 'to fahrenheit'
+  to turn it to fahrenheit.
+  
+4. Your converted temperature will now
+  appear under the buttons, where it will
+  say 'The converted tempurature is:'. Then
+  it will have the converted tempurature
+  in the new units.''')
+
 def submit():
     try:
         temp_unconv = int(entered.get())
@@ -51,6 +71,8 @@ class helping:
     def open():
         help = Toplevel(window)
         help.title('Help')
+        help_lab = Label(help, textvariable=help_txt)
+        grid_widget(help_lab, y=10)
 
 #have to use command after it's made
 

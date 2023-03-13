@@ -1,5 +1,7 @@
 from tkinter import *
 
+# the start of the problem
+
 window = Tk()
 window.title('Temperature converter')
 window.configure(bg='#FFD7CD')
@@ -41,6 +43,8 @@ help_txt.set('''How to use the program:
   it will have the converted tempurature
   in the new units.''')
 
+histry_lst = []
+
 def submit():
     try:
         temp_unconv = int(entered.get())
@@ -58,14 +62,28 @@ def celc_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 32
     convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
+    history.add(tmp, 'celcius')
 
 def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt - 32)*(5/9)
     convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
+    history.add(tmp, 'fahrenheit')
 
-def history():
-    pass
+class history:
+    global histry_lst
+    def add(num, typ):
+        info = [num, typ]
+        histry_lst.append(' '.join(info))
+        print(histry_lst)
+    
+    def open():
+        histry = Toplevel(window)
+        histry.title('History')        
+        histry_str = '\n'.join(histry_lst)
+        histry_txt = StringVar()
+        histry_txt.set(histry_str)
+        histry_lab = Label(histry, )
 
 class helping:
     def open():
@@ -74,12 +92,14 @@ class helping:
         help_lab = Label(help, textvariable=help_txt)
         grid_widget(help_lab, y=10)
 
-#have to use command after it's made
+#have to use commands after they defined
 
 grid_widget(numbers_frame, clmspn=2)
 grid_widget(output_frame, Rw=2, clmspn=2)
 grid_widget(buttons_frame, Rw=1, clmspn=2)
 grid_widget(bottom_frame, Rw=3, clmspn=2)
+
+# the rest of the problem
 
 temp_label = Label(numbers_frame, textvariable=text_var)
 grid_widget(temp_label)
@@ -97,7 +117,7 @@ fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd)
 grid_widget(fahr_butt, Clumn=1)
 
 
-hist_butt = Button(bottom_frame, text='Conversion History', command=history)
+hist_butt = Button(bottom_frame, text='Conversion History', command=history.open)
 grid_widget(hist_butt)
 
 

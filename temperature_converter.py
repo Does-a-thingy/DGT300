@@ -83,7 +83,7 @@ class history:
         histry_str = '\n'.join(histry_lst)
         histry_txt = StringVar()
         histry_txt.set(histry_str)
-        histry_lab = Label(histry, )
+        histry_lab = Label(histry, textvariable=histry_txt)
 
 class helping:
     def open():

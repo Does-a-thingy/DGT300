@@ -84,9 +84,9 @@ class history:
         #print(histry_lst)
     
     def open():
-        global histry_lst, histry_str 
+        global histry_lst, histry_str
         histry = Toplevel(window)
-        histry.title('History')        
+        histry.title('History')
         histry_str = ' \n '.join(histry_lst)
         histry_txt = StringVar()
         histry_txt.set(histry_str)

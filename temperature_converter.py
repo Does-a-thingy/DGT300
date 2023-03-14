@@ -56,7 +56,7 @@ def submit():
             place = round(float(entered.get()),2) * 100
             temp_unconv = int(place)
             entered.set('')
-            return temp_unconv            
+            return temp_unconv
         except:
             entered.set('')
             text_var.set('Please input the temperature up to 2 decimal places')
@@ -67,14 +67,14 @@ def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
 
 def celc_cmd():
     tmp_srt = submit()
-    tmp = (tmp_srt * (9/5)) + 32
+    tmp = (tmp_srt * (9/5)) + 3200
     tmp = tmp/100
     convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
     history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
 
 def fahr_cmd():
     tmp_srt = submit()
-    tmp = (tmp_srt - 32)*(5/9)
+    tmp = (tmp_srt - 3200)*(5/9)
     tmp = tmp/100
     convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
     history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
@@ -107,9 +107,12 @@ class history:
         htop_lab = Label(histry, text='Conversion history:')
         grid_widget(htop_lab)
         
-        old_txt = history.file_fetch()
-        old_hist = Label(histry, textvariable=old_txt)
-        grid_widget(old_hist, 1, y=0)
+        try:
+            old_txt = history.file_fetch()
+            old_hist = Label(histry, textvariable=old_txt)
+            grid_widget(old_hist, 1, y=0)
+        except:
+            pass
         
         histry_str = ' \n '.join(histry_lst)
         histry_txt = StringVar()

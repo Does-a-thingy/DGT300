@@ -48,13 +48,18 @@ histry_str = ''
 
 def submit():
     try:
-        place = round(float(entered.get()),2) * 100
         temp_unconv = int(place)
         entered.set('')
         return temp_unconv
     except:
-        entered.set('')
-        text_var.set('Please input the temperature up to 2 decimal places')
+        try:
+            place = round(float(entered.get()),2) * 100
+            temp_unconv = int(place)
+            entered.set('')
+            return temp_unconv            
+        except:
+            entered.set('')
+            text_var.set('Please input the temperature up to 2 decimal places')
         
 
 def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
@@ -96,21 +101,29 @@ class history:
         
     def open():
         global histry_lst, histry_str
+        
         histry = Toplevel(window)
         histry.title('History')
         htop_lab = Label(histry, text='Conversion history:')
         grid_widget(htop_lab)
+        
         old_txt = history.file_fetch()
         old_hist = Label(histry, textvariable=old_txt)
         grid_widget(old_hist, 1, y=0)
+        
         histry_str = ' \n '.join(histry_lst)
         histry_txt = StringVar()
         histry_txt.set(histry_str)
         histry_lab = Label(histry, textvariable=histry_txt)
         grid_widget(histry_lab, 2, y=0)
+        
         save_butt = Button(histry, text='Save history', command=history.save_t_file)
         grid_widget(save_butt, 3)
-        clos_butt = Button(histry, text='Close', command=histry.destory)
+        
+        def close():
+            histry.destroy()
+        
+        clos_butt = Button(histry, text='Close', command=close)
         grid_widget(clos_butt, 3, 2)
         
     def save_t_file():

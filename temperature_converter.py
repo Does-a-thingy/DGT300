@@ -3,7 +3,7 @@ from tkinter import *
 # the start of the problem
 
 window = Tk()
-window.title('Temperature converter')
+window.wm_attributes
 window.configure(bg='#FFD7CD')
 
 numbers_frame = Frame(window)
@@ -140,10 +140,13 @@ class history:
 
 class helping:
     def open():
+        help_butt.config(state='disabled')
         help = Toplevel(window)
         help.title('Help')
         help_lab = Label(help, textvariable=help_txt)
         grid_widget(help_lab, y=10)
+    
+    
 
 #have to use commands after they defined
 

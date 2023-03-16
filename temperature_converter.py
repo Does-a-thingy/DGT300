@@ -1,4 +1,5 @@
 from tkinter import *
+from functools import partial
 
 # the start of the problem
 
@@ -102,8 +103,13 @@ class history:
     def open():
         global histry_lst, histry_str
         
+        hist_butt.config(state='disabled')
+        
         histry = Toplevel(window)
         histry.title('History')
+        
+        histry.protocol('WM_DELETE_WINDOW', partial(history.close))
+        
         htop_lab = Label(histry, text='Conversion history:')
         grid_widget(htop_lab)
         
@@ -124,6 +130,7 @@ class history:
         grid_widget(save_butt, 3)
         
         def close():
+            hist_butt.config(state='normal')
             histry.destroy()
         
         clos_butt = Button(histry, text='Close', command=close)
@@ -141,10 +148,20 @@ class history:
 class helping:
     def open():
         help_butt.config(state='disabled')
-        help = Toplevel(window)
-        help.title('Help')
-        help_lab = Label(help, textvariable=help_txt)
+        
+        help_w = Toplevel(window)
+        
+        help_w.protocol('WM_DELETE_WINDOW', partial(helping.close))
+        
+        help_w.title('Help')
+        
+        help_lab = Label(help_w, textvariable=help_txt)
+        
         grid_widget(help_lab, y=10)
+        
+    def close():
+        help_butt.config(state='normal')
+        help_w.destroy()
     
     
 

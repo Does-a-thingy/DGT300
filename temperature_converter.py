@@ -159,7 +159,7 @@ class helping:
         
         grid_widget(help_lab, y=10)
         
-    def close():
+    def close(self, partner):
         help_butt.config(state='normal')
         help_w.destroy()
     

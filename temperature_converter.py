@@ -81,6 +81,11 @@ def fahr_cmd():
     history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
 
 class history:
+    
+    histry = Tk(window)
+    histry.title('History')
+    histry.protocol('WM_DELETE_WINDOW', partial(history.close))
+    
     def add(bas, tpe, num, typ):
         global histry_lst
         histry_lst.append('{} {} was converted to {} {}'.format(round(bas, 2), tpe, round(num, 2), typ))
@@ -105,11 +110,6 @@ class history:
         
         hist_butt.config(state='disabled')
         
-        histry = Toplevel(window)
-        histry.title('History')
-        
-        histry.protocol('WM_DELETE_WINDOW', partial(history.close))
-        
         htop_lab = Label(histry, text='Conversion history:')
         grid_widget(htop_lab)
         
@@ -126,16 +126,18 @@ class history:
         histry_lab = Label(histry, textvariable=histry_txt)
         grid_widget(histry_lab, 2, y=0)
         
-        save_butt = Button(histry, text='Save history', command=history.save_t_file)
+        save_butt = Button(histry, text='Save history', command=partial(history.close, partner))
         grid_widget(save_butt, 3)
-        
-        def close():
-            hist_butt.config(state='normal')
-            histry.destroy()
         
         clos_butt = Button(histry, text='Close', command=close)
         grid_widget(clos_butt, 3, 2)
         
+        histry.mainloop()
+    
+    def close(self, partner):
+        partner.hist_butt.config(state='normal')
+        self.histry.destroy()    
+    
     def save_t_file():
         global histry_str, histry_lst
         with open('temp_history.txt', 'a') as f:
@@ -149,9 +151,9 @@ class helping:
     def open():
         help_butt.config(state='disabled')
         
-        help_w = Toplevel(window)
+        help_w = Tk(window)
         
-        help_w.protocol('WM_DELETE_WINDOW', partial(helping.close))
+        help_w.protocol('WM_DELETE_WINDOW', helping.close)
         
         help_w.title('Help')
         
@@ -159,7 +161,7 @@ class helping:
         
         grid_widget(help_lab, y=10)
         
-    def close(self, partner):
+    def close():
         help_butt.config(state='normal')
         help_w.destroy()
     

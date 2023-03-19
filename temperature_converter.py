@@ -82,9 +82,14 @@ def fahr_cmd():
 
 class history:
     
-    histry = Tk(window)
+    histry = Tk()
     histry.title('History')
-    histry.protocol('WM_DELETE_WINDOW', partial(history.close))
+    
+    def close(base):
+        base.config(state='normal')
+        histry.destroy()       
+    
+    histry.protocol('WM_DELETE_WINDOW', close())
     
     def add(bas, tpe, num, typ):
         global histry_lst
@@ -105,7 +110,7 @@ class history:
         old_hist_txt.set(fetched_str)
         return old_hist_txt
         
-    def open():
+    def open(base):
         global histry_lst, histry_str
         
         hist_butt.config(state='disabled')
@@ -126,17 +131,13 @@ class history:
         histry_lab = Label(histry, textvariable=histry_txt)
         grid_widget(histry_lab, 2, y=0)
         
-        save_butt = Button(histry, text='Save history', command=partial(history.close, partner))
+        save_butt = Button(histry, text='Save history', command=history.save_t_file)
         grid_widget(save_butt, 3)
         
-        clos_butt = Button(histry, text='Close', command=close)
+        clos_butt = Button(histry, text='Close', command=partial(history.close, base))
         grid_widget(clos_butt, 3, 2)
         
-        histry.mainloop()
-    
-    def close(self, partner):
-        partner.hist_butt.config(state='normal')
-        self.histry.destroy()    
+        histry.mainloop() 
     
     def save_t_file():
         global histry_str, histry_lst
@@ -151,7 +152,7 @@ class helping:
     def open():
         help_butt.config(state='disabled')
         
-        help_w = Tk(window)
+        help_w = Tk()
         
         help_w.protocol('WM_DELETE_WINDOW', helping.close)
         

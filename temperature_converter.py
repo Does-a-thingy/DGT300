@@ -47,9 +47,13 @@ help_txt.set('''How to use the program:
 histry_lst = []
 histry_str = ''
 
-#because these buttons are used in the commands a base button is built here
-hist_butt = Button(bottom_frame, text='Conversion History')
-help_butt = Button(bottom_frame, text='Help')
+#because these buttons are used in the commands a basic button is built here, then improved at the end
+hist_butt = Button(bottom_frame)
+help_butt = Button(bottom_frame)
+
+
+# looking at tetriatic colors https://www.canva.com/colors/color-wheel/ window bg= ''
+
 
 def submit():
     try:
@@ -65,7 +69,6 @@ def submit():
         except:
             entered.set('')
             text_var.set('Please input the temperature up to 2 decimal places')
-        
 
 def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
     widget.grid(row=Rw, column=Clumn, columnspan=clmspn, padx=x, pady=y, sticky=stic)
@@ -85,8 +88,6 @@ def fahr_cmd():
     history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
 
 class history:
-          
-    
     def add(bas, tpe, num, typ):
         global histry_lst
         histry_lst.append('{} {} was converted to {} {}'.format(round(bas, 2), tpe, round(num, 2), typ))
@@ -109,7 +110,7 @@ class history:
     def open():
         global histry_lst, histry_str
         
-        histry = Toplevel(window)
+        histry = Toplevel(window, bg='#CDF5FF')
         histry.title('History')  
         
         histry.protocol('WM_DELETE_WINDOW', partial(history.close, histry))
@@ -136,8 +137,6 @@ class history:
         
         clos_butt = Button(histry, text='Close', command=partial(history.close, histry))
         grid_widget(clos_butt, 3, 2)
-        
-        histry.mainloop() 
     
     def save_t_file():
         global histry_str, histry_lst
@@ -150,56 +149,55 @@ class history:
     def close(self):
         global hist_butt
         hist_butt.config(state='normal')
-        self.destroy()        
-
+        self.destroy()
 
 class helping:
     def open():
-        
-        help_w = Toplevel(window)
+        help_w = Toplevel(window, bg='#CDF5FF'))
         help_w.title('Help')
         
         help_butt.config(state='disabled')
         help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
         
-        help_lab = Label(help_w, textvariable=help_txt)
+        help_lab = Label(help_w, textvariable=help_txt, bg='#F0CDFF')
         grid_widget(help_lab, y=10)
+        
+        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#F0CDFF')
+        grid_widget(clos_butt, 1)        
         
     def close(self):
         global help_butt
         help_butt.config(state='normal')
         self.destroy()
-    
-    
 
 #have to use commands after they defined
 
-grid_widget(numbers_frame, clmspn=2)
+grid_widget(enters_frame, clmspn=2)
 grid_widget(output_frame, Rw=2, clmspn=2)
 grid_widget(buttons_frame, Rw=1, clmspn=2)
 grid_widget(bottom_frame, Rw=3, clmspn=2)
 
 # the rest of the problem
 
-temp_label = Label(numbers_frame, textvariable=text_var)
+temp_label = Label(enters_frame, textvariable=text_var, bg='')
 grid_widget(temp_label)
 
-temp_entry = Entry(numbers_frame, textvariable=entered)
+temp_entry = Entry(enters_frame, textvariable=entered, bg='')
 grid_widget(temp_entry, Rw=1)
 
-conv_label = Label(output_frame, textvariable=convt_txt)
+conv_label = Label(output_frame, textvariable=convt_txt, bg='')
 grid_widget(conv_label)
 
-celc_butt = Button(buttons_frame, text='To celcius', command=celc_cmd)
+celc_butt = Button(buttons_frame, text='To celcius', command=celc_cmd, bg='')
 grid_widget(celc_butt)
 
-fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd)
+fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd, bg='')
 grid_widget(fahr_butt, Clumn=1)
 
-hist_butt = Button(bottom_frame, text='Conversion History', command=history.open)
+hist_butt = Button(bottom_frame, text='Conversion History', command=history.open, bg='')
 grid_widget(hist_butt)
 
-help_butt = Button(bottom_frame, text='Help', command=helping.open)
+help_butt = Button(bottom_frame, text='Help', command=helping.open, bg='')
 grid_widget(help_butt, Clumn=1)
 
 window.mainloop()

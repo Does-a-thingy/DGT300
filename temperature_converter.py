@@ -47,6 +47,10 @@ help_txt.set('''How to use the program:
 histry_lst = []
 histry_str = ''
 
+#because these buttons are used in the commands a base button is built here
+hist_butt = Button(bottom_frame, text='Conversion History')
+help_butt = Button(bottom_frame, text='Help')
+
 def submit():
     try:
         temp_unconv = int(place)
@@ -81,15 +85,7 @@ def fahr_cmd():
     history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
 
 class history:
-    
-    histry = Tk()
-    histry.title('History')
-    
-    def close(base):
-        base.config(state='normal')
-        histry.destroy()       
-    
-    histry.protocol('WM_DELETE_WINDOW', close())
+          
     
     def add(bas, tpe, num, typ):
         global histry_lst
@@ -110,9 +106,13 @@ class history:
         old_hist_txt.set(fetched_str)
         return old_hist_txt
         
-    def open(base):
+    def open():
         global histry_lst, histry_str
         
+        histry = Toplevel(window)
+        histry.title('History')  
+        
+        histry.protocol('WM_DELETE_WINDOW', partial(history.close, histry))
         hist_butt.config(state='disabled')
         
         htop_lab = Label(histry, text='Conversion history:')
@@ -134,7 +134,7 @@ class history:
         save_butt = Button(histry, text='Save history', command=history.save_t_file)
         grid_widget(save_butt, 3)
         
-        clos_butt = Button(histry, text='Close', command=partial(history.close, base))
+        clos_butt = Button(histry, text='Close', command=partial(history.close, histry))
         grid_widget(clos_butt, 3, 2)
         
         histry.mainloop() 
@@ -147,24 +147,28 @@ class history:
         histry_lst = []
         histry_str = ''
 
+    def close(self):
+        global hist_butt
+        hist_butt.config(state='normal')
+        self.destroy()        
+
 
 class helping:
     def open():
-        help_butt.config(state='disabled')
         
-        help_w = Tk()
-        
-        help_w.protocol('WM_DELETE_WINDOW', helping.close)
-        
+        help_w = Toplevel(window)
         help_w.title('Help')
         
-        help_lab = Label(help_w, textvariable=help_txt)
+        help_butt.config(state='disabled')
+        help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
         
+        help_lab = Label(help_w, textvariable=help_txt)
         grid_widget(help_lab, y=10)
         
-    def close():
+    def close(self):
+        global help_butt
         help_butt.config(state='normal')
-        help_w.destroy()
+        self.destroy()
     
     
 
@@ -192,10 +196,8 @@ grid_widget(celc_butt)
 fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd)
 grid_widget(fahr_butt, Clumn=1)
 
-
 hist_butt = Button(bottom_frame, text='Conversion History', command=history.open)
 grid_widget(hist_butt)
-
 
 help_butt = Button(bottom_frame, text='Help', command=helping.open)
 grid_widget(help_butt, Clumn=1)

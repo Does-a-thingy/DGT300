@@ -7,14 +7,11 @@ w = Tk()
 w.wm_attributes
 w.configure(bg='#FFD7CD')
 
-window = Frame(w, bg='#FFD7CD')
+window = Frame(w, bg='#FFD7CD') # holds everything so that the edge looks better
 
 enters_frame = Frame(window, bg='#FFD7CD')
-
 output_frame = Frame(window, bg='#FFD7CD')
-
 buttons_frame = Frame(window, bg='#FFD7CD')
-
 bottom_frame = Frame(window, bg='#FFD7CD')
 
 entered = StringVar()
@@ -52,10 +49,6 @@ histry_str = ''
 #because these buttons are used in the commands a basic button is built here, then improved at the end
 hist_butt = Button(bottom_frame)
 help_butt = Button(bottom_frame)
-
-
-# looking at tetradic colors https://www.canva.com/colors/color-wheel/ #FFD7CD
-
 
 def submit():
     try:

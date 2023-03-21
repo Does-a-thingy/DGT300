@@ -3,17 +3,19 @@ from functools import partial
 
 # the start of the problem
 
-window = Tk()
-window.wm_attributes
-window.configure(bg='#FFD7CD')
+w = Tk()
+w.wm_attributes
+w.configure(bg='#FFD7CD')
 
-numbers_frame = Frame(window)
+window = Frame(w, bg='#FFD7CD')
 
-output_frame = Frame(window)
+enters_frame = Frame(window, bg='#FFD7CD')
 
-buttons_frame = Frame(window)
+output_frame = Frame(window, bg='#FFD7CD')
 
-bottom_frame = Frame(window)
+buttons_frame = Frame(window, bg='#FFD7CD')
+
+bottom_frame = Frame(window, bg='#FFD7CD')
 
 entered = StringVar()
 entered.set('')
@@ -52,7 +54,7 @@ hist_butt = Button(bottom_frame)
 help_butt = Button(bottom_frame)
 
 
-# looking at tetriatic colors https://www.canva.com/colors/color-wheel/ window bg= ''
+# looking at tetradic colors https://www.canva.com/colors/color-wheel/ #FFD7CD
 
 
 def submit():
@@ -116,12 +118,12 @@ class history:
         histry.protocol('WM_DELETE_WINDOW', partial(history.close, histry))
         hist_butt.config(state='disabled')
         
-        htop_lab = Label(histry, text='Conversion history:')
+        htop_lab = Label(histry, text='Conversion history:', bg='#F0CDFF')
         grid_widget(htop_lab)
         
         try:
             old_txt = history.file_fetch()
-            old_hist = Label(histry, textvariable=old_txt)
+            old_hist = Label(histry, textvariable=old_txt, bg='#F0CDFF')
             grid_widget(old_hist, 1, y=0)
         except:
             pass
@@ -129,13 +131,13 @@ class history:
         histry_str = ' \n '.join(histry_lst)
         histry_txt = StringVar()
         histry_txt.set(histry_str)
-        histry_lab = Label(histry, textvariable=histry_txt)
+        histry_lab = Label(histry, textvariable=histry_txt, bg='#F0CDFF')
         grid_widget(histry_lab, 2, y=0)
         
-        save_butt = Button(histry, text='Save history', command=history.save_t_file)
+        save_butt = Button(histry, text='Save history', command=history.save_t_file, bg='#F0CDFF')
         grid_widget(save_butt, 3)
         
-        clos_butt = Button(histry, text='Close', command=partial(history.close, histry))
+        clos_butt = Button(histry, text='Close', command=partial(history.close, histry), bg='#F0CDFF')
         grid_widget(clos_butt, 3, 2)
     
     def save_t_file():
@@ -153,7 +155,7 @@ class history:
 
 class helping:
     def open():
-        help_w = Toplevel(window, bg='#CDF5FF'))
+        help_w = Toplevel(window, bg='#CDF5FF')
         help_w.title('Help')
         
         help_butt.config(state='disabled')
@@ -172,32 +174,33 @@ class helping:
 
 #have to use commands after they defined
 
+grid_widget(window,  y=20, x=0)
 grid_widget(enters_frame, clmspn=2)
-grid_widget(output_frame, Rw=2, clmspn=2)
 grid_widget(buttons_frame, Rw=1, clmspn=2)
-grid_widget(bottom_frame, Rw=3, clmspn=2)
+grid_widget(output_frame, Rw=2, clmspn=2)
+grid_widget(bottom_frame, Rw=3, clmspn=2, y=0)
 
 # the rest of the problem
 
-temp_label = Label(enters_frame, textvariable=text_var, bg='')
+temp_label = Label(enters_frame, textvariable=text_var, bg='#DCFFCD')
 grid_widget(temp_label)
 
-temp_entry = Entry(enters_frame, textvariable=entered, bg='')
+temp_entry = Entry(enters_frame, textvariable=entered)
 grid_widget(temp_entry, Rw=1)
 
-conv_label = Label(output_frame, textvariable=convt_txt, bg='')
-grid_widget(conv_label)
+conv_label = Label(output_frame, textvariable=convt_txt, bg='#DCFFCD')
+grid_widget(conv_label, y=0)
 
-celc_butt = Button(buttons_frame, text='To celcius', command=celc_cmd, bg='')
+celc_butt = Button(buttons_frame, text='To celcius', command=celc_cmd, bg='#DCFFCD')
 grid_widget(celc_butt)
 
-fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd, bg='')
+fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd, bg='#DCFFCD')
 grid_widget(fahr_butt, Clumn=1)
 
-hist_butt = Button(bottom_frame, text='Conversion History', command=history.open, bg='')
-grid_widget(hist_butt)
+hist_butt = Button(bottom_frame, text='Conversion History', command=history.open, bg='#DCFFCD')
+grid_widget(hist_butt, y=0)
 
-help_butt = Button(bottom_frame, text='Help', command=helping.open, bg='')
-grid_widget(help_butt, Clumn=1)
+help_butt = Button(bottom_frame, text='Help', command=helping.open, bg='#DCFFCD')
+grid_widget(help_butt, Clumn=1, y=0)
 
 window.mainloop()

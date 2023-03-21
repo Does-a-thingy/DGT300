@@ -77,14 +77,14 @@ def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
 
 def celc_cmd():
     tmp_srt = submit()
-    tmp = (tmp_srt * (9/5)) + 3200
+    tmp = (tmp_srt - 3200)*(5/9)
     tmp = tmp/100
     convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
     history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
 
 def fahr_cmd():
     tmp_srt = submit()
-    tmp = (tmp_srt - 3200)*(5/9)
+    tmp = (tmp_srt * (9/5)) + 3200
     tmp = tmp/100
     convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
     history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
@@ -112,33 +112,33 @@ class history:
     def open():
         global histry_lst, histry_str
         
-        histry = Toplevel(window, bg='#CDF5FF')
+        histry = Toplevel(window, bg='#F0CDFF')
         histry.title('History')  
         
         histry.protocol('WM_DELETE_WINDOW', partial(history.close, histry))
         hist_butt.config(state='disabled')
         
-        htop_lab = Label(histry, text='Conversion history:', bg='#F0CDFF')
-        grid_widget(htop_lab)
+        htop_lab = Label(histry, text='Conversion history:', bg='#CDF5FF')
+        grid_widget(htop_lab, clmspn=2)
         
         try:
             old_txt = history.file_fetch()
-            old_hist = Label(histry, textvariable=old_txt, bg='#F0CDFF')
-            grid_widget(old_hist, 1, y=0)
+            old_hist = Label(histry, textvariable=old_txt, bg='#CDF5FF')
+            grid_widget(old_hist, 1, clmspn=2, y=0)
         except:
             pass
         
         histry_str = ' \n '.join(histry_lst)
         histry_txt = StringVar()
         histry_txt.set(histry_str)
-        histry_lab = Label(histry, textvariable=histry_txt, bg='#F0CDFF')
-        grid_widget(histry_lab, 2, y=0)
+        histry_lab = Label(histry, textvariable=histry_txt, bg='#CDF5FF')
+        grid_widget(histry_lab, 2, clmspn=2, y=0)
         
-        save_butt = Button(histry, text='Save history', command=history.save_t_file, bg='#F0CDFF')
+        save_butt = Button(histry, text='Save history', command=history.save_t_file, bg='#CDF5FF')
         grid_widget(save_butt, 3)
         
-        clos_butt = Button(histry, text='Close', command=partial(history.close, histry), bg='#F0CDFF')
-        grid_widget(clos_butt, 3, 2)
+        clos_butt = Button(histry, text='Close', command=partial(history.close, histry), bg='#CDF5FF')
+        grid_widget(clos_butt, 3, 1)
     
     def save_t_file():
         global histry_str, histry_lst
@@ -155,16 +155,16 @@ class history:
 
 class helping:
     def open():
-        help_w = Toplevel(window, bg='#CDF5FF')
+        help_w = Toplevel(window, bg='#F0CDFF')
         help_w.title('Help')
         
         help_butt.config(state='disabled')
         help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
         
-        help_lab = Label(help_w, textvariable=help_txt, bg='#F0CDFF')
+        help_lab = Label(help_w, textvariable=help_txt, bg='#CDF5FF')
         grid_widget(help_lab, y=10)
         
-        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#F0CDFF')
+        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#CDF5FF')
         grid_widget(clos_butt, 1)        
         
     def close(self):

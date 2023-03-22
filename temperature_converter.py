@@ -27,20 +27,20 @@ help_txt = StringVar()
 help_txt.set('''How to use the program:
 
 1. Click the empty rectangle underneath 
-  'please input the temperature'
+  'Please input the temperature up to 2 decimal places'
   
-2. Type in the tempurature you want to 
+2. Type in the temperature you want to 
   convert from.
   
-3. Click which tempurature you want to 
+3. Click which temperature you want to
   convert to, 'to celcius' to turn your
   input to celcius, and 'to fahrenheit'
   to turn it to fahrenheit.
   
 4. Your converted temperature will now
   appear under the buttons, where it will
-  say 'The converted tempurature is:'. Then
-  it will have the converted tempurature
+  say 'The converted temperature is:'. Then
+  it will have the converted temperature
   in the new units.''')
 
 histry_lst = []

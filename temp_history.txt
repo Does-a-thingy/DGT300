@@ -1,0 +1,4 @@
+-40.0 celcius was converted to -40.0 fahrenheit
+56.0 fahrenheit was converted to 13.33 celcius 
+ 485.0 celcius was converted to 905.0 fahrenheit 
+ 134.0 celcius was converted to 273.2 fahrenheit

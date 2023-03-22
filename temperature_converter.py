@@ -53,14 +53,25 @@ help_butt = Button(bottom_frame)
 def submit():
     try:
         temp_unconv = int(place)
-        entered.set('')
-        return temp_unconv
+        if temp_unconv >= -273:
+            entered.set('')
+            return temp_unconv
+        elif temp_unconv >= 3:
+        else:
+            entered.set('')
+            text_var.set('Please input the temperature up to 2 decimal places')            
     except:
         try:
             place = round(float(entered.get()),2) * 100
             temp_unconv = int(place)
-            entered.set('')
-            return temp_unconv
+            if temp_unconv >= -27315:
+                entered.set('')
+                return temp_unconv
+            elif temp_unconv >= 3:
+                #fahrenheit temp for kelvin
+            else:
+                entered.set('')
+                text_var.set('Please input the temperature up to 2 decimal places')                
         except:
             entered.set('')
             text_var.set('Please input the temperature up to 2 decimal places')

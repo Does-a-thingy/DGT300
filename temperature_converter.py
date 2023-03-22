@@ -168,18 +168,21 @@ class helping:
 #have to use commands after they defined
 
 grid_widget(window,  y=20, x=0)
-grid_widget(enters_frame, clmspn=2)
-grid_widget(buttons_frame, Rw=1, clmspn=2)
-grid_widget(output_frame, Rw=2, clmspn=2)
-grid_widget(bottom_frame, Rw=3, clmspn=2, y=0)
+grid_widget(enters_frame)
+grid_widget(buttons_frame, Rw=1)
+grid_widget(output_frame, Rw=2)
+grid_widget(bottom_frame, Rw=3, y=0)
 
 # the rest of the problem
 
+title_label = Label(enters_frame, text='Temperature Converter', font=('Arial', 20), bg='#DCFFCD')
+grid_widget(title_label, clmspn=2)
+
 temp_label = Label(enters_frame, textvariable=text_var, bg='#DCFFCD')
-grid_widget(temp_label)
+grid_widget(temp_label, 1, clmspn=2)
 
 temp_entry = Entry(enters_frame, textvariable=entered)
-grid_widget(temp_entry, Rw=1)
+grid_widget(temp_entry, 2, clmspn=2)
 
 conv_label = Label(output_frame, textvariable=convt_txt, bg='#DCFFCD')
 grid_widget(conv_label, y=0)

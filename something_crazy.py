@@ -5,10 +5,11 @@ import random
 # https://stackoverflow.com/questions/54246872/how-to-combine-tkinter-and-turtle
 # Use rawturtle instead of turtle
 window = Tk()
-
-screen = Canvas(master = window, width = 800, height = 800, bg='green')
-screen.grid(padx=2, pady=2, row=0, column=0, rowspan=10, columnspan=10)
 window.title('Livestream')
+
+#turtle stuff
+screen = Canvas(master = window, width = 600, height = 600, bg='green')
+screen.grid(padx=2, pady=2, row=0, column=0, rowspan=10, columnspan=10)
 
 first = RawTurtle(screen)
 box = first.clone()
@@ -97,6 +98,20 @@ box.end_fill()
 # senary - most is pond, add log, add rock/s
 # make player involved -> choose attributes -> 
 
+
+# checkbox for the number of turtles
+check_frame = Frame(window)
+check_frame.grid(padx=2, pady=2, row=11, column=0, rowspan=1, columnspan=5)
+
+turt_num = IntVar()
+turt_num.set(1)
+
+one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1, text='One turtle')
+one_turt_ck.grid(row=0)
+two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, text='Two turtles')
+two_turt_ck.grid(row=0, column=2)
+
+
 first.lt(random.randint(0, 359))
 second.lt(random.randint(0, 359))
 
@@ -148,3 +163,16 @@ while x is False:
     second.fd(random.randint(0, 8))
     second.lt(random.randint(-30, 30))
     second.speed(random.randint(1, 4))
+
+#extras 
+# checkbox for the number of turtles
+check_frame = Frame(window)
+check_frame.grid(padx=2, pady=2, row=1, column=0, rowspan=1, columnspan=5)
+
+turt_num = IntVar()
+turt_num.set(1)
+
+one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1)
+one_turt_ck.grid(row=0)
+two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2)
+two_turt_ck.grid(row=1)

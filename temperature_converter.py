@@ -53,25 +53,14 @@ help_butt = Button(bottom_frame)
 def submit():
     try:
         temp_unconv = int(place)
-        if temp_unconv >= -273:
-            entered.set('')
-            return temp_unconv
-        elif temp_unconv >= 3:
-        else:
-            entered.set('')
-            text_var.set('Please input the temperature up to 2 decimal places')            
+        entered.set('')
+        return temp_unconv
     except:
         try:
             place = round(float(entered.get()),2) * 100
             temp_unconv = int(place)
-            if temp_unconv >= -27315:
-                entered.set('')
-                return temp_unconv
-            elif temp_unconv >= 3:
-                #fahrenheit temp for kelvin
-            else:
-                entered.set('')
-                text_var.set('Please input the temperature up to 2 decimal places')                
+            entered.set('')
+            return temp_unconv
         except:
             entered.set('')
             text_var.set('Please input the temperature up to 2 decimal places')
@@ -83,15 +72,17 @@ def celc_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt - 3200)*(5/9)
     tmp = tmp/100
-    convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
-    history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
+    if round(tmp, 2) >= -273.15:
+        convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
+        history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
 
 def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 3200
     tmp = tmp/100
-    convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
-    history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
+    if round(tmp, 2) >= -459.67:
+        convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
+        history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
 
 class history:
     def add(bas, tpe, num, typ):

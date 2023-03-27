@@ -75,6 +75,8 @@ def celc_cmd():
     if round(tmp, 2) >= -273.15:
         convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
         history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
+    else:
+        convt_txt.set('The converted temperature is: ')
 
 def fahr_cmd():
     tmp_srt = submit()
@@ -83,6 +85,8 @@ def fahr_cmd():
     if round(tmp, 2) >= -459.67:
         convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
         history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
+    else:
+        convt_txt.set('The converted temperature is: ')
 
 class history:
     def add(bas, tpe, num, typ):

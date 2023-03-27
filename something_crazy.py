@@ -19,6 +19,7 @@ first.penup()
 first.fillcolor('green')
 first.shape("turtle")
 second = first.clone()
+second.ht()
 x = False
 b = 0
 fangle = first.towards(0, 0)
@@ -93,12 +94,11 @@ box.end_fill()
 
 # navigation is pick random
 # can you use turtle.Turtle() to control all of the turtles?
-# increase and decrease the number of turtles
-# make senary?, write on the screen?,
+# increase and decrease the number of turtles -> whats the limit? why?
 # senary - most is pond, add log, add rock/s
 # make player involved -> choose attributes -> 
 
-
+# extras
 # checkbox for the number of turtles
 check_frame = Frame(window)
 check_frame.grid(padx=2, pady=2, row=11, column=0, rowspan=1, columnspan=5)
@@ -112,67 +112,83 @@ two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, text='Two t
 two_turt_ck.grid(row=0, column=2)
 
 
+#start of action
 first.lt(random.randint(0, 359))
 second.lt(random.randint(0, 359))
 
 while x is False:
     # must find how to turn turtles around
-    if first.xcor() >= 190:
-        first.setx(180)
-        fangle == first.towards(0, 0)
-        first.lt(fangle)
-        first.fd(5)
-    elif first.xcor() <= -190:
-        first.setx(-180)
-        fangle == first.towards(0, 0)
-        first.lt(fangle)
-        first.fd(5)
-    if first.ycor() >= 190:
-        first.sety(180)
-        fangle == first.towards(0, 0)
-        first.lt(fangle)
-        first.fd(5)
-    elif first.ycor() <= -190:
-        first.sety(-180)
-        fangle == first.towards(0, 0)
-        first.lt(fangle)
-        first.fd(5)
-    if second.xcor() >= 190:
-        second.setx(180)
-        sangle == second.towards(0, 0)
-        second.lt(sangle)
-        second.fd(5)
-    elif second.xcor() <= -190:
-        second.setx(-180)
-        sangle == second.towards(0, 0)
-        second.lt(sangle)
-        second.fd(5)
-    if second.ycor() >= 190:
-        second.sety(180)
-        sangle == second.towards(0, 0)
-        second.lt(sangle)
-        second.fd(5)
-    elif second.ycor() <= -190:
-        second.sety(-180)
-        sangle == second.towards(0, 0)
-        second.lt(sangle)
-        second.fd(5)
-    first.fd(random.randint(0, 6))
-    first.lt(random.randint(-40, 40))
-    first.speed(random.randint(1, 2))
-    second.fd(random.randint(0, 8))
-    second.lt(random.randint(-30, 30))
-    second.speed(random.randint(1, 4))
+    if turt_num.get() == 1:
+        second.ht()
+        if first.xcor() >= 190:
+            first.setx(180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        elif first.xcor() <= -190:
+            first.setx(-180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        if first.ycor() >= 190:
+            first.sety(180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        elif first.ycor() <= -190:
+            first.sety(-180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        first.fd(random.randint(0, 6))
+        first.lt(random.randint(-40, 40))
+        first.speed(random.randint(1, 2))        
+    elif turt_num.get() == 2:
+        second.st()
+        if first.xcor() >= 190:
+            first.setx(180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        elif first.xcor() <= -190:
+            first.setx(-180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        if first.ycor() >= 190:
+            first.sety(180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)
+        elif first.ycor() <= -190:
+            first.sety(-180)
+            fangle == first.towards(0, 0)
+            first.lt(fangle)
+            first.fd(5)        
+        if second.xcor() >= 190:
+            second.setx(180)
+            sangle == second.towards(0, 0)
+            second.lt(sangle)
+            second.fd(5)
+        elif second.xcor() <= -190:
+            second.setx(-180)
+            sangle == second.towards(0, 0)
+            second.lt(sangle)
+            second.fd(5)
+        if second.ycor() >= 190:
+            second.sety(180)
+            sangle == second.towards(0, 0)
+            second.lt(sangle)
+            second.fd(5)
+        elif second.ycor() <= -190:
+            second.sety(-180)
+            sangle == second.towards(0, 0)
+            second.lt(sangle)
+            second.fd(5)
+        first.fd(random.randint(0, 6))
+        first.lt(random.randint(-40, 40))
+        first.speed(random.randint(1, 2))
+        second.fd(random.randint(0, 8))
+        second.lt(random.randint(-30, 30))
+        second.speed(random.randint(1, 4))
 
-#extras 
-# checkbox for the number of turtles
-check_frame = Frame(window)
-check_frame.grid(padx=2, pady=2, row=1, column=0, rowspan=1, columnspan=5)
-
-turt_num = IntVar()
-turt_num.set(1)
-
-one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1)
-one_turt_ck.grid(row=0)
-two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2)
-two_turt_ck.grid(row=1)

@@ -113,8 +113,8 @@ two_turt_ck.grid(row=0, column=2)
 multi = IntVar()
 multi.set(0)
 
-multi_turt = 
-
+multi_turt = Checkbutton(check_frame, variable=multi, onvalue=1, offvalue=0, text='Turtles can multiply')
+multi_turt.grid(row=0, column=3, padx=10)
 #start of action
 first.lt(random.randint(0, 359))
 second.lt(random.randint(0, 359))

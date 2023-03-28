@@ -35,6 +35,24 @@ limit = ask_input()
 
 for i in range(0, (limit + 1)): # for each number up to limit
     waiting_list = []
+    if len(prime_list) == 1000:
+        print('1000, still working')
+    elif len(prime_list) == 2000:
+        print('2000, still working')
+    elif len(prime_list) == 3000:
+        print('3000, still working')
+    elif len(prime_list) == 4000:
+        print('4000, still working')
+    elif len(prime_list) == 5000:
+        print('5000, still working')
+    elif len(prime_list) == 6000:
+        print('6000, still working')
+    elif len(prime_list) == 7000:
+        print('7000, still working')
+    elif len(prime_list) == 8000:
+        print('8000, still working')
+    elif len(prime_list) == 9000:
+        print('9000, still working')    
     if i != 0 and i != 1:
         for item in prime_list: # check against every value in list
             max_range(item, i)

@@ -122,22 +122,22 @@ while x is False:
         second.ht()
         if first.xcor() >= 190:
             first.setx(180)
-            fangle == first.towards(0, 0)
+            fangle = first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         elif first.xcor() <= -190:
             first.setx(-180)
-            fangle == first.towards(0, 0)
+            fangle = first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         if first.ycor() >= 190:
             first.sety(180)
-            fangle == first.towards(0, 0)
+            fangle = first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         elif first.ycor() <= -190:
             first.sety(-180)
-            fangle == first.towards(0, 0)
+            fangle = first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         first.fd(random.randint(0, 6))

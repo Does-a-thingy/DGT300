@@ -48,4 +48,4 @@ for i in range(0, (limit + 1)): # for each number up to limit
     else:
         pass
 
-print(prime_list)
+print(prime_list, '\n', len(prime_list))

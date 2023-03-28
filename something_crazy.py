@@ -14,6 +14,7 @@ screen.grid(padx=2, pady=2, row=0, column=0, rowspan=10, columnspan=10)
 first = RawTurtle(screen)
 box = first.clone()
 box.speed(0)
+box.ht()
 first.speed(random.randint(1, 3))
 first.penup()
 first.fillcolor('green')
@@ -27,7 +28,6 @@ sangle = second.towards(0, 0)
 
 box.lt(90)
 box.penup()
-box.ht()
 box.goto(-210, -210)
 box.pendown()
 box.color('#1BE4C8')
@@ -41,7 +41,6 @@ box.end_fill()
 box.width(5)
 box.color('black')
 box.penup()
-box.ht()
 box.goto(-220, -220)
 box.pendown()
 b = 0
@@ -77,7 +76,6 @@ box.end_fill()
 box.width(5)
 box.color('brown')
 box.penup()
-box.ht()
 box.goto(-180, -200)
 box.pendown()
 
@@ -92,6 +90,7 @@ for i in range(2):
 
 box.end_fill()
 
+screen.configure(bg='green')
 # navigation is pick random
 # can you use turtle.Turtle() to control all of the turtles?
 # increase and decrease the number of turtles -> whats the limit? why?
@@ -111,6 +110,10 @@ one_turt_ck.grid(row=0)
 two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, text='Two turtles')
 two_turt_ck.grid(row=0, column=2)
 
+multi = IntVar()
+multi.set(0)
+
+multi_turt = 
 
 #start of action
 first.lt(random.randint(0, 359))
@@ -147,42 +150,42 @@ while x is False:
         second.st()
         if first.xcor() >= 190:
             first.setx(180)
-            fangle == first.towards(0, 0)
+            fangle == first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         elif first.xcor() <= -190:
             first.setx(-180)
-            fangle == first.towards(0, 0)
+            fangle == first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         if first.ycor() >= 190:
             first.sety(180)
-            fangle == first.towards(0, 0)
+            fangle == first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)
         elif first.ycor() <= -190:
             first.sety(-180)
-            fangle == first.towards(0, 0)
+            fangle == first.towards(0, 0) + 90
             first.lt(fangle)
             first.fd(5)        
         if second.xcor() >= 190:
             second.setx(180)
-            sangle == second.towards(0, 0)
+            sangle == second.towards(0, 0) + 90
             second.lt(sangle)
             second.fd(5)
         elif second.xcor() <= -190:
             second.setx(-180)
-            sangle == second.towards(0, 0)
+            sangle == second.towards(0, 0) + 90
             second.lt(sangle)
             second.fd(5)
         if second.ycor() >= 190:
             second.sety(180)
-            sangle == second.towards(0, 0)
+            sangle == second.towards(0, 0) + 90
             second.lt(sangle)
             second.fd(5)
         elif second.ycor() <= -190:
             second.sety(-180)
-            sangle == second.towards(0, 0)
+            sangle == second.towards(0, 0) + 90
             second.lt(sangle)
             second.fd(5)
         first.fd(random.randint(0, 6))

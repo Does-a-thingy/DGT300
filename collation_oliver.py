@@ -3,10 +3,10 @@ from tkinter import *
 '''This is the file that I have made to hold my most common functions.
 These functions are all made by me and are used accross my code frequently.'''
 
-def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
+def grd_wid(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
     widget.grid(row=Rw, column=Clumn, columnspan=clmspn, padx=x, pady=y, sticky=stic)
 
-def file_fetch(file):
+def fil_fch(file):
     fetched_lst = []
     with open(file) as f:
         for line in f.readlines():

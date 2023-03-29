@@ -97,9 +97,9 @@ class history:
         #histry_lst.append(' '.join(info))
         #print(histry_lst)
     
-    def file_fetch():
+    def file_fetch(file):
         fetched_lst = []
-        with open('temp_history.txt') as f:
+        with open(file) as f:
             for line in f.readlines():
                 line = line.replace('\n', '')
                 fetched_lst.append(line.strip())

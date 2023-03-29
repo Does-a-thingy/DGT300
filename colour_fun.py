@@ -1,4 +1,5 @@
 from collation_oliver import *
+from bin_rep_funct import *
 #from functools import partial
 
 w = Tk()

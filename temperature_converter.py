@@ -1,5 +1,6 @@
 from tkinter import *
 from functools import partial
+from colour_fun import *
 
 # the start of the problem
 
@@ -72,6 +73,7 @@ def celc_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt - 3200)*(5/9)
     tmp = tmp/100
+    colour_changing()
     if round(tmp, 2) >= -273.15:
         convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
         history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
@@ -82,6 +84,7 @@ def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 3200
     tmp = tmp/100
+    colour_changing()
     if round(tmp, 2) >= -459.67:
         convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
         history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
@@ -119,7 +122,7 @@ class history:
         
         htop_lab = Label(histry, text='Conversion history:', bg='#CDF5FF')
         grid_widget(htop_lab, clmspn=2)
-        
+        colour_changing()
         try:
             old_txt = history.file_fetch()
             old_hist = Label(histry, textvariable=old_txt, bg='#CDF5FF')
@@ -159,7 +162,7 @@ class helping:
         
         help_butt.config(state='disabled')
         help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
-        
+        colour_changing()
         help_lab = Label(help_w, textvariable=help_txt, bg='#CDF5FF')
         grid_widget(help_lab, y=10)
         

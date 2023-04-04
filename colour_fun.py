@@ -4,8 +4,9 @@ from bin_rep_funct import *
 
 w = Tk()
 
-colour = '#FFFFFF'
-color = '#000000'
+colour = '#00FF00'
+color = '#FF00FF'
+clour = '#FFFFFF'
 
 number1 = 0
 number2 = 255
@@ -26,10 +27,14 @@ grd_wid(top_f)
 bot_f = Frame(w, bg=color)
 grd_wid(bot_f, 1)
 
-top_l = Label(top_f, text='')
+top_l = Label(top_f, text='This is text box 1, it is in frame 1', bg=colour)
 grd_wid(top_l)
-bot_l = Label(bot_f, text='')
+top_l2 = Label(top_f, text='This is text box 1, the colour is {}'.format(colour), bg=colour)
+grd_wid(top_l2, 1)
+bot_l = Label(bot_f, text='This is text box 3, it is in frame 2', bg=color)
 grd_wid(bot_l)
+bot_l2 = Label(bot_f, text='This is text box 4, the color is {}'.format(color), bg=color)
+grd_wid(bot_l2, 1)
 
 def cnt_loop(numb, tolim, bolim, step, neg):
     if numb == tolim or numb == bolim:
@@ -54,6 +59,8 @@ def colour_changing():
     colour = str('#' + hex1 + hex2 + hex3)
     #update the colour
     top_f.config(background=colour)
+    top_l.config(background=colour)
+    top_l2.config(text='This is text box 1, the colour is {}'.format(colour), background=colour)
     
     # change the  number
     number4, neg4 = cnt_loop(number4, 0, 255, 1, neg4)
@@ -67,6 +74,26 @@ def colour_changing():
     color = str('#' + hex4 + hex5 + hex6)
     #update the color
     bot_f.config(background=color)
+    bot_l.config(background=color)
+    bot_l2.config(text='This is text box 4, the color is {}'.format(color), background=color)
+    
+    if number1 >= number4:
+        hex7 = making_final(number1)
+    elif number4 > number1:
+        hex7 = making_final(number4)
+    
+    if number2 >= number5:
+        hex8 = making_final(number2)
+    elif number5 > number2:
+        hex8 = making_final(number5)
+    
+    if number3 >= number6:
+        hex9 = making_final(number3)
+    elif number6 > number3:
+        hex9 = making_final(number6)
+    
+    clour = str('#'+hex7+hex8+hex9)
+    w.config(bg=clour)
     
     '''if I used a loop then mainloop never runs and the window never shows up, 
     and using it after will never trigger it. 

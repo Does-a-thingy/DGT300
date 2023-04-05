@@ -1,5 +1,5 @@
 from functools import partial
-from colour_fun_single import *
+from tkinter import *
 
 # the start of the problem
 
@@ -8,11 +8,6 @@ w.wm_attributes
 w.configure(bg='#FFD7CD')
 
 window = Frame(w, bg='#FFD7CD') # holds everything so that the edge looks better
-
-enters_frame = Frame(window, bg='#FFD7CD')
-output_frame = Frame(window, bg='#FFD7CD')
-buttons_frame = Frame(window, bg='#FFD7CD')
-bottom_frame = Frame(window, bg='#FFD7CD')
 
 entered = StringVar()
 entered.set('')
@@ -47,8 +42,8 @@ histry_lst = []
 histry_str = ''
 
 #because these buttons are used in the commands a basic button is built here, then improved at the end
-hist_butt = Button(bottom_frame)
-help_butt = Button(bottom_frame)
+hist_butt = Button(window)
+help_butt = Button(window)
 
 def submit():
     try:
@@ -63,32 +58,33 @@ def submit():
             return temp_unconv
         except:
             entered.set('')
-            text_var.set('Please input the temperature up to 2 decimal places')
 
 def grid_widget(widget, Rw=0, Clumn=0, clmspn=1, x=10, y=3, stic='NESW'):
     widget.grid(row=Rw, column=Clumn, columnspan=clmspn, padx=x, pady=y, sticky=stic)
 
 def celc_cmd():
-    tmp_srt = submit()
-    tmp = (tmp_srt - 3200)*(5/9)
-    tmp = tmp/100
-    colour_changing(window, w)
-    if round(tmp, 2) >= -273.15:
-        convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
-        history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
-    else:
-        convt_txt.set('The converted temperature is: ')
+    try:
+        tmp_srt = submit()
+        tmp = (tmp_srt - 3200)*(5/9)
+        tmp = tmp/100
+        if round(tmp, 2) >= -273.15:
+            convt_txt.set('The converted temperature is: {:.2f} celcius'.format(tmp))
+            history.add(tmp_srt/100, 'fahrenheit', tmp, 'celcius')
+        else:
+            convt_txt.set('That was not a valid temperature')
+    except:
+        convt_txt.set('That was not a valid temperature')
 
 def fahr_cmd():
     tmp_srt = submit()
     tmp = (tmp_srt * (9/5)) + 3200
     tmp = tmp/100
-    colour_changing(window, w)
     if round(tmp, 2) >= -459.67:
         convt_txt.set('The converted temperature is: {:.2f} fahrenheit'.format(tmp))
         history.add(tmp_srt/100, 'celcius', tmp, 'fahrenheit')
     else:
-        convt_txt.set('The converted temperature is: ')
+        convt_txt.set('That is not a valid temperature')
+        w.after(1000, convt_txt.set('The converted temperature is: '))
 
 class history:
     def add(bas, tpe, num, typ):
@@ -121,7 +117,6 @@ class history:
         
         htop_lab = Label(histry, text='Conversion history:', bg='#CDF5FF')
         grid_widget(htop_lab, clmspn=2)
-        colour_changing(window, w)
         try:
             old_txt = history.file_fetch()
             old_hist = Label(histry, textvariable=old_txt, bg='#CDF5FF')
@@ -161,7 +156,6 @@ class helping:
         
         help_butt.config(state='disabled')
         help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
-        colour_changing(window, w)
         help_lab = Label(help_w, textvariable=help_txt, bg='#CDF5FF')
         grid_widget(help_lab, y=10)
         
@@ -176,27 +170,23 @@ class helping:
 #have to use commands after they defined
 
 grid_widget(window,  y=0, x=0)
-grid_widget(enters_frame, y=10)
-grid_widget(buttons_frame, Rw=1)
-grid_widget(output_frame, Rw=2)
-grid_widget(bottom_frame, Rw=3, y=10)
 
 # the rest of the problem
 
-title_label = Label(enters_frame, text='Temperature Converter', font=('Arial', 20), bg='#DCFFCD')
-grid_widget(title_label, clmspn=2)
+title_label = Label(window, text='Temperature Converter', font=('Arial', 20), bg='#DCFFCD')
+grid_widget(title_label, 0, 1, clmspn=2)
 
-temp_label = Label(enters_frame, textvariable=text_var, bg='#DCFFCD')
-grid_widget(temp_label, 1, clmspn=2)
+temp_label = Label(window, textvariable=text_var, bg='#DCFFCD')
+grid_widget(temp_label, 1, 1, clmspn=2)
 
-temp_entry = Entry(enters_frame, textvariable=entered)
-grid_widget(temp_entry, 2, clmspn=2)
+temp_entry = Entry(window, textvariable=entered)
+grid_widget(temp_entry, 2, 1, clmspn=2)
 
-conv_label = Label(output_frame, textvariable=convt_txt, bg='#DCFFCD')
-grid_widget(conv_label, y=0)
+conv_label = Label(window, textvariable=convt_txt, bg='#DCFFCD')
+grid_widget(conv_label, 3, 1 y=0)
 
-celc_butt = Button(buttons_frame, text='To celcius', command=celc_cmd, bg='#DCFFCD')
-grid_widget(celc_butt)
+celc_butt = Button(window, text='To celcius', command=celc_cmd, bg='#DCFFCD')
+grid_widget(celc_butt, 4,1)
 
 fahr_butt = Button(buttons_frame, text='To Fahrenheit', command=fahr_cmd, bg='#DCFFCD')
 grid_widget(fahr_butt, Clumn=1)
@@ -207,4 +197,4 @@ grid_widget(hist_butt, y=0)
 help_butt = Button(bottom_frame, text='Help', command=helping.open, bg='#DCFFCD')
 grid_widget(help_butt, Clumn=1, y=0)
 
-window.mainloop()
+w.mainloop()

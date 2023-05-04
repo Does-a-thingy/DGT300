@@ -183,7 +183,7 @@ temp_entry = Entry(window, textvariable=entered)
 grid_widget(temp_entry, 2, 1, clmspn=2)
 
 conv_label = Label(window, textvariable=convt_txt, bg='#DCFFCD')
-grid_widget(conv_label, 3, 1 y=0)
+grid_widget(conv_label, 3, 1, y=0)
 
 celc_butt = Button(window, text='To celcius', command=celc_cmd, bg='#DCFFCD')
 grid_widget(celc_butt, 4,1)

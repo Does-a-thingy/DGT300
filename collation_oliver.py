@@ -20,5 +20,5 @@ def fil_fch(file):
 def hid_wid(wid):
     wid.grid_forget()
 
-def can():
-    window.destroy()
+def can(self):
+    self.destroy()

@@ -5,10 +5,12 @@ win.configure(bg='#EFE7BC')
 win.title('Movie Theatre')
 
 titlfr = Frame(win, bg='#EFE7BC')
-grd_wid(titlfr, iy=0, ix=0, y=0, x=0)
+grd_wid(titlfr)
 
 frm1 = Frame(win, bg='#EFE7BC')
-grd_wid(frm1, 1, iy=0, ix=0, y=0, x=0)
+grd_wid(frm1, 1)
+
+frm2 = Frame(win, bg='#EFE7BC')
 
 total = 0
 
@@ -39,11 +41,23 @@ def movcmd(num):
     grd_wid(time1b, x=10, y=10)
     grd_wid(time2b, 0,1,x=10,y=10)
     grd_wid(time3b, 0,2,x=10,y=10)
-    
+
     # small thing to make it look better, just adjusts the title's width to fit with the rest of it.
     hid_wid(titlem)
     titlem = Label(titlfr, text='Movie Theatre', bg='#74BDCB', font=('lucid', 26), width=13, relief='solid', bd=1)
     grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
+
+def win2to3():
+    global frm2, frm1
+    hid_wid(frm1)
+    grd_wid(frm2, 1)
+
+def crt_but():
+    global Checkbutton
+    wid = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+    return wid
+
+#GUI code start
 
 # I had to define the font to change the size of the text.
 titlem = Label(titlfr, text='Movie Theatre', bg='#74BDCB', font=('lucid', 26), width=12, relief='solid', bd=1)
@@ -52,6 +66,8 @@ titl = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titl, x=10, ix=10)
 titr = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titr, 0, 4, x=10, ix=10)
+
+# window 1 code start
 
 # lambda lets me call a command and give it a value input.
 movi1 = Button(frm1, text='MOVIE 1', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1)
@@ -66,18 +82,142 @@ grd_wid(movl, x=7.5, ix=10)
 movr = Label(frm1, textvariable=blank, bg='#EFE7BC')
 grd_wid(movr, 0, 4, x=10, ix=10)
 
-timefrm1 = Frame(frm1, bg='#EFBCDE', relief='solid')
-timefrm2 = Frame(frm1, bg='#EFBCDE', relief='solid')
-timefrm3 = Frame(frm1, bg='#EFBCDE', relief='solid')
-grd_wid(timefrm1, 1, 1, y=0, x=0, ix=0, iy=0)
-grd_wid(timefrm2, 1, 2, y=0, x=0, ix=0, iy=0)
-grd_wid(timefrm3, 1, 3, y=0, x=0, ix=0, iy=0)
+# window 2 code start
 
-time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1)
-time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1)
-time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='solid', bd=1)
+timefrm1 = Frame(frm1, bg='#EFBCDE')
+timefrm2 = Frame(frm1, bg='#EFBCDE')
+timefrm3 = Frame(frm1, bg='#EFBCDE')
+grd_wid(timefrm1, 1, 1)
+grd_wid(timefrm2, 1, 2)
+grd_wid(timefrm3, 1, 3)
+
+time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
+time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
+time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
 
 botspc= Label(win, textvariable=blank, bg='#EFE7BC')
 grd_wid(botspc,2, 0, y=5)
+
+# window 3 code start
+
+sblnkl = Label(frm2, bg='#EFE7BC', textvariable=blank)
+grd_wid(sblnkl, x=7.5, ix=10)
+
+seatfrm = Frame(frm2, bg='#EFE7BC')
+grd_wid(seatfrm, 0, 1, rwspn=3, clmspn=3)
+
+# number row of seats:
+z1 = Label(seatfrm, bg='green', text='1', width=2)
+grd_wid(z1, 0, 1)
+z2 = Label(seatfrm, bg='green', text='2', width=2)
+grd_wid(z2, 0, 2)
+z3 = Label(seatfrm, bg='green', text='3', width=2)
+grd_wid(z3, 0, 3)
+z4 = Label(seatfrm, bg='green', text='4', width=2)
+grd_wid(z4, 0, 4)
+z5 = Label(seatfrm, bg='green', text='5', width=2)
+grd_wid(z5, 0, 5)
+z6 = Label(seatfrm, bg='green', text='6', width=2)
+grd_wid(z6, 0, 6)
+z7 = Label(seatfrm, bg='green', text='7', width=2)
+grd_wid(z7, 0, 7)
+z8 = Label(seatfrm, bg='green', text='8', width=2)
+grd_wid(z8, 0, 8)
+
+# letter row of seats
+a0 = Label(seatfrm, bg='green', text='A', width=2)
+grd_wid(a0, 1)
+b0 = Label(seatfrm, bg='green', text='B', width=2)
+grd_wid(b0, 2)
+c0 = Label(seatfrm, bg='green', text='C', width=2)
+grd_wid(c0, 3)
+d0 = Label(seatfrm, bg='green', text='D', width=2)
+grd_wid(d0, 4)
+e0 = Label(seatfrm, bg='green', text='E', width=2)
+grd_wid(e0, 5)
+f0 = Label(seatfrm, bg='green', text='F', width=2)
+grd_wid(f0, 6)
+g0 = Label(seatfrm, bg='green', text='G', width=2)
+grd_wid(g0, 7)
+h0 = Label(seatfrm, bg='green', text='H', width=2)
+grd_wid(h0, 8)
+
+# row A seats
+rowa = []
+for i in range(0, 8):
+    rowa.append(crt_but())
+    grd_wid(rowa[i], 1, (i+1))
+
+# row B seats
+b1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b1, 2, 1)
+b2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b2, 2, 2)
+b3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b3, 2, 3)
+b4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b4, 2, 4)
+b5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b5, 2, 5)
+b6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b6, 2, 6)
+b7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b7, 2, 7)
+b8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b8, 2, 8)
+
+# row C seats
+c1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c1, 3, 1)
+c2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c2, 3, 2)
+c3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c3, 3, 3)
+c4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c4, 3, 4)
+c5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c5, 3, 5)
+c6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c6, 3, 6)
+c7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c7, 3, 7)
+c8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c8, 3, 8)
+
+# row D seats
+b1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b1, 2, 1)
+b2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b2, 2, 2)
+b3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b3, 2, 3)
+b4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b4, 2, 4)
+b5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b5, 2, 5)
+b6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b6, 2, 6)
+b7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b7, 2, 7)
+b8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(b8, 2, 8)
+
+# row E seats
+c1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c1, 3, 1)
+c2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c2, 3, 2)
+c3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c3, 3, 3)
+c4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c4, 3, 4)
+c5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c5, 3, 5)
+c6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c6, 3, 6)
+c7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c7, 3, 7)
+c8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+grd_wid(c8, 3, 8)
 
 win.mainloop()

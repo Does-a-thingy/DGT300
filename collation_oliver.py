@@ -3,7 +3,7 @@ from tkinter import *
 '''This is the file that I have made to hold my most common functions.
 These functions are all made by me and are used accross my code frequently.'''
 
-def grd_wid(wid, Rw=0, Clumn=0, clmspn=1, x=6, ix=4, y=3, iy=3, stc='NESW', rwspn=1):
+def grd_wid(wid, Rw=0, Clumn=0, clmspn=1, x=0, ix=0, y=0, iy=0, stc='NESW', rwspn=1):
     wid.grid(row=Rw, rowspan=rwspn, column=Clumn, columnspan=clmspn, padx=x, ipadx=ix, pady=y, ipady=iy, sticky=stc)
 
 def fil_fch(file):

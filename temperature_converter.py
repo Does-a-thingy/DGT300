@@ -160,7 +160,7 @@ class helping:
         grid_widget(help_lab, y=10)
         
         clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#CDF5FF')
-        grid_widget(clos_butt, 1)        
+        grid_widget(clos_butt, 1)
         
     def close(self):
         global help_butt

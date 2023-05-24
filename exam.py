@@ -52,10 +52,24 @@ def win2to3():
     hid_wid(frm1)
     grd_wid(frm2, 1)
 
+# this is used to mass create checkboxes
 def crt_but():
     global Checkbutton
     wid = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
     return wid
+
+# this is used to mass create 
+def crt_lab(txt,cl='green'):
+    global Label
+    wid = Label(seatfrm, bg=cl, text=txt, width=2)
+    return wid
+
+def checkbox_maker(lst):
+    for o in range(0,7):
+        lst.append([])
+        for i in range(0,8):
+            lst[o].append(crt_but())
+            grd_wid(lst[o][i], (o+2),(i+1))
 
 #GUI code start
 
@@ -145,79 +159,14 @@ grd_wid(h0, 8)
 # row A seats
 rowa = []
 for i in range(0, 8):
-    rowa.append(crt_but())
+    if i < 2 or i > 5: 
+        rowa.append(crt_but())
+    else:
+        rowa.append(crt_lab('', '#EFE7BC'))
     grd_wid(rowa[i], 1, (i+1))
 
-# row B seats
-b1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b1, 2, 1)
-b2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b2, 2, 2)
-b3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b3, 2, 3)
-b4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b4, 2, 4)
-b5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b5, 2, 5)
-b6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b6, 2, 6)
-b7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b7, 2, 7)
-b8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b8, 2, 8)
+check_lst_b_to_h = []
+checkbox_maker(check_lst_b_to_h)
 
-# row C seats
-c1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c1, 3, 1)
-c2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c2, 3, 2)
-c3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c3, 3, 3)
-c4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c4, 3, 4)
-c5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c5, 3, 5)
-c6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c6, 3, 6)
-c7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c7, 3, 7)
-c8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c8, 3, 8)
-
-# row D seats
-b1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b1, 2, 1)
-b2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b2, 2, 2)
-b3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b3, 2, 3)
-b4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b4, 2, 4)
-b5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b5, 2, 5)
-b6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b6, 2, 6)
-b7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b7, 2, 7)
-b8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(b8, 2, 8)
-
-# row E seats
-c1 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c1, 3, 1)
-c2 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c2, 3, 2)
-c3 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c3, 3, 3)
-c4 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c4, 3, 4)
-c5 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c5, 3, 5)
-c6 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c6, 3, 6)
-c7 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c7, 3, 7)
-c8 = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
-grd_wid(c8, 3, 8)
 
 win.mainloop()

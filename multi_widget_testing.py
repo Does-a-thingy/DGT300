@@ -16,11 +16,11 @@ def crt_lab(txt,cl='green'):
     return wid
 
 def smaller(lst):
-    for o in range(2,8):
-        
+    for o in range(0,7):
+        lst.append([])
         for i in range(0,8):
             lst[o].append(crt_but())
-            grd_wid(lst[o][i], o,(i+1))
+            grd_wid(lst[o][i], (o+2),(i+1))
     
 rowa = []
 for i in range(0, 8):
@@ -30,42 +30,8 @@ for i in range(0, 8):
         rowa.append(crt_lab('', '#EFE7BC'))
     grd_wid(rowa[i], 1, (i+1))
 
-
-
-rowb = []
-for i in range(0,8):
-    rowb.append(crt_but())
-    grd_wid(rowb[i], 2, (i+1))
-
-rowc = []
-for i in range(0,8):
-    rowc.append(crt_but())
-    grd_wid(rowc[i], 3, (i+1))
-
-rowd = []
-for i in range(0,8):
-    rowd.append(crt_but())
-    grd_wid(rowd[i], 4, (i+1))
-
-rowe = []
-for i in range(0,8):
-    rowe.append(crt_but())
-    grd_wid(rowe[i], 5, (i+1))
-    
-rowf = []
-for i in range(0,8):
-    rowf.append(crt_but())
-    grd_wid(rowf[i], 6, (i+1))
-
-rowg = []
-for i in range(0,8):
-    rowg.append(crt_but())
-    grd_wid(rowg[i], 7, (i+1))
-
-rowh = []
-for i in range(0,8):
-    rowh.append(crt_but())
-    grd_wid(rowh[i], 8, (i+1))
+grand_list = []
+smaller(grand_list)
 
 alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 

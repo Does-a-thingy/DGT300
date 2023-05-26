@@ -51,6 +51,7 @@ def win2to3():
     global frm2, frm1
     hid_wid(frm1)
     grd_wid(frm2, 1)
+    
 
 # this is used to mass create checkboxes
 def crt_but():
@@ -64,12 +65,32 @@ def crt_lab(txt,cl='green'):
     wid = Label(seatfrm, bg=cl, text=txt, width=2)
     return wid
 
+#used to manage all of the checkboxes.
 def checkbox_maker(lst):
-    for o in range(0,7):
+    alphabet = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H'] # need to store letters somewhere
+    for o in range(0,9):# does all 9 layers of the window
         lst.append([])
-        for i in range(0,8):
-            lst[o].append(crt_but())
-            grd_wid(lst[o][i], (o+2),(i+1))
+        if o == 0: #this is for the top row of numbers
+            for i in range(0,8):
+                lst[o].append(crt_lab(i))# label maker for number
+                grd_wid(lst[o][i],0,(i+1))
+        elif o == 1:# this is for row A
+            for i in range(0,9):
+                if i == 0: # this does A
+                    lst[o].append(crt_lab(alphabet[i]))
+                if (i < 2 or i > 5): # this is for the gap
+                    lst[o].append(crt_but())
+                else:# does the checkbuttons
+                    lst[o].append(crt_lab('', '#EFE7BC'))
+                grd_wid(lst[o][i], o, i)
+        else:
+            for i in range(0,9):
+                if i == 0: # this also does letters
+                    print(o)
+                    lst[o].append(crt_lab(alphabet[o-1]))
+                else: # this does the rows of checkbuttons
+                    lst[o].append(crt_but())
+                grd_wid(lst[o][i], o,i)
 
 #GUI code start
 
@@ -97,7 +118,6 @@ movr = Label(frm1, textvariable=blank, bg='#EFE7BC')
 grd_wid(movr, 0, 4, x=10, ix=10)
 
 # window 2 code start
-
 timefrm1 = Frame(frm1, bg='#EFBCDE')
 timefrm2 = Frame(frm1, bg='#EFBCDE')
 timefrm3 = Frame(frm1, bg='#EFBCDE')
@@ -113,60 +133,36 @@ botspc= Label(win, textvariable=blank, bg='#EFE7BC')
 grd_wid(botspc,2, 0, y=5)
 
 # window 3 code start
-
 sblnkl = Label(frm2, bg='#EFE7BC', textvariable=blank)
 grd_wid(sblnkl, x=7.5, ix=10)
 
 seatfrm = Frame(frm2, bg='#EFE7BC')
 grd_wid(seatfrm, 0, 1, rwspn=3, clmspn=3)
 
-# number row of seats:
-z1 = Label(seatfrm, bg='green', text='1', width=2)
-grd_wid(z1, 0, 1)
-z2 = Label(seatfrm, bg='green', text='2', width=2)
-grd_wid(z2, 0, 2)
-z3 = Label(seatfrm, bg='green', text='3', width=2)
-grd_wid(z3, 0, 3)
-z4 = Label(seatfrm, bg='green', text='4', width=2)
-grd_wid(z4, 0, 4)
-z5 = Label(seatfrm, bg='green', text='5', width=2)
-grd_wid(z5, 0, 5)
-z6 = Label(seatfrm, bg='green', text='6', width=2)
-grd_wid(z6, 0, 6)
-z7 = Label(seatfrm, bg='green', text='7', width=2)
-grd_wid(z7, 0, 7)
-z8 = Label(seatfrm, bg='green', text='8', width=2)
-grd_wid(z8, 0, 8)
-
-# letter row of seats
-a0 = Label(seatfrm, bg='green', text='A', width=2)
-grd_wid(a0, 1)
-b0 = Label(seatfrm, bg='green', text='B', width=2)
-grd_wid(b0, 2)
-c0 = Label(seatfrm, bg='green', text='C', width=2)
-grd_wid(c0, 3)
-d0 = Label(seatfrm, bg='green', text='D', width=2)
-grd_wid(d0, 4)
-e0 = Label(seatfrm, bg='green', text='E', width=2)
-grd_wid(e0, 5)
-f0 = Label(seatfrm, bg='green', text='F', width=2)
-grd_wid(f0, 6)
-g0 = Label(seatfrm, bg='green', text='G', width=2)
-grd_wid(g0, 7)
-h0 = Label(seatfrm, bg='green', text='H', width=2)
-grd_wid(h0, 8)
-
-# row A seats
-rowa = []
-for i in range(0, 8):
-    if i < 2 or i > 5: 
-        rowa.append(crt_but())
-    else:
-        rowa.append(crt_lab('', '#EFE7BC'))
-    grd_wid(rowa[i], 1, (i+1))
-
+# summon the seats
 check_lst_b_to_h = []
 checkbox_maker(check_lst_b_to_h)
 
+# the key on the rightside
+key_frm = Frame(frm2, bg='#BCC4EF')
+grd_wid(key_frm, 0, 4, rwspn=2, clmspn=2, x=5, y=20)
 
+empt_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, width=1)
+empt_lab = Label(key_frm, bg='#BCC4EF', text='Empty')
+grd_wid(empt_box)
+grd_wid(empt_lab,1)
+
+take_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, state= "disabled", width=1)
+take_lab = Label(key_frm, bg='#BCC4EF', text='Taken')
+grd_wid(take_box,2)
+grd_wid(take_lab,3)
+
+selc_va = IntVar(1)
+
+selc_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, onvalue=1, offvalue=0, variable=selc_va, width=1)
+selc_lab = Label(key_frm, bg='#BCC4EF', text='Selected')
+grd_wid(selc_box,4)
+grd_wid(selc_lab,5)
+
+#run that program!
 win.mainloop()

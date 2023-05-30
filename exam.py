@@ -41,22 +41,27 @@ def movcmd(num):
     grd_wid(time1b, x=10, y=10)
     grd_wid(time2b, 0,1,x=10,y=10)
     grd_wid(time3b, 0,2,x=10,y=10)
+    grd_wid(timefrm, 1, 1, clmspn=3)    
 
-    # small thing to make it look better, just adjusts the title's width to fit with the rest of it.
-    hid_wid(titlem)
-    titlem = Label(titlfr, text='Movie Theatre', bg='#74BDCB', font=('lucid', 26), width=13, relief='solid', bd=1)
-    grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
 
 def win2to3():
     global frm2, frm1
     hid_wid(frm1)
     grd_wid(frm2, 1)
     
+def back():
+    global frm2, frm1
+    hid_wid(frm2)
+    grd_wid(frm1, 1)
+
+def check_change(rw, plc):
+    global check_lst_b_to_h
+    pass
 
 # this is used to mass create checkboxes
 def crt_but():
     global Checkbutton
-    wid = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1)
+    wid = Checkbutton(seatfrm, bg='#EFE7BC', relief='solid', bd=1, command=lambda:check_change())
     return wid
 
 # this is used to mass create 
@@ -102,8 +107,8 @@ grd_wid(titl, x=10, ix=10)
 titr = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titr, 0, 4, x=10, ix=10)
 
-# window 1 code start
 
+# window 1 code start
 # lambda lets me call a command and give it a value input.
 movi1 = Button(frm1, text='MOVIE 1', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1)
 grd_wid(movi1, Clumn=1, x=5, ix=10, y=20, iy=5)
@@ -117,13 +122,15 @@ grd_wid(movl, x=7.5, ix=10)
 movr = Label(frm1, textvariable=blank, bg='#EFE7BC')
 grd_wid(movr, 0, 4, x=10, ix=10)
 
+
 # window 2 code start
-timefrm1 = Frame(frm1, bg='#EFBCDE')
-timefrm2 = Frame(frm1, bg='#EFBCDE')
-timefrm3 = Frame(frm1, bg='#EFBCDE')
-grd_wid(timefrm1, 1, 1)
-grd_wid(timefrm2, 1, 2)
-grd_wid(timefrm3, 1, 3)
+timefrm = Frame(frm1, bg='#EFBCDE', relief='solid', bd=1)
+timefrm1 = Frame(timefrm, bg='#EFBCDE')
+timefrm2 = Frame(timefrm, bg='#EFBCDE')
+timefrm3 = Frame(timefrm, bg='#EFBCDE')
+grd_wid(timefrm1)
+grd_wid(timefrm2, 0, 1)
+grd_wid(timefrm3, 0, 2)
 
 time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
 time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
@@ -131,6 +138,7 @@ time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='sol
 
 botspc= Label(win, textvariable=blank, bg='#EFE7BC')
 grd_wid(botspc,2, 0, y=5)
+
 
 # window 3 code start
 sblnkl = Label(frm2, bg='#EFE7BC', textvariable=blank)
@@ -144,25 +152,38 @@ check_lst_b_to_h = []
 checkbox_maker(check_lst_b_to_h)
 
 # the key on the rightside
-key_frm = Frame(frm2, bg='#BCC4EF')
+key_frm = Frame(frm2, bg='#BCC4EF', relief='solid', bd=1)
 grd_wid(key_frm, 0, 4, rwspn=2, clmspn=2, x=5, y=20)
 
-empt_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, width=1)
+var0 = IntVar()
+
+empt_box = Checkbutton(key_frm, bg='#EFE7BC', width=1, variable=var0, offvalue=0, state= "disabled")
 empt_lab = Label(key_frm, bg='#BCC4EF', text='Empty')
 grd_wid(empt_box)
 grd_wid(empt_lab,1)
 
-take_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, state= "disabled", width=1)
+take_box = Checkbutton(key_frm, bg='#ACADAD', state= "disabled", width=1, variable=var0)
 take_lab = Label(key_frm, bg='#BCC4EF', text='Taken')
 grd_wid(take_box,2)
 grd_wid(take_lab,3)
 
-selc_va = IntVar(1)
+var2 = IntVar()
+var2.set(1)
 
-selc_box = Checkbutton(key_frm, bg='#EFE7BC', relief='solid', bd=1, onvalue=1, offvalue=0, variable=selc_va, width=1)
+selc_box = Checkbutton(key_frm, bg='#66FFFF', onvalue=1, variable=var2, width=1, state= "disabled")
 selc_lab = Label(key_frm, bg='#BCC4EF', text='Selected')
 grd_wid(selc_box,4)
 grd_wid(selc_lab,5)
+
+# buttons
+but_frm = Frame(frm2, bg='#EFE7BC')
+grd_wid(but_frm, 2, 4, 1, 4)
+
+bck_but = Button(but_frm, bg='#EFE7BC', text='Back', command=back)
+grd_wid(bck_but)
+
+nxt_but = Button(but_frm, bg='#EFE7BC', text='Confirm')
+grd_wid(nxt_but,1)
 
 #run that program!
 win.mainloop()

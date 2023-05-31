@@ -214,6 +214,8 @@ grd_wid(nxt_but,1)
 
 chosen_seats = []
 
+# remembering seats
+
 #run that program!
 win.mainloop()
 print(chosen_seats)

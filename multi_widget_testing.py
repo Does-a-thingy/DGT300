@@ -72,5 +72,18 @@ smaller(grand_list)
 
 chosen_seats = []
 
+#remember seats
+def fil_fch(file):
+    fetched_lst = []
+    with open(file) as f:
+        for line in f.readlines():
+            line = line.replace('\n', '')
+            fetched_lst.append(line.strip())
+            fetched_lst.remove('')
+    return fetched_lst
+
+fetched = fil_fch('seating.txt')
+print(fetched)
+
 win.mainloop()
 print(chosen_seats)

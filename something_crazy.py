@@ -105,9 +105,9 @@ check_frame.grid(padx=2, pady=2, row=11, column=0, rowspan=1, columnspan=5)
 turt_num = IntVar()
 turt_num.set(1)
 
-one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1, text='One turtle')
+one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1, offvalue=2, text='One turtle')
 one_turt_ck.grid(row=0)
-two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, text='Two turtles')
+two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, offvalue=1, text='Two turtles')
 two_turt_ck.grid(row=0, column=2)
 
 multi = IntVar()
@@ -194,4 +194,3 @@ while x is False:
         second.fd(random.randint(0, 8))
         second.lt(random.randint(-30, 30))
         second.speed(random.randint(1, 4))
-

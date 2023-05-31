@@ -30,7 +30,6 @@ def clk(self):
             pass
 
 def crt_but(bgc='#EFE7BC'):
-    global Checkbutton
     wid = Button(seatfrm, bg=bgc, relief='solid', bd=1, command=lambda:clk(wid), width=2)
     return wid
 

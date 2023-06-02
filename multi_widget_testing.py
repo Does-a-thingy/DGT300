@@ -75,14 +75,51 @@ chosen_seats = []
 #remember seats
 def fil_fch(file):
     fetched_lst = []
+    final = []
     with open(file) as f:
         for line in f.readlines():
-            line = line.replace('\n', '')
+            line = line.replace('\n', 'z')# changes all of the new line commands to the letter z
             fetched_lst.append(line.strip())
-            fetched_lst.remove('')
-    return fetched_lst
+            try:
+                for item in fetched_lst:
+                    fetched_lst.remove('z')# gets rid of blank lines
+                    for line in fetched_lst:
+                        line = line.replace('z', '')# changes the z at the end of the words into a space
+                        final.append(line.strip())# deletes the space at the end
+            except:
+                pass
+        return final
 
 fetched = fil_fch('seating.txt')
+print(fetched)
+# take the seats, and keep their position.
+for item in fetched:
+    if 'movie' in item or 'time' in item:
+        pass
+    else:
+        place = item.split(',')
+        x=1
+        for part in place:
+            part = int(part)
+            if x == 1:
+                place[0] = part
+                x=2
+            else:
+                place[1] = part
+        print(place)
+        i = fetched.index(item)
+        fetched[i] = place
+# grey out seats that are taken
+for self in fetched:
+    try:
+        o = self[0]
+        i = self[1]
+        hid_wid(grand_list[o][i])
+        grand_list[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+        grd_wid(grand_list[o][i], o, i)
+    except:
+        pass
+
 print(fetched)
 
 win.mainloop()

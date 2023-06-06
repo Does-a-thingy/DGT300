@@ -33,7 +33,7 @@ def movcmd(num):
         time1.set('10:45 AM') # later to be replaced with .set(time[1]) or something like it.
         time2.set('2:20 PM')
         time3.set('4:60 PM')
-        movie = 1
+        movie = 1 # for greying out taken seats 
     elif num == 2:
         time1.set('7:45 AM')
         time2.set('1:20 PM')
@@ -47,19 +47,32 @@ def movcmd(num):
     grd_wid(time1b, x=10, y=10)
     grd_wid(time2b, 0,1,x=10,y=10)
     grd_wid(time3b, 0,2,x=10,y=10)
-    grd_wid(timefrm, 1, 1, clmspn=3)    
+    grd_wid(timefrm, 1, 1, clmspn=3)
 
+def taken_seats():
+    global movie, time
+    self = lst[movie-1][time]# takes all the seats from the time slot
+    for item in self: # takes just one seat
+        o = item[0]
+        i = item[1]
+        hid_wid(button_lst[o][i])
+        button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+        grd_wid(button_lst[o][i], o, i)
+    self = lst[movie-1][time]# takes all the seats from the time slot
 
 def win2to3(num):
     global frm2, frm1, time
-    time = num
+    time = num # for greying out taken seats
+    taken_seats()
     hid_wid(frm1)
     grd_wid(frm2, 1)
     
 def back():
-    global frm2, frm1
+    global frm2, frm1, button_lst
     hid_wid(frm2)
     grd_wid(frm1, 1)
+    button_lst = []
+    button_maker(button_lst)
 
 # wanted seat command
 def clk(self):
@@ -67,15 +80,13 @@ def clk(self):
     lst = button_lst
     for o in range(0,9):
         try:
-            print(lst[o].index(self))
             if [o, lst[o].index(self)] in chosen_seats:
                 # This is to deselect the buttons
                 i = lst[o].index(self)
                 chosen_seats.remove([o, i])
                 hid_wid(lst[o][i])
                 lst[o][i] = crt_but()
-                grd_wid(lst[o][i], o, i)                
-                print("remove ", o, " ", i)
+                grd_wid(lst[o][i], o, i)
             else:
                 # This is to select the buttons
                 i = lst[o].index(self)
@@ -83,7 +94,6 @@ def clk(self):
                 hid_wid(lst[o][i])
                 lst[o][i] = crt_but('#66FFFF')
                 grd_wid(lst[o][i], o, i)
-                print("add ", o, " ", i)
         except:
             pass
 
@@ -127,7 +137,6 @@ def button_maker(lst):
                     lst[o].append(crt_but())
                 grd_wid(lst[o][i],o,i)
 
-
 def fil_fch(file):
     fetched_lst = []
     final = []
@@ -144,7 +153,6 @@ def fil_fch(file):
             dine = dine.replace('z', '')# changes the z at the end of the words into a space
             final.append(dine.strip())# deletes the space at the end
         return final
-
 
 # GUI code start
 
@@ -239,7 +247,6 @@ chosen_seats = []
 # remembering seats
 
 fetched = fil_fch('seating.txt')
-print(fetched)
 # take the seats, and keep their position.
 lst = []
 for item in fetched:
@@ -255,7 +262,7 @@ for item in fetched:
             item = int(item)
             lst[z-1].append([])
             y=item
-    elif item == '':
+    elif item == '': # excludes the blanks
         pass
     else:
         place = item.split(',') # seperates the numbers
@@ -280,8 +287,5 @@ for self in fetched:
     except:
         pass
 
-
-print(lst)
 #run that program!
 win.mainloop()
-print(chosen_seats)

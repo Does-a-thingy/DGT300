@@ -73,24 +73,24 @@ smaller(grand_list)
 chosen_seats = []
 
 #remember seats
-def fil_fch(file):
-    fetched_lst = []
-    final = []
-    with open(file) as f:
-        for line in f.readlines():
-            line = line.replace('\n', 'z')# changes all of the new line commands to the letter z
-            fetched_lst.append(line.strip())
-            try:
-                for item in fetched_lst:
-                    fetched_lst.remove('z')# gets rid of blank lines
-                    for line in fetched_lst:
-                        line = line.replace('z', '')# changes the z at the end of the words into a space
-                        final.append(line.strip())# deletes the space at the end
-            except:
+fetched_lst = []
+final = []
+with open('seating.txt') as f:
+    for line in f.readlines():
+        bine = line.replace('\n', 'z')# changes all of the new line commands to the letter z
+        fetched_lst.append(bine.strip())
+    try:
+        for cine in fetched_lst:
+            sine = cine.replace('z', '')# changes the z at the end of the words into a space
+            if sine == '':
                 pass
-        return final
+            else:
+                print('eerferf')
+                final.append(sine.strip())# deletes the space at the end
+    except:
+        print('cry')
+    fetched = final
 
-fetched = fil_fch('seating.txt')
 print(fetched)
 # take the seats, and keep their position.
 for item in fetched:
@@ -100,13 +100,14 @@ for item in fetched:
         place = item.split(',')
         x=1
         for part in place:
+            print(part)
+            print(item)
             part = int(part)
             if x == 1:
                 place[0] = part
                 x=2
             else:
                 place[1] = part
-        print(place)
         i = fetched.index(item)
         fetched[i] = place
 # grey out seats that are taken
@@ -116,7 +117,7 @@ for self in fetched:
         i = self[1]
         hid_wid(grand_list[o][i])
         grand_list[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-        grd_wid(grand_list[o][i], o, i)
+        grd_wid(grand_list[o][i], o, i)s
     except:
         pass
 

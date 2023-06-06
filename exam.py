@@ -20,32 +20,39 @@ time3 = StringVar()
 blank = StringVar()
 blank.set('')
 
+movie = 0
+time = 0
+
 def price(tiknum, pric):
     global total
     total += tiknum * pric
 
 def movcmd(num):
-    global titlem
+    global titlem, movie
     if num == 1:
         time1.set('10:45 AM') # later to be replaced with .set(time[1]) or something like it.
         time2.set('2:20 PM')
         time3.set('4:60 PM')
+        movie = 1
     elif num == 2:
         time1.set('7:45 AM')
         time2.set('1:20 PM')
         time3.set('24:60 PM')
+        movie = 2
     elif num == 3:
         time1.set('1:50 AM')
         time2.set('3:26 PM')
         time3.set('7:99 PM')
+        movie = 3
     grd_wid(time1b, x=10, y=10)
     grd_wid(time2b, 0,1,x=10,y=10)
     grd_wid(time3b, 0,2,x=10,y=10)
     grd_wid(timefrm, 1, 1, clmspn=3)    
 
 
-def win2to3():
-    global frm2, frm1
+def win2to3(num):
+    global frm2, frm1, time
+    time = num
     hid_wid(frm1)
     grd_wid(frm2, 1)
     
@@ -54,14 +61,10 @@ def back():
     hid_wid(frm2)
     grd_wid(frm1, 1)
 
-def check_change(rw, plc):
-    global check_lst_b_to_h
-    pass
-
 # wanted seat command
 def clk(self):
-    global check_lst_b_to_h, chosen_seats
-    lst = check_lst_b_to_h
+    global button_lst, chosen_seats
+    lst = button_lst
     for o in range(0,9):
         try:
             print(lst[o].index(self))
@@ -124,15 +127,24 @@ def button_maker(lst):
                     lst[o].append(crt_but())
                 grd_wid(lst[o][i],o,i)
 
-for self in fetched:
-    try:
-        o = self[0]
-        i = self[1]
-        hid_wid(grand_list[o][i])
-        grand_list[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-        grd_wid(grand_list[o][i], o, i)
-    except:
-        pass
+
+def fil_fch(file):
+    fetched_lst = []
+    final = []
+    with open(file) as f:
+        for line in f.readlines():
+            line = line.replace('\n', 'z')# changes all of the new line commands to the letter z
+            fetched_lst.append(line.strip())
+        try:
+            for item in fetched_lst:
+                fetched_lst.remove('z')# gets rid of blank lines
+        except:
+            pass
+        for dine in fetched_lst:
+            dine = dine.replace('z', '')# changes the z at the end of the words into a space
+            final.append(dine.strip())# deletes the space at the end
+        return final
+
 
 # GUI code start
 
@@ -169,9 +181,9 @@ grd_wid(timefrm1)
 grd_wid(timefrm2, 0, 1)
 grd_wid(timefrm3, 0, 2)
 
-time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
-time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
-time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='solid', bd=1, command=win2to3)
+time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(1))
+time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(2))
+time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(3))
 
 botspc= Label(win, textvariable=blank, bg='#EFE7BC')
 grd_wid(botspc,2, 0, y=5)
@@ -185,8 +197,8 @@ seatfrm = Frame(frm2, bg='#EFE7BC')
 grd_wid(seatfrm, 0, 1, rwspn=3, clmspn=3)
 
 # summon the seats
-check_lst_b_to_h = []
-button_maker(check_lst_b_to_h)
+button_lst = []
+button_maker(button_lst)
 
 # the key on the rightside
 key_frm = Frame(frm2, bg='#BCC4EF', relief='solid', bd=1)
@@ -226,6 +238,50 @@ chosen_seats = []
 
 # remembering seats
 
+fetched = fil_fch('seating.txt')
+print(fetched)
+# take the seats, and keep their position.
+lst = []
+for item in fetched:
+    if 'movie' in item or 'time' in item: # ignores none numbers.
+        lst.append([])
+        item = item.replace('movie', '') # to get rid of the movie part of the string
+        try:
+            item = int(item)
+            lst[item-1].append(item)
+            z=item
+        except:
+            item = item.replace('time', '')# to get rid of the time part of the string
+            item = int(item)
+            lst[z-1].append([])
+            y=item
+    elif item == '':
+        pass
+    else:
+        place = item.split(',') # seperates the numbers
+        x=1 # counting system
+        case = [0,0]
+        for part in place: # takes one of the values from the list
+            part = int(part) # turns string into number
+            if x == 1:
+                case[0] = part # makes first string into number
+                x=2
+            else:
+                case[1] = part # makes second string into number
+        lst[z-1][y].append(case)
+# grey out seats that are taken
+for self in fetched:
+    try:
+        o = self[0]
+        i = self[1]
+        hid_wid(button_lst[o][i])
+        button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+        grd_wid(button_lst[o][i], o, i)
+    except:
+        pass
+
+
+print(lst)
 #run that program!
 win.mainloop()
 print(chosen_seats)

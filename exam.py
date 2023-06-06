@@ -124,6 +124,16 @@ def button_maker(lst):
                     lst[o].append(crt_but())
                 grd_wid(lst[o][i],o,i)
 
+for self in fetched:
+    try:
+        o = self[0]
+        i = self[1]
+        hid_wid(grand_list[o][i])
+        grand_list[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+        grd_wid(grand_list[o][i], o, i)
+    except:
+        pass
+
 # GUI code start
 
 # I had to define the font to change the size of the text.

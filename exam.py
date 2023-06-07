@@ -1,4 +1,5 @@
 from collation_oliver import *
+from tkinter import ttk
 
 win = Tk()
 win.configure(bg='#EFE7BC')
@@ -12,6 +13,8 @@ grd_wid(frm1, 1)
 
 frm2 = Frame(win, bg='#EFE7BC')
 
+frm3 = Frame(win, bg='#EFE7BC')
+
 total = 0
 
 time1 = StringVar()
@@ -22,6 +25,7 @@ blank.set('')
 
 movie = 0
 time = 0
+pricing = 5
 
 def price(tiknum, pric):
     global total
@@ -154,6 +158,23 @@ def fil_fch(file):
             final.append(dine.strip())# deletes the space at the end
         return final
 
+
+#
+def win3_to_4():
+    global frm2, frm3, ticnum_lst
+    hid_wid(frm2)
+    grd_wid(frm3, 1)
+    for i in range(len(chosen_seats)):
+        ticnum_lst.append(i)
+    
+
+def back2():
+    global frm2, frm3, ticnum_lst
+    hid_wid(frm3)
+    grd_wid(frm2, 1)
+    ticnum_lst = []
+
+
 # GUI code start
 
 # I had to define the font to change the size of the text.
@@ -239,15 +260,15 @@ grd_wid(but_frm, 2, 4, 1, 4)
 bck_but = Button(but_frm, bg='#FFA384', text='Back', command=back, relief='solid', bd=1)
 grd_wid(bck_but)
 
-nxt_but = Button(but_frm, bg='#FFA384', text='Confirm', relief='solid', bd=1)
+nxt_but = Button(but_frm, bg='#FFA384', text='Confirm', command=win3_to_4, relief='solid', bd=1)
 grd_wid(nxt_but,1)
 
 chosen_seats = []
 
 # remembering seats
 
+# this is to open the file that stores the seats.
 fetched = fil_fch('seating.txt')
-# take the seats, and keep their position.
 lst = []
 for item in fetched:
     if 'movie' in item or 'time' in item: # ignores none numbers.
@@ -276,16 +297,64 @@ for item in fetched:
             else:
                 case[1] = part # makes second string into number
         lst[z-1][y].append(case)
-# grey out seats that are taken
-for self in fetched:
-    try:
-        o = self[0]
-        i = self[1]
-        hid_wid(button_lst[o][i])
-        button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-        grd_wid(button_lst[o][i], o, i)
-    except:
-        pass
+
+# window 4 code starts
+ticket_frm = Frame(frm3, bg='#EFE7BC')
+grd_wid(ticket_frm, 0, 1, clmspn=3)
+price_frm = Frame(frm3, bg='#EFE7BC')
+grd_wid(price_frm, 0, 4)
+
+#blanks
+ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
+grd_wid(ticblnk, x=7.5, ix=10)
+# ticket code
+
+# labels
+kpri = StringVar()
+kpri.set('Kid: ${}'.format(pricing))
+kidlab = Label(ticket_frm, textvariable=kpri, bg='#BCC4EF')
+grd_wid(kidlab)
+
+
+aprice = pricing * 3
+apri = StringVar()
+apri.set('Adult: ${}'.format(aprice))
+adulab = Label(ticket_frm, textvariable=apri, bg='#BCC4EF')
+grd_wid(adulab, 1)
+
+
+sprice = pricing * 2
+
+spri = StringVar()
+spri.set('Student: ${}'.format(sprice))
+stulab = Label(ticket_frm, textvariable=spri, bg='#BCC4EF')
+grd_wid(stulab, 2)
+
+sepri = StringVar()
+sepri.set('Senior: ${}'.format(sprice))
+senlab = Label(ticket_frm, textvariable=sepri, bg='#BCC4EF')
+grd_wid(senlab, 3)
+
+# combo boxes
+ticnum_lst = []
+
+kidbox = ttk.Combobox(ticket_frm, values=ticnum_lst)
+
+adubox = ttk.Combobox(ticket_frm)
+
+stubox = ttk.Combobox(ticket_frm)
+
+senbox = ttk.Combobox(ticket_frm)
+
+# pay code
+pay_frm = Frame(frm3, bg='#EFE7BC')
+grd_wid(pay_frm, 0, 1)
+
+#labels 
+
+
+# buttons
+
 
 #run that program!
 win.mainloop()

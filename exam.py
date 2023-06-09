@@ -164,7 +164,8 @@ def win3_to_4():
     global frm2, frm3, ticnum_lst
     hid_wid(frm2)
     grd_wid(frm3, 1)
-    for i in range(len(chosen_seats)):
+    ticnum_lst = ['j']    
+    for i in range(len(chosen_seats)+1):
         ticnum_lst.append(i)
     
 
@@ -172,7 +173,7 @@ def back2():
     global frm2, frm3, ticnum_lst
     hid_wid(frm3)
     grd_wid(frm2, 1)
-    ticnum_lst = []
+    ticnum_lst = []    
 
 
 # GUI code start
@@ -300,12 +301,12 @@ for item in fetched:
 
 # window 4 code starts
 ticket_frm = Frame(frm3, bg='#EFE7BC')
-grd_wid(ticket_frm, 0, 1, clmspn=3)
-price_frm = Frame(frm3, bg='#EFE7BC')
-grd_wid(price_frm, 0, 4)
+grd_wid(ticket_frm, 0, 1, clmspn=3, x=5)
+price_frm = Frame(frm3, bg='#ECB7BC')
+grd_wid(price_frm, 0, 4, x=5)
 
 #blanks
-ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
+ticblnk = Label(frm3, textvariable=blank, bg='#E347BC')
 grd_wid(ticblnk, x=7.5, ix=10)
 # ticket code
 
@@ -339,16 +340,19 @@ grd_wid(senlab, 3)
 ticnum_lst = []
 
 kidbox = ttk.Combobox(ticket_frm, values=ticnum_lst)
+grd_wid(kidbox, 0, 1)
 
 adubox = ttk.Combobox(ticket_frm)
+grd_wid(adubox, 1, 1)
 
 stubox = ttk.Combobox(ticket_frm)
+grd_wid(stubox, 2, 1)
 
 senbox = ttk.Combobox(ticket_frm)
+grd_wid(senbox, 3, 1)
 
 # pay code
-pay_frm = Frame(frm3, bg='#EFE7BC')
-grd_wid(pay_frm, 0, 1)
+
 
 #labels 
 

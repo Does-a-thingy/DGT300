@@ -158,17 +158,63 @@ def fil_fch(file):
             final.append(dine.strip())# deletes the space at the end
         return final
 
+# combox weirdness
+def box_make():
+    global kidbox, adubox, stubox, senbox
+    kidbox = ttk.Combobox(ticket_frm, values=kidlst)
+    kidbox.bind('<<ComboboxSelected>>', vals)
+    grd_wid(kidbox, 0, 1)
+    adubox = ttk.Combobox(ticket_frm, values=adulst)
+    adubox.bind('<<ComboboxSelected>>', vals)
+    grd_wid(adubox, 1, 1)
+    stubox = ttk.Combobox(ticket_frm, values=stulst)
+    stubox.bind('<<ComboboxSelected>>', vals)
+    grd_wid(stubox, 2, 1)
+    senbox = ttk.Combobox(ticket_frm, values=senlst)
+    senbox.bind('<<ComboboxSelected>>', vals)
+    grd_wid(senbox, 3, 1)    
 
-#
+# window change
 def win3_to_4():
     global frm2, frm3, ticnum_lst
     hid_wid(frm2)
     grd_wid(frm3, 1)
-    ticnum_lst = ['j']    
+    ticnum_lst = []
+    num1 = IntVar()
     for i in range(len(chosen_seats)+1):
         ticnum_lst.append(i)
+    global kidlst, adulst, stulst, senlst
+    kidlst = ticnum_lst
+    adulst = ticnum_lst
+    stulst = ticnum_lst
+    senlst = ticnum_lst
+    except:
+        pass
+    try:
+        leng = len(chosen_seats) - int(adubox.get()) - leng
+    except:
+        pass
+    try:
+        leng = len(chosen_seats) - int(stubox.get()) - leng
+    except:
+        pass
+    try:
+        leng = len(chosen_seats) - int(senbox.get()) - leng
+    except:
+        pass
+    print(leng)
+    kidlst = []
+    adulst = []
+    stulst = []
+    senlst = []
+    for i in range(leng):
+        kidlst.append(i)
+        adulst.append(i)
+        stulst.append(i)
+        senlst.append(i)
+    box_make()
     
-
+    
 def back2():
     global frm2, frm3, ticnum_lst
     hid_wid(frm3)
@@ -306,7 +352,7 @@ price_frm = Frame(frm3, bg='#ECB7BC')
 grd_wid(price_frm, 0, 4, x=5)
 
 #blanks
-ticblnk = Label(frm3, textvariable=blank, bg='#E347BC')
+ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
 grd_wid(ticblnk, x=7.5, ix=10)
 # ticket code
 
@@ -337,19 +383,6 @@ senlab = Label(ticket_frm, textvariable=sepri, bg='#BCC4EF')
 grd_wid(senlab, 3)
 
 # combo boxes
-ticnum_lst = []
-
-kidbox = ttk.Combobox(ticket_frm, values=ticnum_lst)
-grd_wid(kidbox, 0, 1)
-
-adubox = ttk.Combobox(ticket_frm)
-grd_wid(adubox, 1, 1)
-
-stubox = ttk.Combobox(ticket_frm)
-grd_wid(stubox, 2, 1)
-
-senbox = ttk.Combobox(ticket_frm)
-grd_wid(senbox, 3, 1)
 
 # pay code
 

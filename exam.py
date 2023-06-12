@@ -188,6 +188,13 @@ def win3_to_4():
     adulst = ticnum_lst
     stulst = ticnum_lst
     senlst = ticnum_lst
+    # making and adding parts here because the list is a bit weird and needs these after numbers
+    box_make()
+
+# value change code for 4th window
+def vals(thing):
+    try: # has to be seperate so that it can fail in parts
+        leng = len(chosen_seats) - int(kidbox.get())
     except:
         pass
     try:

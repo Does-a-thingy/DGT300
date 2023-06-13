@@ -27,6 +27,12 @@ movie = 0
 time = 0
 pricing = 5
 
+kidprice = StringVar()
+aduprice = StringVar()
+stuprice = StringVar()
+senprice = StringVar()
+
+
 def price(tiknum, pric):
     global total
     total += tiknum * pric
@@ -159,20 +165,32 @@ def fil_fch(file):
         return final
 
 # combox weirdness
-def box_make():
+def box_make(a=0,b=0,c=0,d=0):
     global kidbox, adubox, stubox, senbox
+    
     kidbox = ttk.Combobox(ticket_frm, values=kidlst)
+    kidbox.set(a)
     kidbox.bind('<<ComboboxSelected>>', vals)
+    kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
     grd_wid(kidbox, 0, 1)
+    
     adubox = ttk.Combobox(ticket_frm, values=adulst)
+    adubox.set(b)
     adubox.bind('<<ComboboxSelected>>', vals)
+    aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
     grd_wid(adubox, 1, 1)
+    
     stubox = ttk.Combobox(ticket_frm, values=stulst)
+    stubox.set(c)
     stubox.bind('<<ComboboxSelected>>', vals)
+    stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
     grd_wid(stubox, 2, 1)
+    
     senbox = ttk.Combobox(ticket_frm, values=senlst)
+    senbox.set(d)
     senbox.bind('<<ComboboxSelected>>', vals)
-    grd_wid(senbox, 3, 1)    
+    senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
+    grd_wid(senbox, 3, 1)
 
 # window change
 def win3_to_4():
@@ -193,33 +211,25 @@ def win3_to_4():
 
 # value change code for 4th window
 def vals(thing):
-    try: # has to be seperate so that it can fail in parts
-        leng = len(chosen_seats) - int(kidbox.get())
-    except:
-        pass
-    try:
-        leng = len(chosen_seats) - int(adubox.get()) - leng
-    except:
-        pass
-    try:
-        leng = len(chosen_seats) - int(stubox.get()) - leng
-    except:
-        pass
-    try:
-        leng = len(chosen_seats) - int(senbox.get()) - leng
-    except:
-        pass
+    # has to be seperate so that it can fail in parts
+    leng = len(chosen_seats) - int(kidbox.get()) - int(senbox.get()) - int(stubox.get()) - int(adubox.get())
+    a=int(kidbox.get())
+    b=int(adubox.get())
+    c=int(stubox.get())
+    d=int(senbox.get())
+    
     print(leng)
+    global kidlst, adulst, stulst, senlst
     kidlst = []
     adulst = []
     stulst = []
     senlst = []
-    for i in range(leng):
+    for i in range(leng+1):
         kidlst.append(i)
         adulst.append(i)
         stulst.append(i)
         senlst.append(i)
-    box_make()
+    box_make(a,b,c,d)
     
     
 def back2():
@@ -355,8 +365,6 @@ for item in fetched:
 # window 4 code starts
 ticket_frm = Frame(frm3, bg='#EFE7BC')
 grd_wid(ticket_frm, 0, 1, clmspn=3, x=5)
-price_frm = Frame(frm3, bg='#ECB7BC')
-grd_wid(price_frm, 0, 4, x=5)
 
 #blanks
 ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
@@ -369,13 +377,11 @@ kpri.set('Kid: ${}'.format(pricing))
 kidlab = Label(ticket_frm, textvariable=kpri, bg='#BCC4EF')
 grd_wid(kidlab)
 
-
 aprice = pricing * 3
 apri = StringVar()
 apri.set('Adult: ${}'.format(aprice))
 adulab = Label(ticket_frm, textvariable=apri, bg='#BCC4EF')
 grd_wid(adulab, 1)
-
 
 sprice = pricing * 2
 
@@ -389,16 +395,40 @@ sepri.set('Senior: ${}'.format(sprice))
 senlab = Label(ticket_frm, textvariable=sepri, bg='#BCC4EF')
 grd_wid(senlab, 3)
 
-# combo boxes
-
 # pay code
+price_frm = Frame(frm3, bg='#ECB7BC')
+grd_wid(price_frm, 0, 4, x=5)
 
+# making temp variables to avoid errors.
 
-#labels 
+kidlst = [0]
+adulst = [0]
+stulst = [0]
+senlst = [0]
+box_make()
 
+#labels
+
+kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
+kidpri = Label(price_frm, textvariable=kidprice)
+grd_wid(kidpri)
+
+aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
+adupri = Label(price_frm, textvariable=aduprice)
+grd_wid(adupri, 1)
+
+stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
+stupri = Label(price_frm, textvariable=stuprice)
+grd_wid(stupri, 2)
+
+senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
+senpri = Label(price_frm, textvariable=senprice)
+grd_wid(senpri, 3)
 
 # buttons
+pay_but = Button()
 
+bac2_but = Button()
 
 #run that program!
 win.mainloop()

@@ -230,15 +230,15 @@ def vals(thing):
         stulst.append(i)
         senlst.append(i)
     box_make(a,b,c,d)
-    
-    
+
 def back2():
     global frm2, frm3, ticnum_lst
     hid_wid(frm3)
     grd_wid(frm2, 1)
     ticnum_lst = []    
 
-
+def win4_to_fin():
+    pass
 # GUI code start
 
 # I had to define the font to change the size of the text.
@@ -410,25 +410,27 @@ box_make()
 #labels
 
 kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
-kidpri = Label(price_frm, textvariable=kidprice)
+kidpri = Label(price_frm, textvariable=kidprice, bg='#BCC4EF')
 grd_wid(kidpri)
 
 aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
-adupri = Label(price_frm, textvariable=aduprice)
+adupri = Label(price_frm, textvariable=aduprice, bg='#BCC4EF')
 grd_wid(adupri, 1)
 
 stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
-stupri = Label(price_frm, textvariable=stuprice)
+stupri = Label(price_frm, textvariable=stuprice, bg='#BCC4EF')
 grd_wid(stupri, 2)
 
 senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
-senpri = Label(price_frm, textvariable=senprice)
+senpri = Label(price_frm, textvariable=senprice, bg='#BCC4EF')
 grd_wid(senpri, 3)
 
 # buttons
-pay_but = Button()
+pay_but = Button(frm3, text='Pay', command=win4_to_fin, bg='#FFA384', relief='flat')
+grd_wid(pay_but, 4, 4)
 
-bac2_but = Button()
+bac2_but = Button(frm3, text='Back', command=back2, bg='#FFA384', relief='flat', )
+grd_wid(bac2_but, 5, 4)
 
 #run that program!
 win.mainloop()

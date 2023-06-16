@@ -8,12 +8,14 @@ win.title('Movie Theatre')
 titlfr = Frame(win, bg='#EFE7BC')
 grd_wid(titlfr)
 
-frm1 = Frame(win, bg='#EFE7BC')
+frm1 = Frame(win, bg='#EFE7BC') # window 1 and 2
 grd_wid(frm1, 1)
 
-frm2 = Frame(win, bg='#EFE7BC')
+frm2 = Frame(win, bg='#EFE7BC') # window 3
 
-frm3 = Frame(win, bg='#EFE7BC')
+frm3 = Frame(win, bg='#EFE7BC') # window 4
+
+frm4 = Frame(win, bg='#EFE7BC') # window 5
 
 total = 0
 
@@ -32,6 +34,10 @@ aduprice = StringVar()
 stuprice = StringVar()
 senprice = StringVar()
 
+#to avoid a problem
+seatfrm = Frame(frm2, bg='#EFE7BC')
+
+# functions
 
 def price(tiknum, pric):
     global total
@@ -68,7 +74,6 @@ def taken_seats():
         hid_wid(button_lst[o][i])
         button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
         grd_wid(button_lst[o][i], o, i)
-    self = lst[movie-1][time]# takes all the seats from the time slot
 
 def win2to3(num):
     global frm2, frm1, time
@@ -108,43 +113,43 @@ def clk(self):
             pass
 
 # this is used to mass create checkboxes
-def crt_but(bgc='#EFE7BC'):
-    wid = Button(seatfrm, bg=bgc, relief='solid', bd=1, command=lambda:clk(wid), width=2)
+def crt_but(bgc='#EFE7BC', frm=seatfrm):
+    wid = Button(frm, bg=bgc, relief='solid', bd=1, command=lambda:clk(wid), width=2)
     return wid
 
 # this is used to mass create 
-def crt_lab(txt,cl='#B9E0A5', rf='solid'):
+def crt_lab(txt,cl='#B9E0A5', rf='solid', frm=seatfrm):
     global Label
-    wid = Label(seatfrm, bg=cl, text=txt, width=2, bd=1, relief=rf)
+    wid = Label(frm, bg=cl, text=txt, width=2, bd=1, relief=rf)
     return wid
 
 #used to manage all of the checkboxes.
-def button_maker(lst):
+def button_maker(lst, frm=seatfrm):
     alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
     for o in range(0,9):
         lst.append([])
         if o == 0: # number row
             for i in range(0,9): # 0 to 8
                 if i == 0:
-                    lst[o].append(crt_lab(''))
+                    lst[o].append(crt_lab('', frm=frm))
                 else:
-                    lst[o].append(crt_lab(i))
+                    lst[o].append(crt_lab(i, frm=frm))
                 grd_wid(lst[o][i],o,i)
         elif o == 1: # Row A
             for i in range(0,9): # 9 to 17
                 if i == 0:
-                    lst[o].append(crt_lab(alphabet[o]))
+                    lst[o].append(crt_lab(alphabet[o], frm=frm))
                 if (i < 2 or i > 5):
-                    lst[o].append(crt_but())
+                    lst[o].append(crt_but(bgc='#EFE7BC', frm=frm))
                 else:
-                    lst[o].append(crt_lab('', '#EFE7BC','flat'))
+                    lst[o].append(crt_lab('', '#EFE7BC','flat', frm=frm))
                 grd_wid(lst[o][i],o,i)
         else: # Rows B to H
             for i in range(0,9):
                 if i == 0:
-                    lst[o].append(crt_lab(alphabet[o]))
+                    lst[o].append(crt_lab(alphabet[o], frm=frm))
                 elif i > 0:
-                    lst[o].append(crt_but())
+                    lst[o].append(crt_but(frm=frm))
                 grd_wid(lst[o][i],o,i)
 
 def fil_fch(file):
@@ -217,8 +222,6 @@ def vals(thing):
     b=int(adubox.get())
     c=int(stubox.get())
     d=int(senbox.get())
-    
-    print(leng)
     global kidlst, adulst, stulst, senlst
     kidlst = []
     adulst = []
@@ -236,9 +239,26 @@ def back2():
     hid_wid(frm3)
     grd_wid(frm2, 1)
     ticnum_lst = []    
+    
+def grey():
+    global chosen_seats, grey_lst
+    for self in chosen_seats:
+        o = self[0]# takes the row
+        i = self[1]# takes the column
+        print(o, i, self)
+        if self not in grey_lst[o]:
+            hid_wid(grey_lst[o][i])# blue
+            grey_lst[o][i] = Button(seatfrm, bg='#66FFFF', relief='solid', bd=1, state='disabled', width=2)
+            grd_wid(grey_lst[o][i], o, i)
+        else:
+            pass
+
 
 def win4_to_fin():
-    pass
+    hid_wid(frm3)
+    grey()
+    grd_wid(frm4)
+
 # GUI code start
 
 # I had to define the font to change the size of the text.
@@ -248,7 +268,6 @@ titl = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titl, x=10, ix=10)
 titr = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titr, 0, 4, x=10, ix=10)
-
 
 # window 1 code start
 # lambda lets me call a command and give it a value input.
@@ -286,8 +305,7 @@ grd_wid(botspc,2, 0, y=5)
 sblnkl = Label(frm2, bg='#EFE7BC', textvariable=blank)
 grd_wid(sblnkl, x=7.5, ix=10)
 
-seatfrm = Frame(frm2, bg='#EFE7BC')
-grd_wid(seatfrm, 0, 1, rwspn=3, clmspn=3)
+grd_wid(seatfrm, 0, 1, 3, rwspn=3)
 
 # summon the seats
 button_lst = []
@@ -431,6 +449,15 @@ grd_wid(pay_but, 4, 4)
 
 bac2_but = Button(frm3, text='Back', command=back2, bg='#FFA384', relief='flat', )
 grd_wid(bac2_but, 5, 4)
+
+# window 5 code
+# seats 2
+gry_frm = Frame(frm4, bg='#EFE7BC')
+grd_wid(gry_frm, 0, 1, 3, rwspn=3)
+
+# summon more seats!
+grey_lst = []
+button_maker(grey_lst, gry_frm)
 
 #run that program!
 win.mainloop()

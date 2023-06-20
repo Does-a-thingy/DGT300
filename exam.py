@@ -289,10 +289,10 @@ def win4_to_fin():
     grd_wid(frm4, 1)
 
 def save():
-    global chosen_seats, lst, movie, time
-    lst[movie-1][time].append(chosen_seats)
-    with open('seating.txt', 'w') as f:
-            f.write('\n'.join(lst))
+    global chosen_seats, movie, time
+    updated_taken = []
+    lst = fil_fch('seating.txt')
+    print(lst)
 
 # GUI code start
 

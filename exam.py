@@ -34,6 +34,8 @@ aduprice = StringVar()
 stuprice = StringVar()
 senprice = StringVar()
 
+alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+
 #to avoid a problem
 seatfrm = Frame(frm2, bg='#EFE7BC')
 
@@ -83,9 +85,10 @@ def win2to3(num):
     grd_wid(frm2, 1)
     
 def back():
-    global frm2, frm1, button_lst
+    global frm2, frm1, button_lst, chosen_seats
     hid_wid(frm2)
     grd_wid(frm1, 1)
+    chosen_seats = []
     button_lst = []
     button_maker(button_lst)
 
@@ -125,7 +128,7 @@ def crt_lab(txt,cl='#B9E0A5', rf='solid', frm=seatfrm):
 
 #used to manage all of the checkboxes.
 def button_maker(lst, frm=seatfrm):
-    alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
+    global alphabet
     for o in range(0,9):
         lst.append([])
         if o == 0: # number row
@@ -241,23 +244,55 @@ def back2():
     ticnum_lst = []    
     
 def grey():
-    global chosen_seats, grey_lst
-    for self in chosen_seats:
-        o = self[0]# takes the row
-        i = self[1]# takes the column
-        print(o, i, self)
-        if self not in grey_lst[o]:
-            hid_wid(grey_lst[o][i])# blue
-            grey_lst[o][i] = Button(seatfrm, bg='#66FFFF', relief='solid', bd=1, state='disabled', width=2)
-            grd_wid(grey_lst[o][i], o, i)
-        else:
-            pass
+    global chosen_seats, grey_lst, alphabet
+    for a in range(0, 9):
+        grey_lst.append([])
+        if a == 0: # number row
+            for b in range(0,9): # 0 to 8
+                if b == 0:
+                    grey_lst[a].append(crt_lab('', frm=gry_frm))
+                else:
+                    grey_lst[a].append(crt_lab(b, frm=gry_frm))
+                grd_wid(grey_lst[a][b],a,b)
+        elif a == 1: # Row A
+            for b in range(0,9): # 9 to 17
+                if [a, b] in chosen_seats:
+                    grey_lst[a].append(Button(gry_frm, bg='#66FFFF', relief='solid', bd=1, state='disabled', width=2))                
+                elif b == 0:
+                    grey_lst[a].append(crt_lab(alphabet[a], frm=gry_frm))
+                elif (b < 3 or b > 6):
+                    grey_lst[a].append(Button(gry_frm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2))
+                else:
+                    grey_lst[a].append(crt_lab('', '#ACADAD','flat', frm=gry_frm))
+                grd_wid(grey_lst[a][b],a,b)
+        else: # Rows B to H
+            for b in range(0,9):
+                if [a, b] in chosen_seats:
+                    grey_lst[a].append(Button(gry_frm, bg='#66FFFF', relief='solid', bd=1, state='disabled', width=2))                
+                elif b == 0:
+                    grey_lst[a].append(crt_lab(alphabet[a], frm=gry_frm))
+                elif b > 0:
+                    grey_lst[a].append(Button(gry_frm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2))
+                grd_wid(grey_lst[a][b],a,b)
 
+def seat_cmd():
+    global seats, chosen_seats, alphabet, fin_seat
+    fin_seat = []
+    for item in chosen_seats:
+        fin_seat.append('\n{}{}'.format(alphabet[item[0]],item[1]))
+    seats.set('Your seats are:{}'.format(' '.join(fin_seat)))
 
 def win4_to_fin():
     hid_wid(frm3)
     grey()
-    grd_wid(frm4)
+    seat_cmd()
+    grd_wid(frm4, 1)
+
+def save():
+    global chosen_seats, lst, movie, time
+    lst[movie-1][time].append(chosen_seats)
+    with open('seating.txt', 'w') as f:
+            f.write('\n'.join(lst))
 
 # GUI code start
 
@@ -379,6 +414,7 @@ for item in fetched:
             else:
                 case[1] = part # makes second string into number
         lst[z-1][y].append(case)
+print(lst)
 
 # window 4 code starts
 ticket_frm = Frame(frm3, bg='#EFE7BC')
@@ -447,7 +483,7 @@ grd_wid(senpri, 3)
 pay_but = Button(frm3, text='Pay', command=win4_to_fin, bg='#FFA384', relief='flat')
 grd_wid(pay_but, 4, 4)
 
-bac2_but = Button(frm3, text='Back', command=back2, bg='#FFA384', relief='flat', )
+bac2_but = Button(frm3, text='Back', command=back2, bg='#FFA384', relief='flat')
 grd_wid(bac2_but, 5, 4)
 
 # window 5 code
@@ -457,7 +493,25 @@ grd_wid(gry_frm, 0, 1, 3, rwspn=3)
 
 # summon more seats!
 grey_lst = []
-button_maker(grey_lst, gry_frm)
+
+# blanks
+blnk5l = Label(frm4, textvariable=blank, bg='#EFE7BC')
+grd_wid(blnk5l, x=10, ix=10)
+
+#tell the user their seats
+grand_frm = Frame(frm4, bg='#BCC4EF')
+grd_wid(grand_frm, 0, 4, x=5)
+
+# seats label
+seats = StringVar()
+seats_lab = Label(grand_frm, bg='#BCC4EF', textvariable=seats)
+grd_wid(seats_lab)
+
+# save button
+save_but = Button(frm4, text='Save', bg='#FFA384', relief='flat', command=save)
+grd_wid(save_but,4,4)
+
 
 #run that program!
 win.mainloop()
+print(chosen_seats)

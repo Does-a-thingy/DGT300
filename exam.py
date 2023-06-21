@@ -95,8 +95,6 @@ def taken_file():
                 else:
                     case[1] = part # makes second value into number
             lst.append(case)
-    print(lst)
-
 
 def win2to3(num):
     global frm2, frm1, time
@@ -314,16 +312,13 @@ def save():
     global chosen_seats, movie, time
     updated_taken = []
     lst = fil_fch('seating/seats{}{}.txt'.format(movie, time))
-    print(lst)
     updated_taken = lst
-    seas = []
     for item in chosen_seats:
         updated_taken.append('{},{}'.format(item[0], item[1]))
-    print(updated_taken)
     taken_str = '\n'.join(updated_taken)
-    print(taken_str)
     with open('seating/seats{}{}.txt'.format(movie, time), 'w') as f:
         f.write(taken_str)
+    win.destroy()
 
 # GUI code start
 
@@ -508,7 +503,5 @@ grd_wid(seats_lab)
 save_but = Button(frm4, text='Save', bg='#FFA384', relief='flat', command=save)
 grd_wid(save_but,4,4)
 
-
 #run that program!
 win.mainloop()
-print(chosen_seats)

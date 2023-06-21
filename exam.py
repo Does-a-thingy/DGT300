@@ -33,6 +33,7 @@ kidprice = StringVar()
 aduprice = StringVar()
 stuprice = StringVar()
 senprice = StringVar()
+totalprice = StringVar()
 
 alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
@@ -200,25 +201,30 @@ def box_make(a=0,b=0,c=0,d=0):
     kidbox.set(a)
     kidbox.bind('<<ComboboxSelected>>', vals)
     kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
-    grd_wid(kidbox, 0, 1)
+    grd_wid(kidbox, 0, 1, y=5)
     
     adubox = ttk.Combobox(ticket_frm, values=adulst)
     adubox.set(b)
     adubox.bind('<<ComboboxSelected>>', vals)
     aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
-    grd_wid(adubox, 1, 1)
+    grd_wid(adubox, 1, 1, y=5)
     
     stubox = ttk.Combobox(ticket_frm, values=stulst)
     stubox.set(c)
     stubox.bind('<<ComboboxSelected>>', vals)
     stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
-    grd_wid(stubox, 2, 1)
+    grd_wid(stubox, 2, 1, y=5)
     
     senbox = ttk.Combobox(ticket_frm, values=senlst)
     senbox.set(d)
     senbox.bind('<<ComboboxSelected>>', vals)
     senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
-    grd_wid(senbox, 3, 1)
+    grd_wid(senbox, 3, 1, y=5)
+    
+    global total
+    total = sprice*int(senbox.get()) +sprice*int(stubox.get()) +aprice*int(adubox.get()) +pricing*int(kidbox.get())
+    totalprice.set('Total: ${}'.format(total))
+    
 
 # window change
 def win3_to_4():
@@ -421,25 +427,25 @@ grd_wid(ticblnk, x=7.5, ix=10)
 kpri = StringVar()
 kpri.set('Kid: ${}'.format(pricing))
 kidlab = Label(ticket_frm, textvariable=kpri, bg='#BCC4EF')
-grd_wid(kidlab)
+grd_wid(kidlab, y=5)
 
 aprice = pricing * 3
 apri = StringVar()
 apri.set('Adult: ${}'.format(aprice))
 adulab = Label(ticket_frm, textvariable=apri, bg='#BCC4EF')
-grd_wid(adulab, 1)
+grd_wid(adulab, 1, y=5)
 
 sprice = pricing * 2
 
 spri = StringVar()
 spri.set('Student: ${}'.format(sprice))
 stulab = Label(ticket_frm, textvariable=spri, bg='#BCC4EF')
-grd_wid(stulab, 2)
+grd_wid(stulab, 2, y=5)
 
 sepri = StringVar()
 sepri.set('Senior: ${}'.format(sprice))
 senlab = Label(ticket_frm, textvariable=sepri, bg='#BCC4EF')
-grd_wid(senlab, 3)
+grd_wid(senlab, 3, y=5)
 
 # pay code
 price_frm = Frame(frm3, bg='#ECB7BC')
@@ -470,6 +476,10 @@ grd_wid(stupri, 2)
 senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
 senpri = Label(price_frm, textvariable=senprice, bg='#BCC4EF')
 grd_wid(senpri, 3)
+
+totalprice.set('Total: ${}'.format(total))
+totalpri = Label(price_frm, textvariable=totalprice, bg='#BC94EF')
+grd_wid(totalpri, 4)
 
 # buttons
 pay_but = Button(frm3, text='Pay', command=win4_to_fin, bg='#FFA384', relief='flat')

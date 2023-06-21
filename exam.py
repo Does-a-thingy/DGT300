@@ -68,18 +68,39 @@ def movcmd(num):
     grd_wid(timefrm, 1, 1, clmspn=3)
 
 def taken_seats():
-    global movie, time
-    self = lst[movie-1][time]# takes all the seats from the time slot
-    for item in self: # takes just one seat
+    global movie, time, lst
+    for item in lst: # takes just one seat
         o = item[0]
         i = item[1]
         hid_wid(button_lst[o][i])
         button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
         grd_wid(button_lst[o][i], o, i)
 
+def taken_file():
+    global movie, time, lst
+    fetched = fil_fch('seating/seats{}{}.txt'.format(movie, time))# gets teh seats from the file for the time slot
+    lst = []
+    for item in fetched:
+        if item == '': # excludes the blanks
+            pass
+        else:
+            place = item.split(',') # seperates the numbers
+            x=1 # counting system
+            case = [0,0]
+            for part in place: # takes one of the values from the list
+                part = int(part) # turns string into number
+                if x == 1:
+                    case[0] = part # makes first value into number
+                    x=2
+                else:
+                    case[1] = part # makes second value into number
+            lst.append(case)
+    
+
 def win2to3(num):
     global frm2, frm1, time
     time = num # for greying out taken seats
+    taken_file()
     taken_seats()
     hid_wid(frm1)
     grd_wid(frm2, 1)
@@ -291,8 +312,13 @@ def win4_to_fin():
 def save():
     global chosen_seats, movie, time
     updated_taken = []
-    lst = fil_fch('seating.txt')
+    lst = fil_fch('seating/seats{}{}.txt'.format(movie, time))
     print(lst)
+    updated_taken = lst
+    updated_taken.append(chosen_seats)
+    taken_str = '\n'.join(updated_taken)
+    with open('seating/seats{}{}.txt'.format(movie, time), 'w') as f:
+        f.write(taken_str)
 
 # GUI code start
 
@@ -381,40 +407,6 @@ nxt_but = Button(but_frm, bg='#FFA384', text='Confirm', command=win3_to_4, relie
 grd_wid(nxt_but,1)
 
 chosen_seats = []
-
-# remembering seats
-
-# this is to open the file that stores the seats.
-fetched = fil_fch('seating.txt')
-lst = []
-for item in fetched:
-    if 'movie' in item or 'time' in item: # ignores none numbers.
-        lst.append([])
-        item = item.replace('movie', '') # to get rid of the movie part of the string
-        try:
-            item = int(item)
-            lst[item-1].append(item)
-            z=item
-        except:
-            item = item.replace('time', '')# to get rid of the time part of the string
-            item = int(item)
-            lst[z-1].append([])
-            y=item
-    elif item == '': # excludes the blanks
-        pass
-    else:
-        place = item.split(',') # seperates the numbers
-        x=1 # counting system
-        case = [0,0]
-        for part in place: # takes one of the values from the list
-            part = int(part) # turns string into number
-            if x == 1:
-                case[0] = part # makes first string into number
-                x=2
-            else:
-                case[1] = part # makes second string into number
-        lst[z-1][y].append(case)
-print(lst)
 
 # window 4 code starts
 ticket_frm = Frame(frm3, bg='#EFE7BC')

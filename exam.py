@@ -51,17 +51,17 @@ def movcmd(num):
     if num == 1:
         time1.set('10:45 AM') # later to be replaced with .set(time[1]) or something like it.
         time2.set('2:20 PM')
-        time3.set('4:60 PM')
+        time3.set('8:45 PM')
         movie = 1 # for greying out taken seats 
     elif num == 2:
-        time1.set('7:45 AM')
+        time1.set('9:45 AM')
         time2.set('1:20 PM')
-        time3.set('24:60 PM')
+        time3.set('4:30 PM')
         movie = 2
     elif num == 3:
-        time1.set('1:50 AM')
-        time2.set('3:26 PM')
-        time3.set('7:99 PM')
+        time1.set('11:00 AM')
+        time2.set('3:25 PM')
+        time3.set('7:20 PM')
         movie = 3
     grd_wid(time1b, x=10, y=10)
     grd_wid(time2b, 0,1,x=10,y=10)
@@ -329,7 +329,7 @@ def save():
 # GUI code start
 
 # I had to define the font to change the size of the text.
-titlem = Label(titlfr, text='Movie Theatre', bg='#74BDCB', font=('lucid', 26), width=12, relief='solid', bd=1)
+titlem = Label(titlfr, text='House Theatres', bg='#74BDCB', font=('lucid', 26), width=12, relief='solid', bd=1)
 grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
 titl = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titl, x=10, ix=10)
@@ -338,11 +338,11 @@ grd_wid(titr, 0, 4, x=10, ix=10)
 
 # window 1 code start
 # lambda lets me call a command and give it a value input.
-movi1 = Button(frm1, text='MOVIE 1', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1)
+movi1 = Button(frm1, text='Jurassic Park', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1)
 grd_wid(movi1, Clumn=1, x=5, ix=10, y=20, iy=5)
-movi2 = Button(frm1, text='MOVIE 2', bg='#FFA384', command=lambda:movcmd(2), relief='solid', bd=1)
+movi2 = Button(frm1, text='Homeward Bound', bg='#FFA384', command=lambda:movcmd(2), relief='solid', bd=1)
 grd_wid(movi2, Clumn=2, x=5, ix=10, y=20, iy=5)
-movi3 = Button(frm1, text='MOVIE 3', bg='#FFA384', command=lambda:movcmd(3), relief='solid', bd=1)
+movi3 = Button(frm1, text='Cliffhanger', bg='#FFA384', command=lambda:movcmd(3), relief='solid', bd=1)
 grd_wid(movi3, Clumn=3, x=5, ix=10, y=20, iy=5)
 
 movl = Label(frm1, textvariable=blank, bg='#EFE7BC')
@@ -463,23 +463,23 @@ box_make()
 
 kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
 kidpri = Label(price_frm, textvariable=kidprice, bg='#BCC4EF')
-grd_wid(kidpri)
+grd_wid(kidpri, y=2)
 
 aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
 adupri = Label(price_frm, textvariable=aduprice, bg='#BCC4EF')
-grd_wid(adupri, 1)
+grd_wid(adupri, 1, y=2)
 
 stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
 stupri = Label(price_frm, textvariable=stuprice, bg='#BCC4EF')
-grd_wid(stupri, 2)
+grd_wid(stupri, 2, y=2)
 
 senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
 senpri = Label(price_frm, textvariable=senprice, bg='#BCC4EF')
-grd_wid(senpri, 3)
+grd_wid(senpri, 3, y=2)
 
 totalprice.set('Total: ${}'.format(total))
-totalpri = Label(price_frm, textvariable=totalprice, bg='#BC94EF')
-grd_wid(totalpri, 4)
+totalpri = Label(price_frm, textvariable=totalprice, bg='#BCC4EF')
+grd_wid(totalpri, 4, y=2)
 
 # buttons
 pay_but = Button(frm3, text='Pay', command=win4_to_fin, bg='#FFA384', relief='flat')

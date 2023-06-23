@@ -46,7 +46,7 @@ def price(tiknum, pric):
     global total
     total += tiknum * pric
 
-def movcmd(num):
+def movcmd(num): # window 1 to 2
     global titlem, movie
     if num == 1:
         time1.set('10:45 AM') # later to be replaced with .set(time[1]) or something like it.
@@ -63,9 +63,9 @@ def movcmd(num):
         time2.set('3:25 PM')
         time3.set('7:20 PM')
         movie = 3
-    grd_wid(time1b, x=10, y=10)
-    grd_wid(time2b, 0,1,x=10,y=10)
-    grd_wid(time3b, 0,2,x=10,y=10)
+    grd_wid(time1b, x=10, y=10, ix=5, iy=2)
+    grd_wid(time2b, 0,1,x=10,y=10, ix=5, iy=2)
+    grd_wid(time3b, 0,2,x=10,y=10, ix=5, iy=2)
     grd_wid(timefrm, 1, 1, clmspn=3)
 
 def taken_seats():
@@ -103,11 +103,13 @@ def win2to3(num):
     taken_file()
     taken_seats()
     hid_wid(frm1)
+    titletxt.set('Select your seats')
     grd_wid(frm2, 1)
     
 def back():
     global frm2, frm1, button_lst, chosen_seats
     hid_wid(frm2)
+    titletxt.set('House Theatres')
     grd_wid(frm1, 1)
     chosen_seats = []
     button_lst = []
@@ -228,7 +230,15 @@ def box_make(a=0,b=0,c=0,d=0):
 
 # window change
 def win3_to_4():
-    global frm2, frm3, ticnum_lst
+    global frm2, frm3, ticnum_lst, titlem
+    
+    titletxt.set('Tickets:')
+    hid_wid(titlem)
+    titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=6, relief='solid', bd=1)
+    grd_wid(titlem, 0, 1, clmspn=2, y=10, stc='E')
+    seat_num.set('Seats: 0/{}'.format(len(chosen_seats)))
+    grd_wid(seat_count,0,3, x=10, y=5, stc='E')
+    
     hid_wid(frm2)
     grd_wid(frm3, 1)
     ticnum_lst = []
@@ -244,8 +254,7 @@ def win3_to_4():
     box_make()
 
 # value change code for 4th window
-def vals(thing):
-    # has to be seperate so that it can fail in parts
+def vals(ignored):
     leng = len(chosen_seats) - int(kidbox.get()) - int(senbox.get()) - int(stubox.get()) - int(adubox.get())
     a=int(kidbox.get())
     b=int(adubox.get())
@@ -261,11 +270,17 @@ def vals(thing):
         adulst.append(i)
         stulst.append(i)
         senlst.append(i)
+    seat_num.set('Seats: {}/{}'.format((len(chosen_seats) - leng), len(chosen_seats)))
     box_make(a,b,c,d)
 
 def back2():
-    global frm2, frm3, ticnum_lst
+    global frm2, frm3, ticnum_lst, titlem, seat_count
     hid_wid(frm3)
+    titletxt.set('Select your seats')
+    hid_wid(titlem)
+    hid_wid(seat_count)
+    titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=16, relief='solid', bd=1)
+    grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')    
     grd_wid(frm2, 1)
     ticnum_lst = []    
     
@@ -304,6 +319,7 @@ def grey():
 def seat_cmd():
     global seats, chosen_seats, alphabet, fin_seat
     fin_seat = []
+    chosen_seats.sort()
     for item in chosen_seats:
         fin_seat.append('\n{}{}'.format(alphabet[item[0]],item[1]))
     seats.set('Your seats are:{}'.format(' '.join(fin_seat)))
@@ -329,7 +345,10 @@ def save():
 # GUI code start
 
 # I had to define the font to change the size of the text.
-titlem = Label(titlfr, text='House Theatres', bg='#74BDCB', font=('lucid', 26), width=12, relief='solid', bd=1)
+
+titletxt = StringVar() # for changable text
+titletxt.set('House Theatres')
+titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=16, relief='solid', bd=1)
 grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
 titl = Label(titlfr, textvariable=blank, bg='#EFE7BC')
 grd_wid(titl, x=10, ix=10)
@@ -338,12 +357,12 @@ grd_wid(titr, 0, 4, x=10, ix=10)
 
 # window 1 code start
 # lambda lets me call a command and give it a value input.
-movi1 = Button(frm1, text='Jurassic Park', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1)
-grd_wid(movi1, Clumn=1, x=5, ix=10, y=20, iy=5)
-movi2 = Button(frm1, text='Homeward Bound', bg='#FFA384', command=lambda:movcmd(2), relief='solid', bd=1)
-grd_wid(movi2, Clumn=2, x=5, ix=10, y=20, iy=5)
-movi3 = Button(frm1, text='Cliffhanger', bg='#FFA384', command=lambda:movcmd(3), relief='solid', bd=1)
-grd_wid(movi3, Clumn=3, x=5, ix=10, y=20, iy=5)
+movi1 = Button(frm1, text='Jurassic Park', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1, width=12)
+grd_wid(movi1, Clumn=1, x=5, ix=5, y=20, iy=5)
+movi2 = Button(frm1, text='Homeward Bound', bg='#FFA384', command=lambda:movcmd(2), relief='solid', bd=1, width=12)
+grd_wid(movi2, Clumn=2, x=5, ix=5, y=20, iy=5)
+movi3 = Button(frm1, text='Cliffhanger', bg='#FFA384', command=lambda:movcmd(3), relief='solid', bd=1, width=12)
+grd_wid(movi3, Clumn=3, x=5, ix=5, y=20, iy=5)
 
 movl = Label(frm1, textvariable=blank, bg='#EFE7BC')
 grd_wid(movl, x=7.5, ix=10)
@@ -353,16 +372,10 @@ grd_wid(movr, 0, 4, x=10, ix=10)
 
 # window 2 code start
 timefrm = Frame(frm1, bg='#EFBCDE', relief='solid', bd=1)
-timefrm1 = Frame(timefrm, bg='#EFBCDE')
-timefrm2 = Frame(timefrm, bg='#EFBCDE')
-timefrm3 = Frame(timefrm, bg='#EFBCDE')
-grd_wid(timefrm1)
-grd_wid(timefrm2, 0, 1)
-grd_wid(timefrm3, 0, 2)
 
-time1b = Button(timefrm1, textvariable=time1, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(1))
-time2b = Button(timefrm2, textvariable=time2, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(2))
-time3b = Button(timefrm3, textvariable=time3, bg='#74BDCB', width=8, relief='solid', bd=1, command=lambda: win2to3(3))
+time1b = Button(timefrm, textvariable=time1, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(1))
+time2b = Button(timefrm, textvariable=time2, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(2))
+time3b = Button(timefrm, textvariable=time3, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(3))
 
 botspc= Label(win, textvariable=blank, bg='#EFE7BC')
 grd_wid(botspc,2, 0, y=5)
@@ -414,9 +427,14 @@ grd_wid(nxt_but,1)
 
 chosen_seats = []
 
+
 # window 4 code starts
 ticket_frm = Frame(frm3, bg='#EFE7BC')
 grd_wid(ticket_frm, 0, 1, clmspn=3, x=5)
+
+# seat counter
+seat_num = StringVar()
+seat_count = Label(titlfr, bg='#FFA384', textvariable=seat_num, width=8, relief='solid', bd=1)
 
 #blanks
 ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
@@ -488,6 +506,7 @@ grd_wid(pay_but, 4, 4)
 bac2_but = Button(frm3, text='Back', command=back2, bg='#FFA384', relief='flat')
 grd_wid(bac2_but, 5, 4)
 
+
 # window 5 code
 # seats 2
 gry_frm = Frame(frm4, bg='#EFE7BC')
@@ -512,6 +531,7 @@ grd_wid(seats_lab)
 # save button
 save_but = Button(frm4, text='Save', bg='#FFA384', relief='flat', command=save)
 grd_wid(save_but,4,4)
+
 
 #run that program!
 win.mainloop()

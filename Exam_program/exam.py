@@ -119,24 +119,31 @@ def back():
 def clk(self):
     global button_lst, chosen_seats
     lst = button_lst
-    for o in range(0,9):
-        try:
-            if [o, lst[o].index(self)] in chosen_seats:
-                # This is to deselect the buttons
-                i = lst[o].index(self)
-                chosen_seats.remove([o, i])
-                hid_wid(lst[o][i])
-                lst[o][i] = crt_but()
-                grd_wid(lst[o][i], o, i)
-            else:
-                # This is to select the buttons
-                i = lst[o].index(self)
-                chosen_seats.append([o, i])
-                hid_wid(lst[o][i])
-                lst[o][i] = crt_but('#66FFFF')
-                grd_wid(lst[o][i], o, i)
-        except:
-            pass
+    if len(chosen_seats) < 16:
+        for o in range(0,9):
+            try:
+                if [o, lst[o].index(self)] in chosen_seats:
+                    # This is to deselect the buttons
+                    i = lst[o].index(self)
+                    chosen_seats.remove([o, i])
+                    hid_wid(lst[o][i])
+                    lst[o][i] = crt_but()
+                    grd_wid(lst[o][i], o, i)
+                else:
+                    # This is to select the buttons
+                    i = lst[o].index(self)
+                    chosen_seats.append([o, i])
+                    hid_wid(lst[o][i])
+                    lst[o][i] = crt_but('#66FFFF')
+                    grd_wid(lst[o][i], o, i)
+            except:
+                pass
+    else:
+        
+        hid_wid(button_lst[o][i])
+        button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+        grd_wid(button_lst[o][i], o, i)
+        
 
 # this is used to mass create checkboxes
 def crt_but(bgc='#EFE7BC', frm=seatfrm):

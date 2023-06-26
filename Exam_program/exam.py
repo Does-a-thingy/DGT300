@@ -117,33 +117,81 @@ def back():
 
 # wanted seat command
 def clk(self):
-    global button_lst, chosen_seats
-    lst = button_lst
-    if len(chosen_seats) < 16:
-        for o in range(0,9):
-            try:
-                if [o, lst[o].index(self)] in chosen_seats:
+    global button_lst, chosen_seats, taken_seats, lst
+    if len(chosen_seats) <= 9:
+        for o in range(1,9):
+            try:                    
+                i = button_lst[o].index(self)
+                if [o, i] in chosen_seats:
                     # This is to deselect the buttons
-                    i = lst[o].index(self)
                     chosen_seats.remove([o, i])
-                    hid_wid(lst[o][i])
-                    lst[o][i] = crt_but()
-                    grd_wid(lst[o][i], o, i)
+                    hid_wid(button_lst[o][i])
+                    button_lst[o][i] = crt_but()
+                    grd_wid(button_lst[o][i], o, i)
                 else:
                     # This is to select the buttons
-                    i = lst[o].index(self)
                     chosen_seats.append([o, i])
-                    hid_wid(lst[o][i])
-                    lst[o][i] = crt_but('#66FFFF')
-                    grd_wid(lst[o][i], o, i)
+                    hid_wid(button_lst[o][i])
+                    button_lst[o][i] = crt_but('#66FFFF')
+                    grd_wid(button_lst[o][i], o, i)
+                    for b in range(1,9):
+                        if [o, b] not in chosen_seats and [o, b] not in lst:
+                            if o == 1 and 3 <= b <= 6:
+                                pass
+                            else:                            
+                                hid_wid(button_lst[o][b])
+                                button_lst[o][b] = crt_but()
+                                grd_wid(button_lst[o][b], o, b)
             except:
+                for b in range(1,9):
+                    if [o, b] not in chosen_seats and [o, b] not in lst:
+                        if o == 1 and 3 <= b <= 6:
+                            pass
+                        else:                        
+                            hid_wid(button_lst[o][b])
+                            button_lst[o][b] = crt_but()
+                            grd_wid(button_lst[o][b], o, b)
                 pass
     else:
-        
-        hid_wid(button_lst[o][i])
-        button_lst[o][i] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-        grd_wid(button_lst[o][i], o, i)
-        
+        for o in range(1,9):
+            try:
+                i = button_lst[o].index(self)
+                if [o, i] in chosen_seats:
+                    chosen_seats.remove([o, i])
+                    hid_wid(button_lst[o][i])
+                    button_lst[o][i] = crt_but()
+                    grd_wid(button_lst[o][i], o, i)
+            except:
+                if len(chosen_seats) >= 10:
+                    try:
+                        for b in range(1,9):
+                            if [o, b] not in chosen_seats:
+                                if o == 1 and 3 <= b <= 6:
+                                    pass
+                                else:
+                                    hid_wid(button_lst[o][b])
+                                    button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+                                    grd_wid(button_lst[o][b], o, b)
+                    except:
+                        for b in range(1,9):
+                            if [o, b] not in chosen_seats:
+                                if o == 1 and 3 <= b <= 6:
+                                    pass
+                                else:
+                                    hid_wid(button_lst[o][b])
+                                    button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+                                    grd_wid(button_lst[o][b], o, b)
+        if len(chosen_seats) <= 9:
+            for o in range(1,9):
+                for b in range(1,9):
+                    if [o, b] not in chosen_seats and [o, b] not in lst:
+                        if o == 1 and 3 <= b <= 6:
+                            pass
+                        else:                        
+                            hid_wid(button_lst[o][b])
+                            button_lst[o][b] = crt_but()
+                            grd_wid(button_lst[o][b], o, b)
+
 
 # this is used to mass create checkboxes
 def crt_but(bgc='#EFE7BC', frm=seatfrm):

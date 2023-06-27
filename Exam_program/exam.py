@@ -37,6 +37,11 @@ totalprice = StringVar()
 
 alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 
+# to do a display at the end
+movies = ['Jurassic Park', 'Homeward Bound', 'Cliffhanger']
+times = [['10:45 AM', '2:20 PM', '8:45 PM'], ['9:45 AM', '1:20 PM', '4:30 PM'], ['11:00 AM', '3:25 PM', '7:20 PM']]
+
+
 #to avoid a problem
 seatfrm = Frame(frm2, bg='#EFE7BC')
 
@@ -49,19 +54,19 @@ def price(tiknum, pric):
 def movcmd(num): # window 1 to 2
     global titlem, movie
     if num == 1:
-        time1.set('10:45 AM') # later to be replaced with .set(time[1]) or something like it.
-        time2.set('2:20 PM')
-        time3.set('8:45 PM')
+        time1.set(times[movie-1][0]) # later to be replaced with .set(time[1]) or something like it.
+        time2.set(times[movie-1][1])
+        time3.set(times[movie-1][2])
         movie = 1 # for greying out taken seats 
     elif num == 2:
-        time1.set('9:45 AM')
-        time2.set('1:20 PM')
-        time3.set('4:30 PM')
+        time1.set(times[movie-1][0])
+        time2.set(times[movie-1][1])
+        time3.set(times[movie-1][2])
         movie = 2
     elif num == 3:
-        time1.set('11:00 AM')
-        time2.set('3:25 PM')
-        time3.set('7:20 PM')
+        time1.set(times[movie-1][0])
+        time2.set(times[movie-1][1])
+        time3.set(times[movie-1][2])
         movie = 3
     grd_wid(time1b, x=10, y=10, ix=5, iy=2)
     grd_wid(time2b, 0,1,x=10,y=10, ix=5, iy=2)
@@ -118,7 +123,7 @@ def back():
 # wanted seat command
 def clk(self):
     global button_lst, chosen_seats, taken_seats, lst
-    if len(chosen_seats) <= 9:
+    if len(chosen_seats) <= 9: # used to limit the amount of seats people can select
         for o in range(1,9):
             try:                    
                 i = button_lst[o].index(self)
@@ -152,7 +157,7 @@ def clk(self):
                             button_lst[o][b] = crt_but()
                             grd_wid(button_lst[o][b], o, b)
                 pass
-    else:
+    else: # turns the seats grey and ungrey depending on what it needs to do.
         for o in range(1,9):
             try:
                 i = button_lst[o].index(self)
@@ -161,26 +166,17 @@ def clk(self):
                     hid_wid(button_lst[o][i])
                     button_lst[o][i] = crt_but()
                     grd_wid(button_lst[o][i], o, i)
+                else:
+                    for b in range(1,9):
+                        if [o, b] not in chosen_seats:
+                            if o == 1 and 3 <= b <= 6:
+                                pass
+                            else:
+                                hid_wid(button_lst[o][b])
+                                button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+                                grd_wid(button_lst[o][b], o, b)
             except:
-                if len(chosen_seats) >= 10:
-                    try:
-                        for b in range(1,9):
-                            if [o, b] not in chosen_seats:
-                                if o == 1 and 3 <= b <= 6:
-                                    pass
-                                else:
-                                    hid_wid(button_lst[o][b])
-                                    button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-                                    grd_wid(button_lst[o][b], o, b)
-                    except:
-                        for b in range(1,9):
-                            if [o, b] not in chosen_seats:
-                                if o == 1 and 3 <= b <= 6:
-                                    pass
-                                else:
-                                    hid_wid(button_lst[o][b])
-                                    button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
-                                    grd_wid(button_lst[o][b], o, b)
+                pass
         if len(chosen_seats) <= 9:
             for o in range(1,9):
                 for b in range(1,9):
@@ -191,6 +187,16 @@ def clk(self):
                             hid_wid(button_lst[o][b])
                             button_lst[o][b] = crt_but()
                             grd_wid(button_lst[o][b], o, b)
+    if len(chosen_seats) >= 10:
+        for o in range(1,9):
+            for b in range(1,9):
+                if [o, b] not in chosen_seats:
+                    if o == 1 and 3 <= b <= 6:
+                        pass
+                    else:
+                        hid_wid(button_lst[o][b])
+                        button_lst[o][b] = Button(seatfrm, bg='#ACADAD', relief='solid', bd=1, state='disabled', width=2)
+                        grd_wid(button_lst[o][b], o, b)
 
 
 # this is used to mass create checkboxes
@@ -380,10 +386,40 @@ def seat_cmd():
     seats.set('Your seats are:{}'.format(' '.join(fin_seat)))
 
 def win4_to_fin():
-    hid_wid(frm3)
-    grey()
-    seat_cmd()
-    grd_wid(frm4, 1)
+    global titlem, seat_count
+    leng = len(chosen_seats) - int(kidbox.get()) - int(senbox.get()) - int(stubox.get()) - int(adubox.get())
+    if leng == 0:
+        hid_wid(frm3)
+        grey()
+        seat_cmd()
+        titletxt.set('{}, {}'.format(movies[movie-1], times[movie-1][time-1]))
+        hid_wid(titlem)
+        hid_wid(seat_count)
+        titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 18), width=22, relief='solid', bd=1)
+        grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
+        grd_wid(frm4, 1)
+    else:
+        helping.open()
+
+class helping:
+    def open():
+        help_w = Toplevel(win, bg='#F0CDFF')
+        help_w.title('Prompt')
+        
+        help_txt = StringVar()
+        help_txt.set('Please select all tickets prices!')
+        pay_but.config(state='disabled')
+        help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
+        help_lab = Label(help_w, textvariable=help_txt, bg='#CDF5FF')
+        grid_widget(help_lab, y=10)
+        
+        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#CDF5FF')
+        grid_widget(clos_butt, 1)
+        
+    def close(self):
+        global pay_but
+        pay_but.config(state='normal')
+        self.destroy()
 
 def save():
     global chosen_seats, movie, time

@@ -1,5 +1,6 @@
 from collation_oliver import *
 from tkinter import ttk
+from functools import partial
 
 win = Tk()
 win.configure(bg='#EFE7BC')
@@ -403,18 +404,18 @@ def win4_to_fin():
 
 class helping:
     def open():
-        help_w = Toplevel(win, bg='#F0CDFF')
+        help_w = Toplevel(win, bg='#EFE7BC')
         help_w.title('Prompt')
         
         help_txt = StringVar()
         help_txt.set('Please select all tickets prices!')
         pay_but.config(state='disabled')
         help_w.protocol('WM_DELETE_WINDOW', partial(helping.close, help_w))
-        help_lab = Label(help_w, textvariable=help_txt, bg='#CDF5FF')
-        grid_widget(help_lab, y=10)
+        help_lab = Label(help_w, textvariable=help_txt, bg='#74BDCB')
+        grd_wid(help_lab, y=10)
         
-        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#CDF5FF')
-        grid_widget(clos_butt, 1)
+        clos_butt = Button(help_w, text='Close', command=partial(helping.close, help_w), bg='#74BDCB')
+        grd_wid(clos_butt, 1)
         
     def close(self):
         global pay_but

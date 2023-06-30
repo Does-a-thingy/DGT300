@@ -5,6 +5,7 @@ from functools import partial
 win = Tk()
 win.configure(bg='#EFE7BC')
 win.title('Movie Theatre')
+win.resizable(False,False)
 
 titlfr = Frame(win, bg='#EFE7BC')
 grd_wid(titlfr)
@@ -202,13 +203,13 @@ def crt_but(bgc='#EFE7BC', frm=seatfrm):
     wid = Button(frm, bg=bgc, relief='solid', bd=1, command=lambda:clk(wid), width=2)
     return wid
 
-# this is used to mass create 
+# this is used to mass create Labels
 def crt_lab(txt,cl='#B9E0A5', rf='solid', frm=seatfrm):
     global Label
     wid = Label(frm, bg=cl, text=txt, width=2, bd=1, relief=rf)
     return wid
 
-#used to manage all of the checkboxes.
+#used to manage all of the checkboxes and labels.
 def button_maker(lst, frm=seatfrm):
     global alphabet
     for o in range(0,9):
@@ -332,16 +333,19 @@ def vals(ignored):
     seat_num.set('Seats: {}/{}'.format((len(chosen_seats) - leng), len(chosen_seats)))
     box_make(a,b,c,d)
 
-def back2():
+def back2(): # goes from window 4 (pay) to window 3 (seats)
     global frm2, frm3, ticnum_lst, titlem, seat_count
-    hid_wid(frm3)
-    titletxt.set('Select your seats')
-    hid_wid(titlem)
-    hid_wid(seat_count)
-    titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=16, relief='solid', bd=1)
-    grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')    
-    grd_wid(frm2, 1)
-    ticnum_lst = []    
+    if (pay_but['state'] == NORMAL):
+        hid_wid(frm3)
+        titletxt.set('Select your seats')
+        hid_wid(titlem)
+        hid_wid(seat_count)
+        titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=16, relief='solid', bd=1)
+        grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')    
+        grd_wid(frm2, 1)
+        ticnum_lst = []
+    else:
+        pass
     
 def grey():
     global chosen_seats, grey_lst, alphabet
@@ -403,6 +407,7 @@ class helping:
     def open():
         help_w = Toplevel(win, bg='#EFE7BC')
         help_w.title('Prompt')
+        help_w.resizable(False,False)
         
         help_txt = StringVar()
         help_txt.set('Please select all tickets prices!')

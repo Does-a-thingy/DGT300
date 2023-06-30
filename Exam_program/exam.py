@@ -42,20 +42,17 @@ alphabet = ['blank', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H']
 movies = ['Jurassic Park', 'Homeward Bound', 'Cliffhanger']
 times = [['10:45 AM', '2:20 PM', '8:45 PM'], ['9:45 AM', '1:20 PM', '4:30 PM'], ['11:00 AM', '3:25 PM', '7:20 PM']]
 
-
 #to avoid a problem
 seatfrm = Frame(frm2, bg='#EFE7BC')
 
-# functions
 
-def price(tiknum, pric):
-    global total
-    total += tiknum * pric
+
+# functions
 
 def movcmd(num): # window 1 to 2
     global titlem, movie
     if num == 1:
-        time1.set(times[movie-1][0]) # later to be replaced with .set(time[1]) or something like it.
+        time1.set(times[movie-1][0])
         time2.set(times[movie-1][1])
         time3.set(times[movie-1][2])
         movie = 1 # for greying out taken seats 

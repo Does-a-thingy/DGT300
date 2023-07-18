@@ -290,28 +290,30 @@ def box_make(a=0,b=0,c=0,d=0):
 
 # window change
 def win3_to_4():
-    global frm2, frm3, ticnum_lst, titlem
-    
-    titletxt.set('Tickets:')
-    hid_wid(titlem)
-    titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=6, relief='solid', bd=1)
-    grd_wid(titlem, 0, 1, clmspn=2, y=10, stc='E')
-    seat_num.set('Seats: 0/{}'.format(len(chosen_seats)))
-    grd_wid(seat_count,0,3, x=10, y=5, stc='E')
-    
-    hid_wid(frm2)
-    grd_wid(frm3, 1)
-    ticnum_lst = []
-    num1 = IntVar()
-    for i in range(len(chosen_seats)+1):
-        ticnum_lst.append(i)
-    global kidlst, adulst, stulst, senlst
-    kidlst = ticnum_lst
-    adulst = ticnum_lst
-    stulst = ticnum_lst
-    senlst = ticnum_lst
-    # making and adding parts here because the list is a bit weird and needs these after numbers
-    box_make()
+    global frm2, frm3, ticnum_lst, titlem, chosen_seats
+    if len(chosen_seats) > 0:
+        titletxt.set('Tickets:')
+        hid_wid(titlem)
+        titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=6, relief='solid', bd=1)
+        grd_wid(titlem, 0, 1, clmspn=2, y=10, stc='E')
+        seat_num.set('Seats: 0/{}'.format(len(chosen_seats)))
+        grd_wid(seat_count,0,3, x=10, y=5, stc='E')
+        
+        hid_wid(frm2)
+        grd_wid(frm3, 1)
+        ticnum_lst = []
+        num1 = IntVar()
+        for i in range(len(chosen_seats)+1):
+            ticnum_lst.append(i)
+        global kidlst, adulst, stulst, senlst
+        kidlst = ticnum_lst
+        adulst = ticnum_lst
+        stulst = ticnum_lst
+        senlst = ticnum_lst
+        # making and adding parts here because the list is a bit weird and needs these after numbers
+        box_make()
+    else:
+        pass
 
 # value change code for 4th window
 def vals(ignored):

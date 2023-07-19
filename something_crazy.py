@@ -103,7 +103,7 @@ check_frame = Frame(window)
 check_frame.grid(padx=2, pady=2, row=11, column=0, rowspan=1, columnspan=5)
 
 turt_num = IntVar()
-turt_num.set(1)
+turt_num.set(2)
 
 one_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=1, offvalue=2, text='One turtle')
 one_turt_ck.grid(row=0)
@@ -111,7 +111,7 @@ two_turt_ck = Checkbutton(check_frame, variable=turt_num, onvalue=2, offvalue=1,
 two_turt_ck.grid(row=0, column=2)
 
 multi = IntVar()
-multi.set(0)
+multi.set(1)
 
 multi_turt = Checkbutton(check_frame, variable=multi, onvalue=1, offvalue=0, text='Turtles can multiply')
 multi_turt.grid(row=0, column=3, padx=10)
@@ -119,78 +119,52 @@ multi_turt.grid(row=0, column=3, padx=10)
 first.lt(random.randint(0, 359))
 second.lt(random.randint(0, 359))
 
+turtle_list = [first, second]
+
+def make_turtle():
+    global first
+    new_turtle = first.clone()
+    return new_turtle
+
+def turtle_positioning(name, fd_low, fd_high, lt_low, lt_high, spd_low, spd_high):
+    if name.xcor() >= 190:
+        name.setx(180)
+        angle = name.towards(0, 0)
+        name.lt(angle)
+        name.fd(5)
+    elif name.xcor() <= -190:
+        name.setx(-180)
+        angle = name.towards(0, 0)
+        name.lt(angle)
+        name.fd(5)
+    if name.ycor() >= 190:
+        name.sety(180)
+        angle = name.towards(0, 0)
+        name.lt(angle)
+        name.fd(5)
+    elif name.ycor() <= -190:
+        name.sety(-180)
+        angle = name.towards(0, 0)
+        name.lt(angle)
+        name.fd(5)
+    name.fd(random.randint(fd_low, fd_high))
+    name.lt(random.randint(lt_low, lt_high))
+    name.speed(random.randint(spd_low, spd_high))
+
 while x is False:
-    # must find how to turn turtles around
+    # this controls the turtles movements
+    # .get() is needed for calling variables for if statements code, crashes otherwise
     if turt_num.get() == 1:
-        second.ht()
-        if first.xcor() >= 190:
-            first.setx(180)
-            fangle = first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        elif first.xcor() <= -190:
-            first.setx(-180)
-            fangle = first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        if first.ycor() >= 190:
-            first.sety(180)
-            fangle = first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        elif first.ycor() <= -190:
-            first.sety(-180)
-            fangle = first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        first.fd(random.randint(0, 6))
-        first.lt(random.randint(-40, 40))
-        first.speed(random.randint(1, 2))        
-    elif turt_num.get() == 2:
-        second.st()
-        if first.xcor() >= 190:
-            first.setx(180)
-            fangle == first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        elif first.xcor() <= -190:
-            first.setx(-180)
-            fangle == first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        if first.ycor() >= 190:
-            first.sety(180)
-            fangle == first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)
-        elif first.ycor() <= -190:
-            first.sety(-180)
-            fangle == first.towards(0, 0) + 90
-            first.lt(fangle)
-            first.fd(5)        
-        if second.xcor() >= 190:
-            second.setx(180)
-            sangle == second.towards(0, 0) + 90
-            second.lt(sangle)
-            second.fd(5)
-        elif second.xcor() <= -190:
-            second.setx(-180)
-            sangle == second.towards(0, 0) + 90
-            second.lt(sangle)
-            second.fd(5)
-        if second.ycor() >= 190:
-            second.sety(180)
-            sangle == second.towards(0, 0) + 90
-            second.lt(sangle)
-            second.fd(5)
-        elif second.ycor() <= -190:
-            second.sety(-180)
-            sangle == second.towards(0, 0) + 90
-            second.lt(sangle)
-            second.fd(5)
-        first.fd(random.randint(0, 6))
-        first.lt(random.randint(-40, 40))
-        first.speed(random.randint(1, 2))
-        second.fd(random.randint(0, 8))
-        second.lt(random.randint(-30, 30))
-        second.speed(random.randint(1, 4))
+        turtle_list[1].ht()
+        turtle_positioning(turtle_list[0], 0, 6, -40, 40, 1, 2)
+    elif turt_num.get() == 2 and multi.get() == 0:
+        turtle_list[1].st()
+        turtle_positioning(turtle_list[0], 0, 6, -40, 40, 1, 2)
+        turtle_positioning(turtle_list[1], 0, 8, -30, 30, 1, 4)
+    elif turt_num.get() == 2 and multi.get() == 1:
+        for animal in turtle_list:
+            turtle_list[1].st()
+            turtle_positioning(animal, 0, 7, -35, 35, 1, 3)
+            if first.ycor() == second.ycor() or first.xcor() == second.xcor():
+                turtle_list.append(make_turtle())
+                print('Baby')

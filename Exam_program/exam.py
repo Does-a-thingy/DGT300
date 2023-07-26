@@ -3,21 +3,21 @@ from tkinter import ttk
 from functools import partial
 
 win = Tk()
-win.configure(bg='#EFE7BC')
+win.configure(bg='#F1E1B8')
 win.title('Movie Theatre')
 win.resizable(False,False)
 
-titlfr = Frame(win, bg='#EFE7BC')
+titlfr = Frame(win, bg='#F1E1B8')
 grd_wid(titlfr)
 
-frm1 = Frame(win, bg='#EFE7BC') # window 1 and 2
+frm1 = Frame(win, bg='#F1E1B8') # window 1 and 2
 grd_wid(frm1, 1)
 
-frm2 = Frame(win, bg='#EFE7BC') # window 3
+frm2 = Frame(win, bg='#F1E1B8') # window 3
 
-frm3 = Frame(win, bg='#EFE7BC') # window 4
+frm3 = Frame(win, bg='#F1E1B8') # window 4
 
-frm4 = Frame(win, bg='#EFE7BC') # window 5
+frm4 = Frame(win, bg='#F1E1B8') # window 5
 
 total = 0
 
@@ -44,7 +44,7 @@ movies = ['Jurassic Park', 'Homeward Bound', 'Cliffhanger']
 times = [['10:45 AM', '2:20 PM', '8:45 PM'], ['9:45 AM', '1:20 PM', '4:30 PM'], ['11:00 AM', '3:25 PM', '7:20 PM']]
 
 #to avoid a problem
-seatfrm = Frame(frm2, bg='#EFE7BC')
+seatfrm = Frame(frm2, bg='#F1E1B8')
 
 
 
@@ -67,10 +67,10 @@ def movcmd(num): # window 1 to 2
         time2.set(times[movie-1][1])
         time3.set(times[movie-1][2])
         movie = 3
-    grd_wid(time1b, x=10, y=10, ix=5, iy=2)
-    grd_wid(time2b, 0,1,x=10,y=10, ix=5, iy=2)
-    grd_wid(time3b, 0,2,x=10,y=10, ix=5, iy=2)
-    grd_wid(timefrm, 1, 1, clmspn=3)
+    grd_wid(time1b,1, x=10, y=5, ix=5, iy=2)
+    grd_wid(time2b, 1,1,x=10,y=5, ix=5, iy=2)
+    grd_wid(time3b, 1,2,x=10,y=5, ix=5, iy=2)
+    grd_wid(timefrm, 2, 1, clmspn=3, y=10, iy=10)
 
 def taken_seats():
     global movie, time, lst
@@ -199,7 +199,7 @@ def clk(self):
 
 
 # this is used to mass create checkboxes
-def crt_but(bgc='#EFE7BC', frm=seatfrm):
+def crt_but(bgc='#FAF2BE', frm=seatfrm):
     wid = Button(frm, bg=bgc, relief='solid', bd=1, command=lambda:clk(wid), width=2)
     return wid
 
@@ -217,25 +217,25 @@ def button_maker(lst, frm=seatfrm):
         if o == 0: # number row
             for i in range(0,9): # 0 to 8
                 if i == 0:
-                    lst[o].append(crt_lab('', frm=frm))
+                    lst[o].append(crt_lab(''))
                 else:
-                    lst[o].append(crt_lab(i, frm=frm))
+                    lst[o].append(crt_lab(i))
                 grd_wid(lst[o][i],o,i)
         elif o == 1: # Row A
             for i in range(0,9): # 9 to 17
                 if i == 0:
-                    lst[o].append(crt_lab(alphabet[o], frm=frm))
+                    lst[o].append(crt_lab(alphabet[o]))
                 if (i < 2 or i > 5):
-                    lst[o].append(crt_but(bgc='#EFE7BC', frm=frm))
+                    lst[o].append(crt_but())
                 else:
-                    lst[o].append(crt_lab('', '#EFE7BC','flat', frm=frm))
+                    lst[o].append(crt_lab('', '#F1E1B8','flat'))
                 grd_wid(lst[o][i],o,i)
         else: # Rows B to H
             for i in range(0,9):
                 if i == 0:
-                    lst[o].append(crt_lab(alphabet[o], frm=frm))
+                    lst[o].append(crt_lab(alphabet[o]))
                 elif i > 0:
-                    lst[o].append(crt_but(frm=frm))
+                    lst[o].append(crt_but())
                 grd_wid(lst[o][i],o,i)
 
 def fil_fch(file):
@@ -259,25 +259,25 @@ def fil_fch(file):
 def box_make(a=0,b=0,c=0,d=0):
     global kidbox, adubox, stubox, senbox
     
-    kidbox = ttk.Combobox(ticket_frm, values=kidlst)
+    kidbox = ttk.Combobox(ticket_frm, values=kidlst, state='readonly')
     kidbox.set(a)
     kidbox.bind('<<ComboboxSelected>>', vals)
     kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
     grd_wid(kidbox, 0, 1, y=5)
     
-    adubox = ttk.Combobox(ticket_frm, values=adulst)
+    adubox = ttk.Combobox(ticket_frm, values=adulst, state='readonly')
     adubox.set(b)
     adubox.bind('<<ComboboxSelected>>', vals)
     aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
     grd_wid(adubox, 1, 1, y=5)
     
-    stubox = ttk.Combobox(ticket_frm, values=stulst)
+    stubox = ttk.Combobox(ticket_frm, values=stulst, state='readonly')
     stubox.set(c)
     stubox.bind('<<ComboboxSelected>>', vals)
     stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
     grd_wid(stubox, 2, 1, y=5)
     
-    senbox = ttk.Combobox(ticket_frm, values=senlst)
+    senbox = ttk.Combobox(ticket_frm, values=senlst, state='readonly')
     senbox.set(d)
     senbox.bind('<<ComboboxSelected>>', vals)
     senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
@@ -407,7 +407,7 @@ def win4_to_fin():
 
 class helping:
     def open():
-        help_w = Toplevel(win, bg='#EFE7BC')
+        help_w = Toplevel(win, bg='#F1E1B8')
         help_w.title('Prompt')
         help_w.resizable(False,False)
         
@@ -446,39 +446,43 @@ titletxt = StringVar() # for changable text
 titletxt.set('House Theatres')
 titlem = Label(titlfr, textvariable=titletxt, bg='#74BDCB', font=('lucid', 26), width=16, relief='solid', bd=1)
 grd_wid(titlem, 0, 1, clmspn=3, y=10, x=0, stc='E')
-titl = Label(titlfr, textvariable=blank, bg='#EFE7BC')
+titl = Label(titlfr, textvariable=blank, bg='#F1E1B8')
 grd_wid(titl, x=10, ix=10)
-titr = Label(titlfr, textvariable=blank, bg='#EFE7BC')
+titr = Label(titlfr, textvariable=blank, bg='#F1E1B8')
 grd_wid(titr, 0, 4, x=10, ix=10)
 
 # window 1 code start
+movie_txt = Label(frm1, text='Movies:', bg='#FFA384', relief='solid', bd=1)
+grd_wid(movie_txt, Clumn=2, x=5, ix=5, y=5, iy=5)
 # lambda lets me call a command and give it a value input.
 movi1 = Button(frm1, text='Jurassic Park', bg='#FFA384', command=lambda:movcmd(1), relief='solid', bd=1, width=12)
-grd_wid(movi1, Clumn=1, x=5, ix=5, y=20, iy=5)
+grd_wid(movi1, 1, 1, x=5, ix=5, y=5, iy=5)
 movi2 = Button(frm1, text='Homeward Bound', bg='#FFA384', command=lambda:movcmd(2), relief='solid', bd=1, width=12)
-grd_wid(movi2, Clumn=2, x=5, ix=5, y=20, iy=5)
+grd_wid(movi2, 1, 2, x=5, ix=5, y=5, iy=5)
 movi3 = Button(frm1, text='Cliffhanger', bg='#FFA384', command=lambda:movcmd(3), relief='solid', bd=1, width=12)
-grd_wid(movi3, Clumn=3, x=5, ix=5, y=20, iy=5)
+grd_wid(movi3, 1, 3, x=5, ix=5, y=5, iy=5)
 
-movl = Label(frm1, textvariable=blank, bg='#EFE7BC')
-grd_wid(movl, x=7.5, ix=10)
-movr = Label(frm1, textvariable=blank, bg='#EFE7BC')
-grd_wid(movr, 0, 4, x=10, ix=10)
+movl = Label(frm1, textvariable=blank, bg='#F1E1B8')
+grd_wid(movl, 1, x=7.5, ix=10)
+movr = Label(frm1, textvariable=blank, bg='#F1E1B8')
+grd_wid(movr, 1, 4, x=10, ix=10)
 
 
 # window 2 code start
 timefrm = Frame(frm1, bg='#EFBCDE', relief='solid', bd=1)
 
+time_txt = Label(timefrm, text='Times:', bg='#74BDCB', relief='solid', bd=1)
+grd_wid(time_txt, 0, 1, x=5, ix=5,y=5, iy=5)
 time1b = Button(timefrm, textvariable=time1, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(1))
 time2b = Button(timefrm, textvariable=time2, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(2))
 time3b = Button(timefrm, textvariable=time3, bg='#74BDCB', width=10, relief='solid', bd=1, command=lambda: win2to3(3))
 
-botspc= Label(win, textvariable=blank, bg='#EFE7BC')
-grd_wid(botspc,2, 0, y=5)
+botspc= Label(win, textvariable=blank, bg='#F1E1B8')
+grd_wid(botspc,2, 0)
 
 
 # window 3 code start
-sblnkl = Label(frm2, bg='#EFE7BC', textvariable=blank)
+sblnkl = Label(frm2, bg='#F1E1B8', textvariable=blank)
 grd_wid(sblnkl, x=7.5, ix=10)
 
 grd_wid(seatfrm, 0, 1, 3, rwspn=3)
@@ -493,26 +497,26 @@ grd_wid(key_frm, 0, 4, rwspn=2, clmspn=2, x=5, y=20)
 
 var0 = IntVar()
 
-empt_box = Button(key_frm, bg='#EFE7BC', width=1, state= "disabled", relief='solid', bd=1)
+empt_box = Button(key_frm, bg='#FAF2BE', width=2, state= "disabled", relief='solid', bd=1)
 empt_lab = Label(key_frm, bg='#BCC4EF', text='Empty')
 grd_wid(empt_box)
-grd_wid(empt_lab,1)
+grd_wid(empt_lab,0,1)
 
-take_box = Button(key_frm, bg='#ACADAD', state= "disabled", width=1, relief='solid', bd=1)
+take_box = Button(key_frm, bg='#ACADAD', state= "disabled", width=2, relief='solid', bd=1)
 take_lab = Label(key_frm, bg='#BCC4EF', text='Taken')
-grd_wid(take_box,2)
-grd_wid(take_lab,3)
+grd_wid(take_box,1)
+grd_wid(take_lab,1,1)
 
 var2 = IntVar()
 var2.set(1)
 
-selc_box = Button(key_frm, bg='#66FFFF', width=1, state= "disabled", relief='solid', bd=1)
+selc_box = Button(key_frm, bg='#66FFFF', width=2, state= "disabled", relief='solid', bd=1)
 selc_lab = Label(key_frm, bg='#BCC4EF', text='Selected')
-grd_wid(selc_box,4)
-grd_wid(selc_lab,5)
+grd_wid(selc_box,2)
+grd_wid(selc_lab,2,1)
 
 # buttons
-but_frm = Frame(frm2, bg='#EFE7BC')
+but_frm = Frame(frm2, bg='#F1E1B8')
 grd_wid(but_frm, 2, 4, 1, 4)
 
 bck_but = Button(but_frm, bg='#FFA384', text='Back', command=back, relief='solid', bd=1)
@@ -525,7 +529,7 @@ chosen_seats = []
 
 
 # window 4 code starts
-ticket_frm = Frame(frm3, bg='#EFE7BC')
+ticket_frm = Frame(frm3, bg='#F1E1B8')
 grd_wid(ticket_frm, 0, 1, clmspn=3, x=5)
 
 # seat counter
@@ -533,7 +537,7 @@ seat_num = StringVar()
 seat_count = Label(titlfr, bg='#FFA384', textvariable=seat_num, width=8, relief='solid', bd=1)
 
 #blanks
-ticblnk = Label(frm3, textvariable=blank, bg='#EFE7BC')
+ticblnk = Label(frm3, textvariable=blank, bg='#F1E1B8')
 grd_wid(ticblnk, x=7.5, ix=10)
 # ticket code
 
@@ -605,14 +609,14 @@ grd_wid(bac2_but, 5, 4)
 
 # window 5 code
 # seats 2
-gry_frm = Frame(frm4, bg='#EFE7BC')
+gry_frm = Frame(frm4, bg='#F1E1B8')
 grd_wid(gry_frm, 0, 1, 3, rwspn=3)
 
 # summon more seats!
 grey_lst = []
 
 # blanks
-blnk5l = Label(frm4, textvariable=blank, bg='#EFE7BC')
+blnk5l = Label(frm4, textvariable=blank, bg='#F1E1B8')
 grd_wid(blnk5l, x=10, ix=10)
 
 #tell the user their seats

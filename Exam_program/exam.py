@@ -241,19 +241,25 @@ def button_maker(lst, frm=seatfrm):
 def fil_fch(file):
     fetched_lst = []
     final = []
-    with open(file) as f:
-        for line in f.readlines():
-            line = line.replace('\n', 'z')# changes all of the new line commands to the letter z
-            fetched_lst.append(line.strip())
-        try:
-            for item in fetched_lst:
-                fetched_lst.remove('z')# gets rid of blank lines
-        except:
-            pass
-        for dine in fetched_lst:
-            dine = dine.replace('z', '')# changes the z at the end of the words into a space
-            final.append(dine.strip())# deletes the space at the end
-        return final
+    try:
+        with open(file) as f:
+            for line in f.readlines():
+                line = line.replace('\n', 'z')# changes all of the new line commands to the letter z
+                fetched_lst.append(line.strip())
+            try:
+                for item in fetched_lst:
+                    fetched_lst.remove('z')# gets rid of blank lines
+            except:
+                pass
+            for dine in fetched_lst:
+                dine = dine.replace('z', '')# changes the z at the end of the words into a space
+                final.append(dine.strip())# deletes the space at the end
+            return final
+    except:
+        with open(file, 'w') as f:
+            final = []
+            return final
+            
 
 # combox weirdness
 def box_make(a=0,b=0,c=0,d=0):
@@ -263,25 +269,25 @@ def box_make(a=0,b=0,c=0,d=0):
     kidbox.set(a)
     kidbox.bind('<<ComboboxSelected>>', vals)
     kidprice.set('Kid: ${}'.format(pricing*int(kidbox.get())))
-    grd_wid(kidbox, 0, 1, y=5)
+    grd_wid(kidbox, 1, 1, y=5)
     
     adubox = ttk.Combobox(ticket_frm, values=adulst, state='readonly')
     adubox.set(b)
     adubox.bind('<<ComboboxSelected>>', vals)
     aduprice.set('Adult: ${}'.format(aprice*int(adubox.get())))
-    grd_wid(adubox, 1, 1, y=5)
+    grd_wid(adubox, 2, 1, y=5)
     
     stubox = ttk.Combobox(ticket_frm, values=stulst, state='readonly')
     stubox.set(c)
     stubox.bind('<<ComboboxSelected>>', vals)
     stuprice.set('Student: ${}'.format(sprice*int(stubox.get())))
-    grd_wid(stubox, 2, 1, y=5)
+    grd_wid(stubox, 3, 1, y=5)
     
     senbox = ttk.Combobox(ticket_frm, values=senlst, state='readonly')
     senbox.set(d)
     senbox.bind('<<ComboboxSelected>>', vals)
     senprice.set('Senior: ${}'.format(sprice*int(senbox.get())))
-    grd_wid(senbox, 3, 1, y=5)
+    grd_wid(senbox, 4, 1, y=5)
     
     global total
     total = sprice*int(senbox.get()) +sprice*int(stubox.get()) +aprice*int(adubox.get()) +pricing*int(kidbox.get())
@@ -534,36 +540,40 @@ grd_wid(ticket_frm, 0, 1, clmspn=3, x=5)
 
 # seat counter
 seat_num = StringVar()
-seat_count = Label(titlfr, bg='#FFA384', textvariable=seat_num, width=8, relief='solid', bd=1)
+seat_count = Label(titlfr, bg='#FFA384', textvariable=seat_num, font=('lucid', 16), width=8, relief='solid', bd=1)
 
 #blanks
 ticblnk = Label(frm3, textvariable=blank, bg='#F1E1B8')
 grd_wid(ticblnk, x=7.5, ix=10)
 # ticket code
 
+# Text on top of selecting
+ticket_label = Label(ticket_frm, text='Please choose your tickets:', bg='#BCC4EF')
+grd_wid(ticket_label, clmspn=2, y=5)
+
 # labels
 kpri = StringVar()
 kpri.set('Kid: ${}'.format(pricing))
 kidlab = Label(ticket_frm, textvariable=kpri, bg='#BCC4EF')
-grd_wid(kidlab, y=5)
+grd_wid(kidlab, 1, y=5)
 
 aprice = pricing * 3
 apri = StringVar()
 apri.set('Adult: ${}'.format(aprice))
 adulab = Label(ticket_frm, textvariable=apri, bg='#BCC4EF')
-grd_wid(adulab, 1, y=5)
+grd_wid(adulab, 2, y=5)
 
 sprice = pricing * 2
 
 spri = StringVar()
 spri.set('Student: ${}'.format(sprice))
 stulab = Label(ticket_frm, textvariable=spri, bg='#BCC4EF')
-grd_wid(stulab, 2, y=5)
+grd_wid(stulab, 3, y=5)
 
 sepri = StringVar()
 sepri.set('Senior: ${}'.format(sprice))
 senlab = Label(ticket_frm, textvariable=sepri, bg='#BCC4EF')
-grd_wid(senlab, 3, y=5)
+grd_wid(senlab, 4, y=5)
 
 # pay code
 price_frm = Frame(frm3, bg='#ECB7BC')

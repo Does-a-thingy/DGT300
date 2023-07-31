@@ -9,7 +9,7 @@ window = Tk()
 window.title('Livestream')
 
 #turtle stuff
-screen = Canvas(master = window, width = 600, height = 600, bg='green')
+screen = Canvas(master = window, width = 400, height = 400, bg='green')
 screen.grid(padx=2, pady=2, row=0, column=0, rowspan=10, columnspan=10)
 
 first = RawTurtle(screen)
@@ -20,22 +20,22 @@ first.speed(random.randint(1, 3))
 first.penup()
 first.fillcolor('green')
 first.shape("turtle")
-first.goto(random.randint(-50, 50), random.randint(-50, 50))
 second = first.clone()
-second.goto(random.randint(-50, 50), random.randint(-50, 50))
 third = second.clone()
+first.goto(random.randint(-50, 50), random.randint(-50, 50))
+second.goto(random.randint(-50, 50), random.randint(-50, 50))
 third.goto(random.randint(-50, 50), random.randint(-50, 50))
 x = False
 b = 0
 
 box.lt(90)
 box.penup()
-box.goto(-210, -210)
+box.goto(-120, -120)
 box.pendown()
 box.color('#1BE4C8')
 box.begin_fill()
 while b != 4:
-    box.fd(420)
+    box.fd(240)
     box.rt(90)
     b += 1
 box.end_fill()
@@ -43,16 +43,16 @@ box.end_fill()
 box.width(5)
 box.color('black')
 box.penup()
-box.goto(-220, -220)
+box.goto(-130, -130)
 box.pendown()
 b = 0
 for i in range(4):
-    box.fd(440)
+    box.fd(260)
     box.rt(90)
     b += 1
 
 box.penup()
-box.goto(200, 190)
+box.goto(110, 100)
 box.pendown()
 box.color('light grey')
 box.begin_fill()
@@ -60,7 +60,7 @@ box.circle(15)
 box.end_fill()
 
 box.penup()
-box.goto(205, 175)
+box.goto(115, 85)
 box.pendown()
 box.width(2)
 box.begin_fill()
@@ -68,7 +68,7 @@ box.circle(4)
 box.end_fill()
 
 box.penup()
-box.goto(170, 200)
+box.goto(80, 100)
 box.pendown()
 box.width(2)
 box.begin_fill()
@@ -78,7 +78,7 @@ box.end_fill()
 box.width(5)
 box.color('brown')
 box.penup()
-box.goto(-180, -200)
+box.goto(-90, -110)
 box.pendown()
 
 box.begin_fill()
@@ -120,36 +120,43 @@ def make_turtle(animal):
     new_turtle = animal.clone()
     return new_turtle
 
-def turtle_multiply(animal):
+def turtle_multiply():
     global turtle_list
-    turtle_population = len(turtle_list) + 1
-    self_index = turtle_list.index(animal)    
-    for i in range(0, turtle_population):
-        if i-1 != self_index and i-1 != 0:
-            print(i-1)
-            print(self_index)
-            if animal.ycor() == turtle_list[i-1].ycor() and animal.xcor() == turtle_list[i-1].xcor():
-                turtle_list.append(make_turtle(animal))
-                print('Baby')
+    for animal in turtle_list:
+        turtle_population = len(turtle_list) + 1
+        self_index = turtle_list.index(animal)
+        for i in range(0, turtle_population):
+            if i-1 != self_index and i-1 != -1:
+                aycor = round(animal.ycor(), 0)
+                tlycor = round(turtle_list[i-1].ycor(), 0)
+                axcor = round(animal.xcor(),0)
+                tlxcor = round(turtle_list[i-1].xcor(),0)
+                if aycor == tlycor and axcor == tlycor:
+                    turtle_list.append(make_turtle(animal))
+                    turtle_list[-1].goto(random.randint(-90, 90), random.randint(-90, 90))
+                    animal.fd(10)
+                    turtle_list[i-1].fd(10)
+                    print('Baby')
+    window.after(100, turtle_multiply)
 
 def turtle_positioning(name, fd_low, fd_high, lt_low, lt_high, spd_low, spd_high):
-    if name.xcor() >= 190:
-        name.setx(180)
+    if name.xcor() >= 100:
+        name.setx(90)
         angle = name.towards(0, 0)
         name.lt(angle)
         name.fd(5)
-    elif name.xcor() <= -190:
-        name.setx(-180)
+    elif name.xcor() <= -100:
+        name.setx(-90)
         angle = name.towards(0, 0)
         name.lt(angle)
         name.fd(5)
-    if name.ycor() >= 190:
-        name.sety(180)
+    if name.ycor() >= 100:
+        name.sety(90)
         angle = name.towards(0, 0)
         name.lt(angle)
         name.fd(5)
-    elif name.ycor() <= -190:
-        name.sety(-180)
+    elif name.ycor() <= -100:
+        name.sety(-90)
         angle = name.towards(0, 0)
         name.lt(angle)
         name.fd(5)
@@ -157,6 +164,7 @@ def turtle_positioning(name, fd_low, fd_high, lt_low, lt_high, spd_low, spd_high
     name.lt(random.randint(lt_low, lt_high))
     name.speed(random.randint(spd_low, spd_high))
 
+turtle_multiply()
 while x is False:
     # this controls the turtles movements
     # .get() is needed for calling variables for if statements code, crashes otherwise
@@ -166,4 +174,3 @@ while x is False:
     elif multi.get() == 1:
         for animal in turtle_list:
             turtle_positioning(animal, 0, 7, -35, 35, 0, 3)
-            turtle_multiply(animal)

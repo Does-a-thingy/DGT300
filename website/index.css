@@ -1,0 +1,75 @@
+html {
+    background-size: streach;
+    font-family: 'Sunflower', sans-serif;
+    max-width: 99%;
+}
+h3 {
+    color: white;
+}
+/*this controls the left part*/
+.left {
+    background-color: rgba(180,180,180,0.6);
+    grid-area: left;
+    align-content: center;
+    text-align: center; }
+    .left:hover {
+    background-color: rgba(200,200,200,0.8);
+}
+/*this controls the right part*/
+.right {
+    background-color: rgba(180,180,180,0.6);
+    grid-area: right;
+    align-content: center;
+    text-align: center; }
+    .right:hover{
+    background-color: rgba(200,200,200,0.8);
+}
+/* Control the middle parts */
+.mid {
+  background-color: rgba(180,180,180,0.6);
+    grid-area: mid;
+    align-content: center;
+    text-align: center; }
+    .mid:hover{
+    background-color: rgba(200,200,200,0.8);
+}
+h2{
+    color: aliceblue;
+}
+a {
+    display: grid;
+    color: azure;
+    text-decoration: none;
+}
+    a:hover {
+        color: white; }
+/* this organises the rest of the site by using CSS griding*/
+.site {
+    grid-gap: 2px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 1fr 4fr 4fr 1fr;
+    grid-template-areas:
+        "header header"
+        "left right"
+        "mid mid"
+        "footer footer";
+}
+/* this is the header */
+.header {
+    background-color: #B4E8DF;
+    color: white;
+    text-align: center;
+    display: grid;
+    grid-area: header;
+}
+
+
+/* this is the footer */
+.footer {
+    display: grid;
+    background-color: #B4E8DF;
+    color: aliceblue;
+    text-align: center;
+    grid-area: footer;
+}

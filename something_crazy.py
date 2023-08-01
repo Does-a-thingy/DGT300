@@ -122,21 +122,22 @@ def make_turtle(animal):
 
 def turtle_multiply():
     global turtle_list
-    for animal in turtle_list:
-        turtle_population = len(turtle_list) + 1
-        self_index = turtle_list.index(animal)
-        for i in range(0, turtle_population):
-            if i-1 != self_index and i-1 != -1:
-                aycor = round(animal.ycor(), 0)
-                tlycor = round(turtle_list[i-1].ycor(), 0)
-                axcor = round(animal.xcor(),0)
-                tlxcor = round(turtle_list[i-1].xcor(),0)
-                if aycor == tlycor and axcor == tlycor:
-                    turtle_list.append(make_turtle(animal))
-                    turtle_list[-1].goto(random.randint(-90, 90), random.randint(-90, 90))
-                    animal.fd(10)
-                    turtle_list[i-1].fd(10)
-                    print('Baby')
+    if multi.get() == 1:
+        for animal in turtle_list:
+            turtle_population = len(turtle_list) + 1
+            self_index = turtle_list.index(animal)
+            for i in range(0, turtle_population):
+                if i-1 != self_index and i-1 != -1:
+                    aycor = round(animal.ycor(), 0)
+                    tlycor = round(turtle_list[i-1].ycor(), 0)
+                    axcor = round(animal.xcor(),0)
+                    tlxcor = round(turtle_list[i-1].xcor(),0)
+                    if aycor == tlycor and axcor == tlxcor:
+                        turtle_list.append(make_turtle(animal))
+                        turtle_list[-1].goto(random.randint(-90, 90), random.randint(-90, 90))
+                        animal.fd(10)
+                        turtle_list[i-1].fd(10)
+                        print('Baby')
     window.after(100, turtle_multiply)
 
 def turtle_positioning(name, fd_low, fd_high, lt_low, lt_high, spd_low, spd_high):
@@ -168,9 +169,5 @@ turtle_multiply()
 while x is False:
     # this controls the turtles movements
     # .get() is needed for calling variables for if statements code, crashes otherwise
-    if multi.get() == 0:
-        turtle_positioning(turtle_list[0], 0, 6, -40, 40, 1, 2)
-        turtle_positioning(turtle_list[1], 0, 8, -30, 30, 1, 4)
-    elif multi.get() == 1:
-        for animal in turtle_list:
-            turtle_positioning(animal, 0, 7, -35, 35, 0, 3)
+    for animal in turtle_list:
+        turtle_positioning(animal, 0, 7, -35, 35, 0, 3)

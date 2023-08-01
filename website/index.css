@@ -6,22 +6,31 @@ html {
 h3 {
     color: white;
 }
-/*this controls the left part*/
-.left {
+/* This controls the thing part */
+.thing {
     background-color: rgba(180,180,180,0.6);
-    grid-area: left;
+    grid-area: thing;
     align-content: center;
     text-align: center; }
-    .left:hover {
+    .thing:hover {
     background-color: rgba(200,200,200,0.8);
 }
-/*this controls the right part*/
-.right {
+/* This controls the date part */
+.date {
     background-color: rgba(180,180,180,0.6);
-    grid-area: right;
+    grid-area: date;
     align-content: center;
     text-align: center; }
-    .right:hover{
+    .date:hover {
+    background-color: rgba(200,200,200,0.8);
+}
+/* This controls the place part */
+.place {
+    background-color: rgba(180,180,180,0.6);
+    grid-area: place;
+    align-content: center;
+    text-align: center; }
+.place:hover {
     background-color: rgba(200,200,200,0.8);
 }
 /* Control the middle parts */
@@ -29,7 +38,13 @@ h3 {
   background-color: rgba(180,180,180,0.6);
     grid-area: mid;
     align-content: center;
-    text-align: center; }
+    text-align: center;
+    display: grid;
+    grid-template-areas:
+    "date"
+    "thing"
+    "place";
+    }
     .mid:hover{
     background-color: rgba(200,200,200,0.8);
 }
@@ -47,13 +62,12 @@ a {
 .site {
     grid-gap: 2px;
     display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 1fr 4fr 4fr 1fr;
+    grid-template-columns: 100%;
+    grid-template-rows: 1fr 8fr 1fr;
     grid-template-areas:
-        "header header"
-        "left right"
-        "mid mid"
-        "footer footer";
+        "header"
+        "mid"
+        "footer";
 }
 /* this is the header */
 .header {

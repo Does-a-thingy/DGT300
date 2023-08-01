@@ -120,6 +120,22 @@ def make_turtle(animal):
     new_turtle = animal.clone()
     return new_turtle
 
+def cor_check():
+    global turtle_list
+    for animal in turtle_list:
+        turtle_population = len(turtle_list) + 1
+        self_index = turtle_list.index(animal)    
+        for i in range(0, turtle_population):
+            if i-1 != self_index and i-1 != -1:
+                aycor = round(animal.ycor(), 0)
+                tlycor = round(turtle_list[i-1].ycor(), 0)
+                axcor = round(animal.xcor(),0)
+                tlxcor = round(turtle_list[i-1].xcor(),0)
+                if aycor <= (tlycor + 5) and aycor >= (tlycor - 5):
+                    if axcor <= (tlxcor + 5) and axcor >= (tlxcor - 5):
+                        return True
+    return False
+
 def turtle_multiply():
     global turtle_list
     if multi.get() == 1:
@@ -132,7 +148,7 @@ def turtle_multiply():
                     tlycor = round(turtle_list[i-1].ycor(), 0)
                     axcor = round(animal.xcor(),0)
                     tlxcor = round(turtle_list[i-1].xcor(),0)
-                    if aycor == tlycor and axcor == tlxcor:
+                    if cor_check() == True:
                         turtle_list.append(make_turtle(animal))
                         turtle_list[-1].goto(random.randint(-90, 90), random.randint(-90, 90))
                         animal.fd(10)

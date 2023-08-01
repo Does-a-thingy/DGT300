@@ -1,7 +1,7 @@
 html {
     background-size: streach;
     font-family: 'Sunflower', sans-serif;
-    max-width: 99%;
+    max-width: 100%;
 }
 h3 {
     color: white;
@@ -33,9 +33,19 @@ h3 {
     .place:hover {
         background-color: rgba(200,200,200,0.8);
     }
+/* This controls the button part*/
+.button {
+    background-color: rgba(180,180,180,0.6);
+    grid-area: button;
+    align-content: center;
+    text-align: center;
+}
+    .button:hover {
+        background-color: rgba(200,200,200,0.8);
+    }
 /* Control the middle parts */
-.mid {
-  background-color: rgba(180,180,180,0.6);
+.middle {
+    background-color: rgba(180,180,180,0.6);
     grid-area: mid;
     align-content: center;
     text-align: center;
@@ -43,7 +53,8 @@ h3 {
     grid-template-areas:
     "date"
     "thing"
-    "place";
+    "place"
+    "button";
     }
     .mid:hover{
         background-color: rgba(200,200,200,0.8);

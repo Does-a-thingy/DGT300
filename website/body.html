@@ -3,22 +3,26 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <link rel="stylesheet" href="index.css">
-        <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet">
+        <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet"> -->
     </head>
         <form action="" method="post" enctype="multipart/form-data">
             <div class='middle'>
                 <div class='date'>
                     <label>Date:</label>
-                    <input type="text" class="form-control" placeholder="Enter date" name="date">
+                    <input type="date" class="form-control" placeholder="Enter date" name="date">
                 </div>
                 <div class='thing'>
-                    <input type="text" class="form-control" placeholder="Enter date" name="thing">
+                    <label>Thing:</label>
+                    <input type="text" class="form-control" placeholder="Enter thing" name="thing">
                 </div>
                 <div class='place'>
-                    <input type="text" class="form-control" placeholder="Enter date" name="place">
+                    <label>Place:</label>
+                    <input type="text" class="form-control" placeholder="Enter place" name="place">
                 </div>
-                <input type="submit" name="insert_btn" class="btn btn-primary" >
+                <div class="button">
+                    <input type="submit" name="insert_btn" class="btn btn-primary" >
+                </div>
             </div>
         </form>
 </html>

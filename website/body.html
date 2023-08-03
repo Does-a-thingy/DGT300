@@ -1,28 +1,42 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="index.css">
-        <!-- <link rel="preconnect" href="https://fonts.gstatic.com">
-        <link href="https://fonts.googleapis.com/css2?family=Sunflower:wght@300&display=swap" rel="stylesheet"> -->
+        <title>Lost and found</title>
     </head>
-        <form action="" method="post" enctype="multipart/form-data">
-            <div class='middle'>
-                <div class='date'>
-                    <label>Date:</label>
-                    <input type="date" class="form-control" placeholder="Enter date" name="date">
-                </div>
-                <div class='thing'>
-                    <label>Thing:</label>
-                    <input type="text" class="form-control" placeholder="Enter thing" name="thing">
-                </div>
-                <div class='place'>
-                    <label>Place:</label>
-                    <input type="text" class="form-control" placeholder="Enter place" name="place">
-                </div>
-                <div class="button">
-                    <input type="submit" name="insert_btn" class="btn btn-primary" >
-                </div>
+    <form action="" method="post" enctype="multipart/form-data">
+        <div class='middle'>
+            <div class='date'>
+                <label>Date:</label>
+                <input type="date" class="form-control" placeholder="Enter date" name="date">
             </div>
-        </form>
+            <div class='object'>
+                <label>Object:</label>
+                <input type="text" class="form-control" placeholder="Enter object" name="object">
+            </div>
+            <div class='place'>
+                <label>Place:</label>
+                <input type="text" class="form-control" placeholder="Enter place" name="place">
+            </div>
+            <div class="button">
+                <input type="submit" name="insert_btn" class="btn btn-primary" >
+            </div>
+        </div>
+    </form>
+<?php 
+$conn = mysqli_connect('localhost', 'root', '', 'crudoperation')
+
+if(isset($_POST['insert_btn'])){
+    $date = $_POST['date']
+    $object = $_POST['object']
+    $place = $_POST['place']
+
+    $insert = "INSERT INTO 
+    user(date,object,place)
+    VALUES('$date', '$object', '$place')
+    ";
+}
+?>
 </html>

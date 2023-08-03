@@ -6,13 +6,13 @@ html {
 h3 {
     color: white;
 }
-/* This controls the thing part */
-.thing {
+/* This controls the object part */
+.object {
     background-color: rgba(180,180,180,0.6);
-    grid-area: thing;
+    grid-area: object;
     align-content: center;
     text-align: center; }
-    .thing:hover {
+    .object:hover {
         background-color: rgba(200,200,200,0.8);
     }
 /* This controls the date part */
@@ -52,7 +52,7 @@ h3 {
     display: grid;
     grid-template-areas:
     "date"
-    "thing"
+    "object"
     "place"
     "button";
     }

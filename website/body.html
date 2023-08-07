@@ -4,7 +4,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="index.css">
-        <title>Lost and found</title>
+        <title>body</title>
     </head>
     <form action="" method="post" enctype="multipart/form-data">
         <div class='middle'>
@@ -21,22 +21,33 @@
                 <input type="text" class="form-control" placeholder="Enter place" name="place">
             </div>
             <div class="button">
-                <input type="submit" name="insert_btn" class="btn btn-primary" >
+                <input type="submit" name="insert_btn" class="btn btn-primary" ><br>
+                <a class="btn btn-primary", href='body.html'>View updated info</a>
             </div>
         </div>
     </form>
-<?php 
-$conn = mysqli_connect('localhost', 'root', '', 'crudoperation')
+    <?php 
+    $conn = mysqli_connect('localhost', 'root', '', 'crudoperation')
 
-if(isset($_POST['insert_btn'])){
-    $date = $_POST['date']
-    $object = $_POST['object']
-    $place = $_POST['place']
+    if(isset($_POST['insert_btn'])){
+        $date = $_POST['date']
+        $object = $_POST['object']
+        $place = $_POST['place']
 
-    $insert = "INSERT INTO 
-    user(date,object,place)
-    VALUES('$date', '$object', '$place')
-    ";
-}
-?>
+        $insert = "INSERT INTO 
+        user(date,object,place)
+        VALUES('$date', '$object', '$place')
+        ";
+
+        $run_insert = mysqli_query($conn, $insert);
+
+        if($run_insert) {
+            echo "Record inserted";
+        }
+        else {
+            echo "Try again";
+        }
+
+    }
+    ?>
 </html>

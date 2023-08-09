@@ -49,9 +49,11 @@ html {
     text-align: center;
     display: grid;
     grid-template-areas:
+        "name"
+        "place"
         "date"
         "object"
-        "place"
+        "discription"
         "button"
         "updte";
 }

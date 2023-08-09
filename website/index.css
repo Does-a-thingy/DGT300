@@ -86,12 +86,15 @@ h1 {
     line-height: 1.3;
     padding-bottom: 20px;
 }
+
 h3 {
     color: white;
 }
+
 h2{
     color: aliceblue;
 }
+
 a {
     background-color: #9C2744;
     display: grid;

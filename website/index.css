@@ -64,7 +64,7 @@ html {
     text-align: center;
     display: grid;
     grid-template-areas:
-        ;
+        "table";
 }
 
 /* this is the footer */

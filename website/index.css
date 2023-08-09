@@ -113,6 +113,19 @@ input:hover {
     border-bottom-style:solid;
 }
 
+
+/* This controls the name part */
+.name {
+    background-color: rgb(232, 232, 232);
+    border: 2px solid #9C2744;
+    grid-area: name;
+    align-content: center;
+    text-align: center; 
+}
+    .name:hover {
+        background-color: rgba(200,200,200,0.8);
+}
+
 /* This controls the object part */
 .object {
     background-color: rgb(232, 232, 232);
@@ -147,6 +160,18 @@ input:hover {
     text-align: center; 
 }
     .place:hover {
+        background-color: rgba(200,200,200,0.8);
+}
+
+/* This controls the discription part */
+.discription {
+    background-color: rgb(232, 232, 232);
+    border: 2px solid #9C2744;
+    grid-area: discription;
+    align-content: center;
+    text-align: center; 
+}
+    .discription:hover {
         background-color: rgba(200,200,200,0.8);
 }
 

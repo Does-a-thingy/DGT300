@@ -1,5 +1,4 @@
 html {
-    background-size: streach;
     font-family: 'Sunflower', sans-serif;
     max-width: 100%;
     background-color: rgb(232, 232, 232);
@@ -10,7 +9,7 @@ html {
     grid-gap: 2px;
     display: grid;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr 8fr 1fr;
+    grid-template-rows: 1fr 12fr 1fr;
     grid-template-areas:
         "header"
         "body"
@@ -28,7 +27,7 @@ html {
 
 /* Control the middle parts */
 .middle {
-    background-color: rgba(180,180,180,0.6);
+    background-color: rgb(232, 232, 232);
     grid-area: body;
     grid-template-columns: 49%, 49%;
     grid-column-gap: 10px;
@@ -38,12 +37,10 @@ html {
     grid-template-areas:
         "lefty righty";
 }
-    .middle:hover {
-        background-color: rgba(200,200,200,0.8);
-}
+
 /*this is for the left side -> has the input boxes*/
 .left {
-    background-color: rgba(180,180,180,0.6);
+    background-color: rgb(232, 232, 232);
     grid-area: lefty;
     align-content: center;
     text-align: center;
@@ -60,13 +57,15 @@ html {
 
 /*this is for the right side -> has the form display*/
 .right {
-    background-color: rgba(180,180,180,0.6);
+    background-color: rgb(232, 232, 232);
+    border: 2px solid #9C2744;
     grid-area: righty;
     align-content: center;
     text-align: center;
     display: grid;
     grid-template-areas:
-        "table";
+        "info_row"
+        "results";
 }
 
 /* this is the footer */
@@ -111,11 +110,6 @@ a {
 input {
     background-color:  rgba(240,240,240,0.8)
 }
-input:hover {
-    background-color: rgba(256,256,256,0.9);
-    border-bottom-style:solid;
-}
-
 
 /* This controls the name part */
 .name {
@@ -124,9 +118,6 @@ input:hover {
     grid-area: name;
     align-content: center;
     text-align: center; 
-}
-    .name:hover {
-        background-color: rgba(200,200,200,0.8);
 }
 
 /* This controls the object part */
@@ -137,9 +128,6 @@ input:hover {
     align-content: center;
     text-align: center; 
 }
-    .object:hover {
-        background-color: rgba(200,200,200,0.8);
-}
 
 /* This controls the date part */
 .date {
@@ -148,10 +136,6 @@ input:hover {
     grid-area: date;
     align-content: center;
     text-align: center;
-}
-    .date:hover {
-        background-color: rgba(200,200,200,0.8);
-        border: 2px, solid, #9C2744;
 }
 
 /* This controls the place part */
@@ -162,9 +146,6 @@ input:hover {
     align-content: center;
     text-align: center; 
 }
-    .place:hover {
-        background-color: rgba(200,200,200,0.8);
-}
 
 /* This controls the discription part */
 .discription {
@@ -174,8 +155,23 @@ input:hover {
     align-content: center;
     text-align: center; 
 }
-    .discription:hover {
-        background-color: rgba(200,200,200,0.8);
+
+.info {
+    background-color: rgb(232, 232, 232);
+    border: 2px solid #9C2744;
+    grid-area: info_row;
+    align-content: center;
+    text-align: center; 
+    border: 2px solid #9C2744;
+}
+
+.results {
+    background-color: rgb(232, 232, 232);
+    border: 2px solid #9C2744;
+    grid-area: results;
+    align-content: center;
+    text-align: center; 
+    border: 2px solid #9C2744;
 }
 
 /* This controls the button part*/
@@ -185,9 +181,6 @@ input:hover {
     grid-area: button;
     align-content: center;
     text-align: center;
-}
-    .button:hover {
-        background-color: rgba(200,200,200,0.8);
 }
 
 /*this is for all of the custom classing*/
@@ -207,6 +200,7 @@ input:hover {
     border-radius:.25rem;
     transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
+
 .btn {
     display:inline-block;
     font-weight:400;
@@ -225,6 +219,7 @@ input:hover {
     border-radius:.25rem;
     transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
+
 .btn-primary {
     align-self: center;
     width: 10%;
@@ -236,4 +231,12 @@ input:hover {
     background-color:#7C1E36;
     border-bottom-color: #50768D;
     border-bottom-width: medium;
+}
+
+table {
+    background-color: #FFF;
+}
+
+td, tr, th {
+    background-color: rgb(232, 232, 232);
 }

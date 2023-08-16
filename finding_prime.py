@@ -31,28 +31,17 @@ def max_range(base, numb):
         bad = 1
 
 
-limit = ask_input()
+#limit = ask_input()
+#for i in range(0, (limit + 1)): # for each number up to limit
 
-for i in range(0, (limit + 1)): # for each number up to limit
+i=0
+while True:
+
     waiting_list = []
-    if len(prime_list) == 1000:
-        print('1000, still working')
-    elif len(prime_list) == 2000:
-        print('2000, still working')
-    elif len(prime_list) == 3000:
-        print('3000, still working')
-    elif len(prime_list) == 4000:
-        print('4000, still working')
-    elif len(prime_list) == 5000:
-        print('5000, still working')
-    elif len(prime_list) == 6000:
-        print('6000, still working')
-    elif len(prime_list) == 7000:
-        print('7000, still working')
-    elif len(prime_list) == 8000:
-        print('8000, still working')
-    elif len(prime_list) == 9000:
-        print('9000, still working')    
+    b = i//1000
+    if (i - (1000 * b)) == 0:
+        print('{}, still working'.format(i))
+        print(prime_list, '\n', len(prime_list))
     if i != 0 and i != 1:
         for item in prime_list: # check against every value in list
             max_range(item, i)
@@ -65,5 +54,6 @@ for i in range(0, (limit + 1)): # for each number up to limit
         prime_list.append(2)
     else:
         pass
+    i+=1
 
 print(prime_list, '\n', len(prime_list))

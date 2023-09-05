@@ -151,9 +151,10 @@ def turtle_multiply():
                     if cor_check() == True:
                         turtle_list.append(make_turtle(animal))
                         turtle_list[-1].goto(random.randint(-90, 90), random.randint(-90, 90))
-                        animal.fd(10)
-                        turtle_list[i-1].fd(10)
+                        animal.fd(15)
+                        turtle_list[i-1].fd(15)
                         print('Baby')
+                        
     window.after(100, turtle_multiply)
 
 def turtle_positioning(name, fd_low, fd_high, lt_low, lt_high, spd_low, spd_high):

@@ -1,15 +1,32 @@
 html {
     font-family: 'Sunflower', sans-serif;
     max-width: 100%;
-    background-color: rgb(232, 232, 232);
+    align-content: center;
+    text-align: center;
+    background-color: black;
+}
+
+body {
+    background-image: url("https://www.hhs.school.nz/wp-content/uploads/2017/09/bg-body.png");
+    background-position: left top;
+    background-size: cover;
+    align-content: center;
+    text-align: center;
+    background-repeat: no-repeat;
+    background-attachment:  fixed;
 }
 
 /* this organises the rest of the site by using CSS griding*/
 .site {
-    grid-gap: 2px;
+    grid-column-gap: 2px;
+    grid-row-gap: 5px;
+    max-width: 80%;
+    min-height: 90%;
     display: grid;
+    align-content: center;
+    text-align: center;
     grid-template-columns: 100%;
-    grid-template-rows: 1fr 12fr 1fr;
+    grid-template-rows: 10% 75% 15%;
     grid-template-areas:
         "header"
         "body"
@@ -23,19 +40,39 @@ html {
     text-align: center;
     display: grid;
     grid-area: header;
+    grid-template-columns: 10% 80% 10%;
+    grid-template-areas: 
+        "logo label";
 }
 
 /* Control the middle parts */
 .middle {
     background-color: rgb(232, 232, 232);
     grid-area: body;
-    grid-template-columns: 49%, 49%;
+    max-width: 80%;
+    grid-template-columns: 50%, 50%;
     grid-column-gap: 10px;
+    grid-row-gap: 5px;
+    min-height: 80%;
     align-content: center;
     text-align: center;
     display: grid;
     grid-template-areas:
         "lefty righty";
+}
+
+/* this is the footer */
+.footer {
+    display: grid;
+    align-content: center;
+    text-align: center;
+    background-color: black;
+    color: white;
+    grid-area: footer;
+    grid-column-gap: 10%;
+    grid-template-columns: 60% 10%;
+    grid-template-areas: 
+        "list hhsinfo";
 }
 
 /*this is for the left side -> has the input boxes*/
@@ -58,23 +95,14 @@ html {
 /*this is for the right side -> has the form display*/
 .right {
     background-color: rgb(232, 232, 232);
-    border: 2px solid #9C2744;
+    height: 70%;
+    max-height: 90%;
+    overflow: scroll;
     grid-area: righty;
-    align-content: center;
-    text-align: center;
     display: grid;
     grid-template-areas:
-        "info_row"
-        "results";
-}
-
-/* this is the footer */
-.footer {
-    display: grid;
-    background-color: #9C2744;
-    color: aliceblue;
-    text-align: center;
-    grid-area: footer;
+        "find_title"
+        "info_row";
 }
 
 /*This is for the text types*/
@@ -90,25 +118,28 @@ h3 {
     color: white;
 }
 
-h2{
-    color: aliceblue;
+p {
+    display: inline;
+}
+b {
+    display: inline;
 }
 
 a {
-    background-color: #9C2744;
     display: grid;
+    background-color: black;
     color: white;
     text-decoration:none;
     align-content: center;
     text-align: center;
 }
-    a:hover {
-        background-color: #7C1E36;
+a:hover {
+    color: #9C1C1B;
 }
 
 /* this is for the input boxes*/
 input {
-    background-color:  rgba(240,240,240,0.8)
+    background-color:  rgba(240,240,240,0.8);
 }
 
 /* This controls the name part */
@@ -156,13 +187,19 @@ input {
     text-align: center; 
 }
 
+.find_title {
+    background-color: rgb(232, 232, 232);
+    grid-area: find_title;
+    align-content: center;
+    text-align: center; 
+}
+
 .info {
     background-color: rgb(232, 232, 232);
     border: 2px solid #9C2744;
     grid-area: info_row;
     align-content: center;
-    text-align: center; 
-    border: 2px solid #9C2744;
+    text-align: center;
 }
 
 .results {
@@ -194,11 +231,15 @@ input {
     font-weight:400;
     line-height:1.5;
     color:#495057;
-    background-color:#fff;
+    background-color: #fff;
     background-clip:padding-box;
     border:1px solid #ced4da;
     border-radius:.25rem;
-    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    transition:border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+
+.det {
+    width: 60%;
 }
 
 .btn {
@@ -217,12 +258,12 @@ input {
     font-size:1rem;
     line-height:1.5;
     border-radius:.25rem;
-    transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+    transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
 }
 
 .btn-primary {
     align-self: center;
-    width: 10%;
+    width: 40%;
     color:#fff;
     background-color:#9C2744;
 }
@@ -234,9 +275,115 @@ input {
 }
 
 table {
-    background-color: #FFF;
+    background-color:  rgb(232, 232, 232);
 }
 
 td, tr, th {
     background-color: rgb(232, 232, 232);
+}
+
+tr:hover {
+    background-color: rgb(220, 220, 220);
+}
+
+th {
+    max-width: 10%
+}
+
+.logo {
+    grid-area: logo;
+    display: inline-grid;
+}
+
+.label {
+    font-weight: bold;
+    font-size: 32px;
+    margin-left: 0;
+    line-height: 1.3;
+    padding-bottom: 20px;
+    display: inline-grid;
+    grid-area: label;
+}
+
+.home {
+    background-color: black;
+    color: white;
+    grid-area: home;
+    display: inline-grid;
+}
+
+a.home:hover {
+    color: #9C1C1B;
+}
+
+.hhsinfo {
+    display: inline-grid;
+    text-align: left;
+    grid-area: hhsinfo;
+    grid-template-areas: 
+        "locat"
+        "phone"
+        "fax"
+        "mail";
+}
+.loc {
+    display: inline-grid;
+    text-align: left;
+    grid-area: locat;
+}
+.phone {
+    display: inline-grid;
+    text-align: left;
+    grid-area: phone;
+}
+.fax {
+    display: inline-grid;
+    text-align: left;
+    grid-area: fax;
+}
+.mail {
+    display: inline-grid;
+    text-align: left;
+    grid-area: mail;
+    background-color: black;
+    color: white;
+}
+
+a.mail:hover {
+    color: #9C1C1B;
+}
+
+.listy {
+    display: grid;
+    grid-area: list;
+    grid-template-areas: 
+        "home" "about" "learn" "apply" "inter"
+}
+
+.about {
+    background-color: black;
+    display; grid;
+    color: white;
+    grid-area: about;
+}
+
+.learn {
+    background-color: black;
+    display; grid;
+    color: white;
+    grid-area: learn;
+}
+
+.apply {
+    background-color: black;
+    display; grid;
+    color: white;
+    grid-area: apply;
+}
+
+.inter {
+    background-color: black;
+    display; grid;
+    color: white;
+    grid-area: inter;
 }

@@ -7,40 +7,41 @@
         <title>Lost and found</title>
     </head>
     <?php
-        $hostName = "localhost";
-        $userName = "root";
-        $password = "";
-        $database = "crud";
+    
+    $conn =mysqli_connect('localhost','root','','crud');
+    if(isset($_POST['insert_btn'])){
+        $user_name=$_POST['user_name'];
+        $place=$_POST['place'];
+        $date=$_POST['date'];
+        $object=$_POST['object'];
+        $details=$_POST['details'];
 
-        $conn = mysqli_connect($hostName, $userName, $password, $database)
-            //Host name, User name, password, database names
-
-        //$db = $conn
-        //$table = ""
-
-        if(isset($_POST['insert_btn'])){
-            $name = $_POST['user_name']
-            $place = $_POST['place']
-            $date = $_POST['date']
-            $object = $_POST['object']
-            $discript = $_POST['discription']
-
-            $insert = "INSERT INTO 
-            information(date,object,place)
-            VALUES('$name', '$place', '$date', '$object', '$discript')";
-
-            $run_insert = mysqli_query($conn, $insert);
-
-            if($run_insert) {
-                echo "Record inserted";
-            }
-            else {
-                echo "Try again";
-            }
-        echo file_get_contents("header.html");
-        echo file_get_contents("body.html");
-        echo file_get_contents("footer.html");
+        $insert ="INSERT INTO information(user_name,place,date,object_name,description)
+        VALUES('$user_name','$place','$date','$object','$details')";
+        $run_insert =mysqli_query($conn,$insert);
+        if($run_insert){
+            echo "record inserted";
         }
+        else{
+            echo "try again";
+        }
+
+    }
+    
+    $conn = mysqli_connect('localhost','root','','crud');
+    $select="SELECT * FROM information"; // select all data from table and store it under select variable
+    $run =mysqli_query($conn,$select); // this command is to establish the connection and run the query
+    while($row_user =mysqli_fetch_array($run)){// this command will store the data in the form of array
+        $record_id=$row_user['record_ID'];
+        $user_name=$row_user['user_name'];
+        $place=$row_user['place'];
+        $date=$row_user['date'];
+        $details=$row_user['description'];
+    }
     ?>
+    
+    <header><?php echo file_get_contents("header.html");?></header>
+    <body><?php echo file_get_contents("body.php");   ?></body>
+    <footer><?php echo file_get_contents("footer.html");?></footer>
 
 </html>
